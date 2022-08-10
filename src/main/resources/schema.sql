@@ -2,10 +2,9 @@ drop table if exists EMPLOYEE;
 
 -- CREATETABLE
 CREATE TABLE "EMPLOYEE" (
-    "ID" SERIAL NOT NULL,
+    "ID" int auto_increment primary key,
     "NAME" TEXT NOT NULL,
     "PHONE" TEXT NOT NULL,
     "EMAIL" TEXT NOT NULL,
-    "BRANCH" TEXT NOT NULL,
-    CONSTRAINT "EMPLOYEE_PKEY" PRIMARY KEY ("ID")
+    "BRANCH" TEXT NOT NULL 
 );
