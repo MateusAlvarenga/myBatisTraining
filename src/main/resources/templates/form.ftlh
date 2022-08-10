@@ -15,16 +15,16 @@
     <h5>Add New Employee</h5>
     <form action="/update" method="post">
         Name:<br/>
-        <input type="text" class="form-control" name="name" value="${emp.name}"/>
+        <input type="text" class="form-control" name="name" value="${emp.name}" required />
         <br/>
         Phone:<br/>
-        <input type="text" class="form-control" name="phone" value="${emp.phone}"/>
+        <input type="text" class="form-control" name="phone" value="${emp.phone}" required />
         <br/>
         Email:<br/>
-        <input type="email" class="form-control" name="email" value="${emp.email}"/>
+        <input type="email" class="form-control" name="email" value="${emp.email}" required />
         <br/>
         Department:<br/>
-        <input type="text" class="form-control" name="branch" value="${emp.branch}"/>
+        <input type="text" class="form-control" name="branch" value="${emp.branch}" required />
         <br/>
         <input type="hidden" name="id" value="${emp.id}"/>
         <button type="submit" class="btn btn-primary">Submit</button>

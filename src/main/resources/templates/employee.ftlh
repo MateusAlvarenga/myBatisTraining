@@ -46,16 +46,16 @@
     <h5>Add New Employee</h5>
     <form action="/insert" method="post">
         Name:<br/>
-        <input type="text" class="form-control" name="name"/>
+        <input type="text" class="form-control" name="name" required />
         <br/>
         Phone:<br/>
-        <input type="text" class="form-control" name="phone"/>
+        <input type="text" class="form-control" name="phone" required />
         <br/>
         Email:<br/>
-        <input type="email" class="form-control" name="email"/>
+        <input type="email" class="form-control" name="email" required/>
         <br/>
         Department:<br/>
-        <input type="text" class="form-control" name="branch"/>
+        <input type="text" class="form-control" name="branch" required/>
         <br/>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
