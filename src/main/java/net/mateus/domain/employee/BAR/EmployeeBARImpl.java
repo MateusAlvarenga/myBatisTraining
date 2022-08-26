@@ -2,6 +2,7 @@ package net.mateus.domain.employee.BAR;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 @AllArgsConstructor
@@ -9,10 +10,11 @@ import org.springframework.stereotype.Repository;
 public class EmployeeBARImpl implements EmployeeBAR {
 
   private final EmployeeMapper mapper;
+  private final SqlSession sqlSession;
 
   @Override
   public List<Employee> fetchEmployees() {
-    return mapper.findAll();
+    return sqlSession.selectList("findAll");
   }
 
   @Override

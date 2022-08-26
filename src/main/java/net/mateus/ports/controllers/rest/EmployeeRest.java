@@ -27,6 +27,11 @@ public class EmployeeRest {
     return bac.fetchEmployees();
   }
 
+  @GetMapping("/{id}")
+  public Employee get(@PathVariable Integer id){
+    return bac.fetchEmployeeById(id);
+  }
+
   @PostMapping
   public ResponseEntity insert(@RequestBody Employee employee){
     Integer transactionStatus = bac.insertEmployee(employee);

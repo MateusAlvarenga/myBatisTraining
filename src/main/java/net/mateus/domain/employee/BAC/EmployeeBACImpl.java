@@ -4,9 +4,10 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import net.mateus.domain.employee.BAR.Employee;
 import net.mateus.domain.employee.BAR.EmployeeBAR;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 @AllArgsConstructor
 public class EmployeeBACImpl implements EmployeeBAC {
 
