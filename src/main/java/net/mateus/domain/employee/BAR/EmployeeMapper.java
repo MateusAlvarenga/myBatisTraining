@@ -4,10 +4,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-/**
- * @author csdcodes.net
- * @since 2020-3-25
- */
 @Mapper
 public interface EmployeeMapper {
 

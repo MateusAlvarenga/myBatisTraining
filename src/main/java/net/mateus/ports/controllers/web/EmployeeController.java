@@ -11,11 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * @author csdcodes.net
- * @since 2020-3-25
- */
-
 @Controller
 @AllArgsConstructor
 public class EmployeeController {
