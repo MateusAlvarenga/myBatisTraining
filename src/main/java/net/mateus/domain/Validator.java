@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.mateus.domain.ValidationError;
 
-public abstract class Validator {
+public abstract class Validator  implements  IValidator{
 
   private List<ValidationError> errors;
 
@@ -19,7 +19,5 @@ public abstract class Validator {
   public void addError(String field, String message) {
     errors.add(ValidationError.of(field, message));
   }
-
-  public abstract boolean validate();
 
 }

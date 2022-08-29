@@ -1,10 +1,11 @@
 package net.mateus.domain.employee.BAC;
 
 import java.util.regex.Pattern;
+import net.mateus.domain.IValidator;
 import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.Validator;
 
-public class EmployeeValidator extends Validator {
+public class EmployeeValidator extends Validator implements IValidator {
 
   public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
       Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -17,7 +18,7 @@ public class EmployeeValidator extends Validator {
   }
 
   @Override
-  public boolean validate() {
+  public Boolean validate() {
 
     if (employee.getName() == null || employee.getName().isEmpty()) {
       addError("name", "Name is required");
