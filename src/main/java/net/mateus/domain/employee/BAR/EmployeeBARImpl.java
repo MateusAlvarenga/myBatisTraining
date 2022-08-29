@@ -1,17 +1,21 @@
 package net.mateus.domain.employee.BAR;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
 import net.mateus.domain.employee.model.Employee;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-@AllArgsConstructor
+
 @Repository
 public class EmployeeBARImpl implements EmployeeBAR {
 
   private final EmployeeMapper mapper;
   private final SqlSession sqlSession;
+
+  public EmployeeBARImpl(EmployeeMapper mapper, SqlSession sqlSession) {
+    this.mapper = mapper;
+    this.sqlSession = sqlSession;
+  }
 
   @Override
   public List<Employee> fetchAllEmployees() {

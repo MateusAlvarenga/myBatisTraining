@@ -1,8 +1,6 @@
 package net.mateus.ports.controllers.rest;
 
 import java.util.List;
-import java.util.Optional;
-import lombok.AllArgsConstructor;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.model.Employee;
@@ -19,10 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/employee")
-@AllArgsConstructor
 public class EmployeeRest {
 
   private final EmployeeBAC bac;
+
+  public EmployeeRest(EmployeeBAC bac) {
+    this.bac = bac;
+  }
 
   @GetMapping("/fetch-all")
   public List<Employee> list(){
@@ -45,6 +46,13 @@ public class EmployeeRest {
     Response<Employee> response = bac.updateEmployee(employee);
     return ResponseEntity.status(response.getHttpStatus()).body(response);
   }
+
+  @GetMapping("/sadfsd")
+  public ResponseEntity asdfsadf(@RequestBody Employee employee){
+    Response<Employee> response = bac.updateEmployee(employee);
+    return ResponseEntity.status(response.getHttpStatus()).body(response);
+  }
+
 
   @DeleteMapping("/{id}")
   public ResponseEntity delete(@PathVariable Integer id){

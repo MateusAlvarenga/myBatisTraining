@@ -2,7 +2,6 @@ package net.mateus.springbootmybatiscrud.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
-import lombok.SneakyThrows;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.model.Employee;
@@ -22,6 +21,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -42,8 +42,8 @@ public class EmployeeRestTest {
 
 
   @Test
-  @SneakyThrows
-  public void fetchList() {
+
+  public void fetchList() throws Exception {
 
     final List<Employee> employeesExpected = List.of(
         EmployeeBuilder.builder().id(1).name("Mateus").build(),
@@ -64,8 +64,8 @@ public class EmployeeRestTest {
         mapper.writeValueAsString(employeesExpected), true);
   }
   @Test
-  @SneakyThrows
-  public void fetchById() {
+
+  public void fetchById() throws Exception {
 
     final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
     final Integer givenId = 1;
@@ -85,13 +85,15 @@ public class EmployeeRestTest {
   }
 
   @Test
-  @SneakyThrows
-  public void insert() {
+  public void insert() throws Exception {
 
-    final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected =  EmployeeBuilder
+        .builder()
+        .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
+        .build();
     final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
     final String urlTemplate = "/api/employee";
-    when(BAC.insertEmployee(employeeExpected)).thenReturn(responseExpected);
+    when(BAC.insertEmployee(any())).thenReturn(responseExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
         .post(urlTemplate)
@@ -103,13 +105,15 @@ public class EmployeeRestTest {
   }
 
   @Test
-  @SneakyThrows
-  public void update() {
+  public void update() throws Exception {
 
-    final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected =  EmployeeBuilder
+        .builder()
+        .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
+        .build();
     final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
     final String urlTemplate = "/api/employee";
-    when(BAC.updateEmployee(employeeExpected)).thenReturn(responseExpected);
+    when(BAC.updateEmployee(any())).thenReturn(responseExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
         .put(urlTemplate)
@@ -121,8 +125,7 @@ public class EmployeeRestTest {
   }
 
   @Test
-  @SneakyThrows
-  public void delete() {
+  public void delete() throws Exception {
 
     final Integer givenId = 1;
     final String urlTemplate = "/api/employee/" + givenId;

@@ -1,10 +1,9 @@
 package net.mateus.domain.employee.BAR;
 
-import lombok.Setter;
 import net.mateus.domain.employee.model.Employee;
 
 
-@Setter
+
 public class EmployeeBuilder {
   private Integer id;
   private String name;

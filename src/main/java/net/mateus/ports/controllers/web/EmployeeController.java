@@ -1,6 +1,5 @@
 package net.mateus.ports.controllers.web;
 
-import lombok.AllArgsConstructor;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.model.Employee;
@@ -13,10 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@AllArgsConstructor
 public class EmployeeController {
     private final EmployeeMapper mapper;
     private final EmployeeBAC bac;
+
+    public EmployeeController(EmployeeMapper mapper, EmployeeBAC bac) {
+        this.mapper = mapper;
+        this.bac = bac;
+    }
 
     @GetMapping("/")
     private String emp(){

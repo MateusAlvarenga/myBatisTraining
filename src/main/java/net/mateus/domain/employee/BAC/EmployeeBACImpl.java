@@ -1,7 +1,6 @@
 package net.mateus.domain.employee.BAC;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
 import net.mateus.domain.IValidator;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.model.Employee;
@@ -10,8 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class EmployeeBACImpl implements EmployeeBAC {
+
+  public EmployeeBACImpl(EmployeeBAR bar) {
+    this.bar = bar;
+  }
 
   private final EmployeeBAR bar;
 
