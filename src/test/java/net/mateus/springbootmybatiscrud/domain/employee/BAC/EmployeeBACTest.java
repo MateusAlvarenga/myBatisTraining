@@ -6,6 +6,7 @@ import java.util.List;
 import net.mateus.domain.employee.BAC.EmployeeBACImpl;
 import net.mateus.domain.employee.BAR.Employee;
 import net.mateus.domain.employee.BAR.EmployeeBAR;
+import net.mateus.domain.employee.BAR.EmployeeBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,8 +30,8 @@ public class EmployeeBACTest {
   @Test
   public void testFetchEmployees() {
     final List<Employee> employeesExpected = List.of(
-        Employee.builder().id(1).name("Mateus").build(),
-        Employee.builder().id(2).name("James").build()
+        EmployeeBuilder.builder().id(1).name("Mateus").build(),
+        EmployeeBuilder.builder().id(2).name("James").build()
     );
     when(bar.fetchEmployees()).thenReturn(employeesExpected);
 
@@ -40,7 +41,7 @@ public class EmployeeBACTest {
 
   @Test
   public void testFetchEmployeeById() {
-    final Employee employeeExpected = Employee.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected = EmployeeBuilder.builder().id(1).name("Mateus").build();
     when(bar.fetchEmployeeById(anyInt())).thenReturn(employeeExpected);
 
     Employee employeeResponse = bac.fetchEmployeeById(1);
@@ -49,7 +50,7 @@ public class EmployeeBACTest {
 
   @Test
   public void testInsertEmployee() {
-    final Employee employeeExpected = Employee.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected = EmployeeBuilder.builder().id(1).name("Mateus").build();
     when(bar.insertEmployee(employeeExpected)).thenReturn(1);
 
     Integer idResponse = bac.insertEmployee(employeeExpected);
@@ -58,7 +59,7 @@ public class EmployeeBACTest {
 
   @Test
   public void testUpdateEmployee() {
-    final Employee employeeExpected = Employee.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected = EmployeeBuilder.builder().id(1).name("Mateus").build();
     when(bar.updateEmployee(employeeExpected)).thenReturn(1);
 
     Integer idResponse = bac.updateEmployee(employeeExpected);
@@ -67,7 +68,7 @@ public class EmployeeBACTest {
 
   @Test
   public void testDeleteEmployeeById() {
-    final Employee employeeExpected = Employee.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected = EmployeeBuilder.builder().id(1).name("Mateus").build();
     when(bar.deleteEmployee(anyInt())).thenReturn(1);
 
     Integer idResponse = bac.deleteEmployee(1);

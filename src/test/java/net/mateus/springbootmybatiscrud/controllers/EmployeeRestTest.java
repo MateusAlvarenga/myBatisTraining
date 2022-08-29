@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.SneakyThrows;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.BAR.Employee;
+import net.mateus.domain.employee.BAR.EmployeeBuilder;
 import net.mateus.ports.controllers.rest.EmployeeRest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,8 +44,8 @@ public class EmployeeRestTest {
   public void fetchList() {
 
     final List<Employee> employeesExpected = List.of(
-        Employee.builder().id(1).name("Mateus").build(),
-        Employee.builder().id(2).name("James").build()
+        EmployeeBuilder.builder().id(1).name("Mateus").build(),
+        EmployeeBuilder.builder().id(2).name("James").build()
     );
     final String urlTemplate = "/api/employee/list";
     when(BAC.fetchEmployees()).thenReturn(employeesExpected);
@@ -64,7 +65,7 @@ public class EmployeeRestTest {
   @SneakyThrows
   public void fetchById() {
 
-    final Employee employeeExpected =  Employee.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
     final Integer givenId = 1;
     final String urlTemplate = "/api/employee/" + givenId;
     when(BAC.fetchEmployeeById(anyInt())).thenReturn(employeeExpected);
@@ -85,7 +86,7 @@ public class EmployeeRestTest {
   @SneakyThrows
   public void insert() {
 
-    final Employee employeeExpected =  Employee.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
     final String urlTemplate = "/api/employee";
     when(BAC.insertEmployee(employeeExpected)).thenReturn(1);
 
@@ -102,7 +103,7 @@ public class EmployeeRestTest {
   @SneakyThrows
   public void update() {
 
-    final Employee employeeExpected =  Employee.builder().id(1).name("Mateus").build();
+    final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
     final String urlTemplate = "/api/employee";
     when(BAC.updateEmployee(employeeExpected)).thenReturn(1);
 

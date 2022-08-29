@@ -1,11 +1,11 @@
 package net.mateus.domain.employee.BAR;
 
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@Builder
+@AllArgsConstructor
 public class Employee {
     private Integer id;
     private String name;
