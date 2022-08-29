@@ -51,7 +51,7 @@ public class EmployeeValidator extends Validator {
       addError("branch", "Branch must be less than 50 characters");
     }
 
-    if(!VALID_EMAIL_ADDRESS_REGEX.matcher(employee.getEmail()).find()) {
+    if(employee.getEmail() != null && !VALID_EMAIL_ADDRESS_REGEX.matcher(employee.getEmail()).find()) {
       addError("email", "Email is not valid");
     }
 
