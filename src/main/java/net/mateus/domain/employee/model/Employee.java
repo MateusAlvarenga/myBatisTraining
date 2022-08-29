@@ -1,4 +1,4 @@
-package net.mateus.domain.employee.BAR;
+package net.mateus.domain.employee.model;
 
 
 import lombok.AllArgsConstructor;

@@ -2,6 +2,7 @@ package net.mateus.domain.employee.BAR;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import net.mateus.domain.employee.model.Employee;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 

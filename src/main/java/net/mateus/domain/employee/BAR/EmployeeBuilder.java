@@ -1,8 +1,7 @@
 package net.mateus.domain.employee.BAR;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.mateus.domain.employee.model.Employee;
 
 
 @Setter

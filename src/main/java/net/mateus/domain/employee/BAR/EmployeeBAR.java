@@ -1,6 +1,7 @@
 package net.mateus.domain.employee.BAR;
 
 import java.util.List;
+import net.mateus.domain.employee.model.Employee;
 
 public interface EmployeeBAR {
 

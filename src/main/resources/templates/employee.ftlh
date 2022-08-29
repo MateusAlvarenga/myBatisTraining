@@ -13,7 +13,23 @@
 </head>
 <body>
 <div class="container">
-    <h4>Spring MyBatis MySQL CRUD</h4><br/>
+    <#if response??>
+        <div style="border: 1px solid black;border-radius: 5px 5px 5px 5px;">
+            <#if response.httpStatus.value() == 200>
+                <b>Employee saved !</b>
+            </#if>
+            <#if response.httpStatus.value() != 200>
+                <b>Employee not saved status: ${response.httpStatus.value()}</b>
+            </#if>
+            <ul>
+                <#list response.validationErrors as error>
+                    <li> ${error.message}</li>
+                </#list>
+            </ul>
+        </div>
+    </#if>
+
+    <h4>Spring MyBatis CRUD</h4><br/>
     <h5>Employee List</h5>
     <table class="table table-bordered">
         <thead>
@@ -52,7 +68,7 @@
         <input type="text" class="form-control" name="phone" required />
         <br/>
         Email:<br/>
-        <input type="email" class="form-control" name="email" required/>
+        <input type="text" class="form-control" name="email" required/>
         <br/>
         Department:<br/>
         <input type="text" class="form-control" name="branch" required/>

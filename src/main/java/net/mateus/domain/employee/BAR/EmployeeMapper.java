@@ -1,5 +1,6 @@
 package net.mateus.domain.employee.BAR;
 
+import net.mateus.domain.employee.model.Employee;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

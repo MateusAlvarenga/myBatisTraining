@@ -3,8 +3,9 @@ package net.mateus.springbootmybatiscrud.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import lombok.SneakyThrows;
+import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
-import net.mateus.domain.employee.BAR.Employee;
+import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.employee.BAR.EmployeeBuilder;
 import net.mateus.ports.controllers.rest.EmployeeRest;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -87,8 +89,9 @@ public class EmployeeRestTest {
   public void insert() {
 
     final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
+    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
     final String urlTemplate = "/api/employee";
-    when(BAC.insertEmployee(employeeExpected)).thenReturn(1);
+    when(BAC.insertEmployee(employeeExpected)).thenReturn(responseExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
         .post(urlTemplate)
@@ -104,8 +107,9 @@ public class EmployeeRestTest {
   public void update() {
 
     final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
+    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
     final String urlTemplate = "/api/employee";
-    when(BAC.updateEmployee(employeeExpected)).thenReturn(1);
+    when(BAC.updateEmployee(employeeExpected)).thenReturn(responseExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
         .put(urlTemplate)

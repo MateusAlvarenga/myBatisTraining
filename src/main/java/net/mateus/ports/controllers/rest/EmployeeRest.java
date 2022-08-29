@@ -1,9 +1,11 @@
 package net.mateus.ports.controllers.rest;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
+import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
-import net.mateus.domain.employee.BAR.Employee;
+import net.mateus.domain.employee.model.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,25 +35,15 @@ public class EmployeeRest {
   }
 
   @PostMapping
-  public ResponseEntity insert(@RequestBody Employee employee){
-    Integer transactionStatus = bac.insertEmployee(employee);
-
-    if(transactionStatus == 1){
-      return new ResponseEntity(HttpStatus.OK);
-    }else {
-      return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
+  public ResponseEntity<?> insert(@RequestBody Employee employee){
+    Response<Employee> response = bac.insertEmployee(employee);
+    return ResponseEntity.status(response.getHttpStatus()).body(response);
   }
 
   @PutMapping
   public ResponseEntity update(@RequestBody Employee employee){
-    Integer transactionStatus = bac.updateEmployee(employee);
-
-    if(transactionStatus == 1){
-      return new ResponseEntity(HttpStatus.OK);
-    }else {
-      return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
+    Response<Employee> response = bac.updateEmployee(employee);
+    return ResponseEntity.status(response.getHttpStatus()).body(response);
   }
 
   @DeleteMapping("/{id}")

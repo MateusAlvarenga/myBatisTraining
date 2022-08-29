@@ -1,8 +1,9 @@
 package net.mateus.ports.controllers.web;
 
 import lombok.AllArgsConstructor;
+import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
-import net.mateus.domain.employee.BAR.Employee;
+import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.employee.BAR.EmployeeMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,11 @@ public class EmployeeController {
         return "redirect:/emp-list";
     }
     @PostMapping("/insert")
-    private String insert(@ModelAttribute("employee") Employee employee){
-        bac.insertEmployee(employee);
-        return "redirect:/emp-list";
+    private String insert(@ModelAttribute("employee") Employee employee, Model model){
+        Response response = bac.insertEmployee(employee);
+        model.addAttribute("employees", bac.fetchAllEmployees());
+        model.addAttribute("response", response);
+        return "employee";
     }
 
     @GetMapping("/emp-list")
@@ -49,9 +52,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    private String update(@ModelAttribute("employee") Employee employee){
-        bac.updateEmployee(employee);
-        return "redirect:/emp-list";
+    private String update(@ModelAttribute("employee") Employee employee, Model model){
+        Response response = bac.insertEmployee(employee);
+        model.addAttribute("employees", bac.fetchAllEmployees());
+        model.addAttribute("response", response);
+        return "employee";
     }
 
 }

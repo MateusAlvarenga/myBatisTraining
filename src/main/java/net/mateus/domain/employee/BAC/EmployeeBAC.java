@@ -1,7 +1,8 @@
 package net.mateus.domain.employee.BAC;
 
 import java.util.List;
-import net.mateus.domain.employee.BAR.Employee;
+import net.mateus.domain.Response;
+import net.mateus.domain.employee.model.Employee;
 
 public interface EmployeeBAC {
 
@@ -9,9 +10,9 @@ public interface EmployeeBAC {
 
   public Employee fetchEmployeeById(Integer id);
 
-  public Integer insertEmployee(Employee employee);
+  public Response<Employee> insertEmployee(Employee employee);
 
-  public Integer updateEmployee(Employee employee);
+  public Response<Employee> updateEmployee(Employee employee);
 
   public Integer deleteEmployee(Integer id);
 
