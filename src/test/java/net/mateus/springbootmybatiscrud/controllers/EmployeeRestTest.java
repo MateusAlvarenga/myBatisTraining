@@ -47,8 +47,8 @@ public class EmployeeRestTest {
         EmployeeBuilder.builder().id(1).name("Mateus").build(),
         EmployeeBuilder.builder().id(2).name("James").build()
     );
-    final String urlTemplate = "/api/employee/list";
-    when(BAC.fetchEmployees()).thenReturn(employeesExpected);
+    final String urlTemplate = "/api/employee/fetch-all";
+    when(BAC.fetchAllEmployees()).thenReturn(employeesExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
         .get(urlTemplate)

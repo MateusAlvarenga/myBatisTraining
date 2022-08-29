@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EmployeeBAR {
 
-  public List<Employee> fetchEmployees();
+  public List<Employee> fetchAllEmployees();
 
   public Employee fetchEmployeeById(Integer id);
 

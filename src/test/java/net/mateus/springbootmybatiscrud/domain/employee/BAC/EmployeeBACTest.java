@@ -33,9 +33,9 @@ public class EmployeeBACTest {
         EmployeeBuilder.builder().id(1).name("Mateus").build(),
         EmployeeBuilder.builder().id(2).name("James").build()
     );
-    when(bar.fetchEmployees()).thenReturn(employeesExpected);
+    when(bar.fetchAllEmployees()).thenReturn(employeesExpected);
 
-    List<Employee> employeesResponse = bac.fetchEmployees();
+    List<Employee> employeesResponse = bac.fetchAllEmployees();
     assertThat(employeesResponse).isEqualTo(employeesExpected);
   }
 

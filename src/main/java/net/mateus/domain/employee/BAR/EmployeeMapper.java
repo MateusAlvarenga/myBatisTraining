@@ -12,7 +12,7 @@ public interface EmployeeMapper {
     int insert(Employee employee);
 
     @Select("SELECT * FROM employee")
-    List<Employee> findAll();
+    List<Employee> fetchAll();
 
     @Select("SELECT * FROM public.employee WHERE id = #{id}")
     Employee findById(@Param("id") long id);

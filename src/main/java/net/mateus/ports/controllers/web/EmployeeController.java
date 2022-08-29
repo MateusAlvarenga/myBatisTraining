@@ -29,7 +29,7 @@ public class EmployeeController {
 
     @GetMapping("/emp-list")
     private String employees(Model model){
-        model.addAttribute("employees", bac.fetchEmployees());
+        model.addAttribute("employees", bac.fetchAllEmployees());
         return "employee";
     }
 

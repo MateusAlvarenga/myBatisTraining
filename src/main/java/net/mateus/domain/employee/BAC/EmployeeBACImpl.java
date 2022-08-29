@@ -15,8 +15,8 @@ public class EmployeeBACImpl implements EmployeeBAC {
 
 
   @Override
-  public List<Employee> fetchEmployees() {
-    return bar.fetchEmployees();
+  public List<Employee> fetchAllEmployees() {
+    return bar.fetchAllEmployees();
   }
 
   @Override

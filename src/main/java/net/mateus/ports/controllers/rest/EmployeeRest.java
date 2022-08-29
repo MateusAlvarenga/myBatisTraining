@@ -22,9 +22,9 @@ public class EmployeeRest {
 
   private final EmployeeBAC bac;
 
-  @GetMapping("/list")
+  @GetMapping("/fetch-all")
   public List<Employee> list(){
-    return bac.fetchEmployees();
+    return bac.fetchAllEmployees();
   }
 
   @GetMapping("/{id}")

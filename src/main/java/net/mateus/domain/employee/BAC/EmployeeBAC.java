@@ -5,7 +5,7 @@ import net.mateus.domain.employee.BAR.Employee;
 
 public interface EmployeeBAC {
 
-  public List<Employee> fetchEmployees();
+  public List<Employee> fetchAllEmployees();
 
   public Employee fetchEmployeeById(Integer id);
 

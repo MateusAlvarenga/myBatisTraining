@@ -13,8 +13,8 @@ public class EmployeeBARImpl implements EmployeeBAR {
   private final SqlSession sqlSession;
 
   @Override
-  public List<Employee> fetchEmployees() {
-    return sqlSession.selectList("findAll");
+  public List<Employee> fetchAllEmployees() {
+    return mapper.fetchAll();
   }
 
   @Override
