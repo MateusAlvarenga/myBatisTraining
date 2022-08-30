@@ -29,7 +29,7 @@ public class EmployeeBACImpl implements EmployeeBAC {
 
   @Override
   public Response<Employee> insertEmployee(Employee employee) {
-    IValidator validator = new EmployeeValidator(employee);
+    Validator validator = new EmployeeValidator(employee);
 
     if(!validator.validate()){
       return Response.of(HttpStatus.BAD_REQUEST, validator.getErrors());
