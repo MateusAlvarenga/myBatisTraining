@@ -2,10 +2,15 @@ package net.mateus.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import net.mateus.domain.ValidationError;
 
-public abstract class Validator  implements  IValidator{
+public abstract class Validator{
 
+  public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+      Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+  public abstract Boolean validate();
   private List<ValidationError> errors;
 
   public Validator() {

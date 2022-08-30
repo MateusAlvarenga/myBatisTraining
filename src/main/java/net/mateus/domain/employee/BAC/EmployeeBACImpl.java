@@ -1,8 +1,8 @@
 package net.mateus.domain.employee.BAC;
 
 import java.util.List;
-import net.mateus.domain.IValidator;
 import net.mateus.domain.Response;
+import net.mateus.domain.Validator;
 import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.employee.BAR.EmployeeBAR;
 import org.springframework.http.HttpStatus;
@@ -46,7 +46,7 @@ public class EmployeeBACImpl implements EmployeeBAC {
 
   @Override
   public Response<Employee> updateEmployee(Employee employee) {
-    IValidator validator = new EmployeeValidator(employee);
+    Validator validator = new EmployeeValidator(employee);
 
     if(!validator.validate()){
       return Response.of(HttpStatus.BAD_REQUEST, validator.getErrors());
