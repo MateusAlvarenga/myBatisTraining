@@ -1,10 +1,11 @@
 package net.mateus.domain.employee.BAC;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Objects;
 import net.mateus.domain.Response;
 import net.mateus.domain.Validator;
-import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.employee.BAR.EmployeeBAR;
+import net.mateus.domain.employee.model.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +19,16 @@ public class EmployeeBACImpl implements EmployeeBAC {
   private final EmployeeBAR bar;
 
   @Override
-  public List<Employee> fetchAllEmployees() {
-    return bar.fetchAllEmployees();
+  public Response<Employee> fetchAllEmployees() {
+    return Response.of(bar.fetchAllEmployees(), HttpStatus.OK);
   }
 
   @Override
-  public Employee fetchEmployeeById(Integer id) {
-    return bar.fetchEmployeeById(id);
+  public Response<Employee> fetchEmployeeById(Integer id) {
+    Employee employee = bar.fetchEmployeeById(id);
+    return Response.of(Objects.nonNull(employee) ?
+        Collections.singletonList(employee) :  Collections.emptyList(),
+        Objects.nonNull(employee) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
   }
 
   @Override

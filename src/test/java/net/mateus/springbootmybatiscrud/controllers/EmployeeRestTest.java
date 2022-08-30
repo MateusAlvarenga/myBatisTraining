@@ -1,11 +1,16 @@
 package net.mateus.springbootmybatiscrud.controllers;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
-import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.employee.BAR.EmployeeBuilder;
+import net.mateus.domain.employee.model.Employee;
 import net.mateus.ports.controllers.rest.EmployeeRest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +25,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(EmployeeRest.class)
@@ -50,7 +50,8 @@ public class EmployeeRestTest {
         EmployeeBuilder.builder().id(2).name("James").build()
     );
     final String urlTemplate = "/api/employee/fetch-all";
-    when(BAC.fetchAllEmployees()).thenReturn(employeesExpected);
+    final Response<Employee> responseExpected = Response.of(employeesExpected, HttpStatus.OK);
+    when(BAC.fetchAllEmployees()).thenReturn(responseExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
         .get(urlTemplate)
@@ -61,16 +62,17 @@ public class EmployeeRestTest {
 
     JSONAssert.assertEquals(
         Response.getResponse().getContentAsString(),
-        mapper.writeValueAsString(employeesExpected), true);
+        mapper.writeValueAsString(responseExpected), true);
   }
   @Test
 
   public void fetchById() throws Exception {
 
     final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
+    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
     final Integer givenId = 1;
-    final String urlTemplate = "/api/employee/" + givenId;
-    when(BAC.fetchEmployeeById(anyInt())).thenReturn(employeeExpected);
+    final String urlTemplate = "/api/employee/fetch-by-id/" + givenId;
+    when(BAC.fetchEmployeeById(anyInt())).thenReturn(responseExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
         .get(urlTemplate)
@@ -81,7 +83,7 @@ public class EmployeeRestTest {
 
     JSONAssert.assertEquals(
         Response.getResponse().getContentAsString(),
-        mapper.writeValueAsString(employeeExpected), true);
+        mapper.writeValueAsString(responseExpected), true);
   }
 
   @Test

@@ -1,6 +1,5 @@
 package net.mateus.ports.controllers.rest;
 
-import java.util.List;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.model.Employee;
@@ -26,43 +25,63 @@ public class EmployeeRest {
   }
 
   @GetMapping("/fetch-all")
-  public List<Employee> list(){
-    return bac.fetchAllEmployees();
+  public ResponseEntity<?> list(){
+    try{
+      Response<Employee> response = bac.fetchAllEmployees();
+      return response.toResponseEntity();
+
+    }catch (Exception e){
+      Response response = Response.of(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return  response.toResponseEntity();
+    }
   }
 
-  @GetMapping("/{id}")
-  public Employee get(@PathVariable Integer id){
-    return bac.fetchEmployeeById(id);
+  @GetMapping("/fetch-by-id/{id}")
+  public ResponseEntity<?>  get(@PathVariable Integer id){
+    try{
+      Response<Employee> response = bac.fetchEmployeeById(id);
+      return  response.toResponseEntity();
+    }catch (Exception e){
+      Response response = Response.of(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return response.toResponseEntity();
+    }
   }
 
   @PostMapping
   public ResponseEntity<?> insert(@RequestBody Employee employee){
-    Response<Employee> response = bac.insertEmployee(employee);
-    return ResponseEntity.status(response.getHttpStatus()).body(response);
+    try{
+      Response<Employee> response = bac.insertEmployee(employee);
+      return response.toResponseEntity();
+    }catch (Exception e){
+      Response response = Response.of(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return response.toResponseEntity();
+    }
   }
 
   @PutMapping
   public ResponseEntity update(@RequestBody Employee employee){
-    Response<Employee> response = bac.updateEmployee(employee);
-    return ResponseEntity.status(response.getHttpStatus()).body(response);
-  }
-
-  @GetMapping("/sadfsd")
-  public ResponseEntity asdfsadf(@RequestBody Employee employee){
-    Response<Employee> response = bac.updateEmployee(employee);
-    return ResponseEntity.status(response.getHttpStatus()).body(response);
-  }
-
-
-  @DeleteMapping("/{id}")
-  public ResponseEntity delete(@PathVariable Integer id){
-    Integer transactionStatus = bac.deleteEmployee(id);
-
-    if(transactionStatus == 1){
-      return new ResponseEntity(HttpStatus.OK);
-    }else {
-      return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    try {
+      Response<Employee> response = bac.updateEmployee(employee);
+      return  response.toResponseEntity();
+    }catch (Exception e){
+      Response response = Response.of(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return response.toResponseEntity();
     }
   }
 
+  @DeleteMapping("/{id}")
+  public ResponseEntity delete(@PathVariable Integer id) {
+    try {
+      Integer transactionStatus = bac.deleteEmployee(id);
+
+      if (transactionStatus == 1)
+        return  Response.of("Employee deleted successfully", HttpStatus.OK).toResponseEntity();
+      else
+        return  Response.of("Employee not found", HttpStatus.NOT_FOUND).toResponseEntity();
+
+    } catch (Exception e) {
+      Response response = Response.of(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return response.toResponseEntity();
+    }
+  }
 }

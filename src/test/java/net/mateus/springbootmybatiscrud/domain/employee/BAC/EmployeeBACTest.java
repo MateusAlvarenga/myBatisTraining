@@ -1,24 +1,22 @@
 package net.mateus.springbootmybatiscrud.domain.employee.BAC;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
+
 import java.util.List;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBACImpl;
-import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.employee.BAR.EmployeeBAR;
 import net.mateus.domain.employee.BAR.EmployeeBuilder;
+import net.mateus.domain.employee.model.Employee;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -41,19 +39,21 @@ public class EmployeeBACTest {
             .name("joe").email("example@gmail.com").branch("abc").phone("3456891")
             .build()
     );
+    final Response<Employee> responseExpected = Response.of(employeesExpected, HttpStatus.OK);
     when(bar.fetchAllEmployees()).thenReturn(employeesExpected);
 
-    List<Employee> employeesResponse = bac.fetchAllEmployees();
-    assertThat(employeesResponse).isEqualTo(employeesExpected);
+    Response<Employee> employeesResponse = bac.fetchAllEmployees();
+    assertEquals(responseExpected, employeesResponse);
   }
 
   @Test
   public void testFetchEmployeeById() {
     final Employee employeeExpected = EmployeeBuilder.builder().id(1).name("Mateus").build();
+    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
     when(bar.fetchEmployeeById(anyInt())).thenReturn(employeeExpected);
 
-    Employee employeeResponse = bac.fetchEmployeeById(1);
-    assertThat(employeeResponse).isEqualTo(employeeExpected);
+    Response<Employee> employeeResponse = bac.fetchEmployeeById(1);
+   assertEquals(responseExpected, employeeResponse);
   }
 
   @Test

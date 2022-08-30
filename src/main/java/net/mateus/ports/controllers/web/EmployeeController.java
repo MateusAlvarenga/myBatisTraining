@@ -2,8 +2,8 @@ package net.mateus.ports.controllers.web;
 
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
-import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.employee.BAR.EmployeeMapper;
+import net.mateus.domain.employee.model.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,14 +28,14 @@ public class EmployeeController {
     @PostMapping("/insert")
     private String insert(@ModelAttribute("employee") Employee employee, Model model){
         Response response = bac.insertEmployee(employee);
-        model.addAttribute("employees", bac.fetchAllEmployees());
+        model.addAttribute("employees", bac.fetchAllEmployees().getData());
         model.addAttribute("response", response);
         return "employee";
     }
 
     @GetMapping("/emp-list")
     private String employees(Model model){
-        model.addAttribute("employees", bac.fetchAllEmployees());
+        model.addAttribute("employees", bac.fetchAllEmployees().getData());
         return "employee";
     }
 
@@ -47,7 +47,7 @@ public class EmployeeController {
 
     @GetMapping("/form")
     private String updateForm(@RequestParam("id") int id, Model model){
-        Employee emp = bac.fetchEmployeeById(id);
+        Employee emp = bac.fetchEmployeeById(id).getData().get(0);
         if(emp != null){
             model.addAttribute("emp", emp);
         }
@@ -57,7 +57,7 @@ public class EmployeeController {
     @PostMapping("/update")
     private String update(@ModelAttribute("employee") Employee employee, Model model){
         Response response = bac.insertEmployee(employee);
-        model.addAttribute("employees", bac.fetchAllEmployees());
+        model.addAttribute("employees", bac.fetchAllEmployees().getData());
         model.addAttribute("response", response);
         return "employee";
     }

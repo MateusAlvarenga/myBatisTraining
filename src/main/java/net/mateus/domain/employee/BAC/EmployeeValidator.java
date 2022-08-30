@@ -1,8 +1,7 @@
 package net.mateus.domain.employee.BAC;
 
-import java.util.regex.Pattern;
-import net.mateus.domain.employee.model.Employee;
 import net.mateus.domain.Validator;
+import net.mateus.domain.employee.model.Employee;
 
 public class EmployeeValidator extends Validator {
   private final Employee employee;
