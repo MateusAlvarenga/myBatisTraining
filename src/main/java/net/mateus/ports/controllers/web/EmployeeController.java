@@ -56,7 +56,7 @@ public class EmployeeController {
 
     @PostMapping("/update")
     private String update(@ModelAttribute("employee") Employee employee, Model model){
-        Response response = bac.insertEmployee(employee);
+        Response response = bac.updateEmployee(employee);
         model.addAttribute("employees", bac.fetchAllEmployees().getData());
         model.addAttribute("response", response);
         return "employee";

@@ -5,6 +5,7 @@ import net.mateus.domain.employee.model.Employee;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -14,6 +15,7 @@ public interface EmployeeMapper {
 
     @Insert("INSERT INTO employee(name, phone, email, branch) " +
             " VALUES (#{name}, #{phone}, #{email}, #{branch})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Employee employee);
 
     @Select("SELECT * FROM employee")

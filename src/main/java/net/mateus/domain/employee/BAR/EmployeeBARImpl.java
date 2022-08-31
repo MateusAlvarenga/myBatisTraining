@@ -1,6 +1,7 @@
 package net.mateus.domain.employee.BAR;
 
 import java.util.List;
+import lombok.SneakyThrows;
 import net.mateus.domain.employee.model.Employee;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Repository;
 public class EmployeeBARImpl implements EmployeeBAR {
 
   private final EmployeeMapper mapper;
-  private final SqlSession sqlSession;
+//  private final SqlSession sqlSession;
 
-  public EmployeeBARImpl(EmployeeMapper mapper, SqlSession sqlSession) {
+  public EmployeeBARImpl(EmployeeMapper mapper/*, SqlSession sqlSession*/) {
     this.mapper = mapper;
-    this.sqlSession = sqlSession;
+//    this.sqlSession = sqlSession;
   }
 
   @Override

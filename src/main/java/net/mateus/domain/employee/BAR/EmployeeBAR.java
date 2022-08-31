@@ -15,4 +15,5 @@ public interface EmployeeBAR {
 
   public Integer deleteEmployee(Integer id);
 
+//  public Integer createNewEmployee(Employee employee);
 }
