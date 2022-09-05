@@ -22,7 +22,7 @@
                 <b>Employee not saved status: ${response.httpStatus.value()}</b>
             </#if>
             <ul>
-                <#list response.validationErrors as error>
+                <#list response.messages as error>
                     <li> ${error.message}</li>
                 </#list>
             </ul>

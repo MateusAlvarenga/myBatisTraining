@@ -67,7 +67,7 @@ public class EmployeeBACTest {
 
     final Response<Employee> response = bac.insertEmployee(employeeExpected);
     assertEquals(responseExpected.getData(), response.getData());
-    assertEquals(response.getValidationErrors().size(),0);
+    assertEquals(response.getMessages().size(),0);
   }
 
   @Test
@@ -81,7 +81,7 @@ public class EmployeeBACTest {
 
     final Response<Employee> response = bac.updateEmployee(employeeExpected);
     assertEquals(responseExpected.getData(), response.getData());
-    assertEquals(response.getValidationErrors().size(),0);
+    assertEquals(response.getMessages().size(),0);
   }
 
   @Test
@@ -104,7 +104,7 @@ public class EmployeeBACTest {
     final Integer expectedValidationErrorsSize = 4;
 
     final Response<Employee> response = bac.insertEmployee(employeeInput);
-    assertEquals(expectedValidationErrorsSize,response.getValidationErrors().size());
+    assertEquals(expectedValidationErrorsSize,response.getMessages().size());
   }
 
   @Test
@@ -116,7 +116,7 @@ public class EmployeeBACTest {
     final Integer expectedValidationErrorsSize = 0;
 
     final Response<Employee> response = bac.insertEmployee(employeeInput);
-    assertEquals(expectedValidationErrorsSize,response.getValidationErrors().size());
+    assertEquals(expectedValidationErrorsSize,response.getMessages().size());
   }
   @Test
   public void testValidations3(){
@@ -127,6 +127,6 @@ public class EmployeeBACTest {
     final Integer expectedValidationErrorsSize = 1;
 
     final Response<Employee> response = bac.insertEmployee(employeeInput);
-    assertEquals(expectedValidationErrorsSize,response.getValidationErrors().size());
+    assertEquals(expectedValidationErrorsSize,response.getMessages().size());
   }
 }

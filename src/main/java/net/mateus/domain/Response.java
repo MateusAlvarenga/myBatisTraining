@@ -12,14 +12,14 @@ public class Response <R>{
 
   private List<R> data;
   private HttpStatus httpStatus;
-  private final List<ValidationError> validationErrors;
+  private final List<ValidationError> messages;
 
   private static final List EMPTY_LIST = Collections.emptyList();
 
   private Response(List<R> data, HttpStatus aStatus, List<ValidationError> errors) {
     this.data = data;
     this.httpStatus = aStatus;
-    this.validationErrors = errors;
+    this.messages = errors;
   }
 
   public static <R> Response<R> of(List<R> data, HttpStatus aStatus) {
@@ -27,15 +27,15 @@ public class Response <R>{
   }
 
   public static <R> Response<R> of(R data, HttpStatus aStatus) {
-    return new Response<>(Collections.singletonList(data), aStatus, Collections.emptyList());
+    return new Response<>(Collections.singletonList(data), aStatus, EMPTY_LIST);
   }
 
   public static <R> Response<R> of(HttpStatus aStatus , List<ValidationError> errors) {
-    return new Response<>( null, aStatus, errors);
+    return new Response<>( EMPTY_LIST, aStatus, errors);
   }
 
   public static Response<Employee> of(HttpStatus aStatus) {
-    return new Response<>( null, aStatus, Collections.emptyList());
+    return new Response<>( EMPTY_LIST, aStatus, Collections.emptyList());
   }
 
   public List<R> getData() {
@@ -46,8 +46,8 @@ public class Response <R>{
     return httpStatus;
   }
 
-  public List<ValidationError> getValidationErrors() {
-    return validationErrors;
+  public List<ValidationError> getMessages() {
+    return messages;
   }
 
   public ResponseEntity<?> toResponseEntity() {
@@ -64,11 +64,11 @@ public class Response <R>{
     }
     Response<?> response = (Response<?>) o;
     return Objects.equals(data, response.data) && httpStatus == response.httpStatus
-        && Objects.equals(validationErrors, response.validationErrors);
+        && Objects.equals(messages, response.messages);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, httpStatus, validationErrors);
+    return Objects.hash(data, httpStatus, messages);
   }
 }
