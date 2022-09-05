@@ -23,7 +23,7 @@ public class Response <R>{
   }
 
   public static <R> Response<R> of(List<R> data, HttpStatus aStatus) {
-    return new Response<>(data, aStatus, Collections.emptyList());
+    return new Response<>(data, aStatus, EMPTY_LIST);
   }
 
   public static <R> Response<R> of(R data, HttpStatus aStatus) {
@@ -35,7 +35,7 @@ public class Response <R>{
   }
 
   public static Response<Employee> of(HttpStatus aStatus) {
-    return new Response<>( EMPTY_LIST, aStatus, Collections.emptyList());
+    return new Response<>( EMPTY_LIST, aStatus, EMPTY_LIST);
   }
 
   public List<R> getData() {
