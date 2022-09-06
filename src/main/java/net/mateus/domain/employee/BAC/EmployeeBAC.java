@@ -13,6 +13,6 @@ public interface EmployeeBAC {
 
   public Response<Employee> updateEmployee(Employee employee);
 
-  public Integer deleteEmployee(Integer id);
+  public Response<Employee> deleteEmployee(Integer id);
 
 }

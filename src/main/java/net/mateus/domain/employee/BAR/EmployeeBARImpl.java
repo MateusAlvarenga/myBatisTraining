@@ -1,9 +1,9 @@
 package net.mateus.domain.employee.BAR;
 
-import java.util.List;
-import lombok.SneakyThrows;
+import java.util.Objects;
+import net.mateus.domain.Response;
+import net.mateus.domain.STATUS;
 import net.mateus.domain.employee.model.Employee;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 
@@ -19,27 +19,44 @@ public class EmployeeBARImpl implements EmployeeBAR {
   }
 
   @Override
-  public List<Employee> fetchAllEmployees() {
-    return mapper.fetchAll();
+  public Response<Employee> fetchAllEmployees() {
+    return Response.of(mapper.fetchAll(), STATUS.OPERATIONSUCCESS);
   }
 
   @Override
-  public Employee fetchEmployeeById(Integer id) {
-    return mapper.findById(id);
+  public Response<Employee> fetchEmployeeById(Integer id) {
+    final Employee employee = mapper.findById(id);
+    if(Objects.nonNull(employee)){
+      return Response.of(employee, STATUS.OPERATIONSUCCESS);
+    }else {
+      return Response.of(STATUS.NOROWSFOUNDERROR);
+    }
   }
 
   @Override
-  public Integer insertEmployee(Employee employee) {
-    return mapper.insert(employee);
+  public Response<Employee> insertEmployee(Employee employee) {
+    if(mapper.insert(employee) > 0){
+      return Response.of(employee, STATUS.OPERATIONSUCCESS);
+    }else {
+      return Response.of(STATUS.PERSISTENCEERROR);
+    }
   }
 
   @Override
-  public Integer updateEmployee(Employee employee) {
-    return mapper.update(employee);
+  public Response<Employee> updateEmployee(Employee employee) {
+     if(mapper.update(employee) == 1){
+       return Response.of(employee, STATUS.OPERATIONSUCCESS);
+     }else {
+       return Response.of(STATUS.NOROWSUPDATEDERROR);
+     }
   }
 
   @Override
-  public Integer deleteEmployee(Integer id) {
-    return mapper.deleteById(id);
+  public Response<Employee> deleteEmployee(Integer id) {
+    if(mapper.deleteById(id) == 1){
+      return Response.of(STATUS.OPERATIONSUCCESS);
+    }else {
+      return Response.of(STATUS.NOROWSREMOVEDERROR);
+    }
   }
 }

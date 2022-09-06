@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import net.mateus.domain.Response;
+import net.mateus.domain.STATUS;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.BAR.EmployeeBuilder;
 import net.mateus.domain.employee.model.Employee;
@@ -50,7 +51,7 @@ public class EmployeeRestTest {
         EmployeeBuilder.builder().id(2).name("James").build()
     );
     final String urlTemplate = "/api/employee/fetch-all";
-    final Response<Employee> responseExpected = Response.of(employeesExpected, HttpStatus.OK);
+    final Response<Employee> responseExpected = Response.of(employeesExpected, STATUS.OPERATIONSUCCESS);
     when(BAC.fetchAllEmployees()).thenReturn(responseExpected);
 
     RequestBuilder request = MockMvcRequestBuilders
@@ -69,7 +70,7 @@ public class EmployeeRestTest {
   public void fetchById() throws Exception {
 
     final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
+    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
     final Integer givenId = 1;
     final String urlTemplate = "/api/employee/fetch-by-id/" + givenId;
     when(BAC.fetchEmployeeById(anyInt())).thenReturn(responseExpected);
@@ -93,7 +94,7 @@ public class EmployeeRestTest {
         .builder()
         .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
+    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
     final String urlTemplate = "/api/employee";
     when(BAC.insertEmployee(any())).thenReturn(responseExpected);
 
@@ -113,7 +114,7 @@ public class EmployeeRestTest {
         .builder()
         .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
+    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
     final String urlTemplate = "/api/employee";
     when(BAC.updateEmployee(any())).thenReturn(responseExpected);
 
@@ -131,8 +132,8 @@ public class EmployeeRestTest {
 
     final Integer givenId = 1;
     final String urlTemplate = "/api/employee/" + givenId;
-    when(BAC.deleteEmployee(anyInt())).thenReturn(1);
-
+    final Response<Employee> responseExpected = Response.of(STATUS.OPERATIONSUCCESS);
+    when(BAC.deleteEmployee(anyInt())).thenReturn(responseExpected);
     RequestBuilder request = MockMvcRequestBuilders
         .delete(urlTemplate)
         .accept(MediaType.APPLICATION_JSON);

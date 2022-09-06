@@ -15,11 +15,11 @@
 <div class="container">
     <#if response??>
         <div style="border: 1px solid black;border-radius: 5px 5px 5px 5px;">
-            <#if response.httpStatus.value() == 200>
+            <#if response.status == "OPERATIONSUCCESS">
                 <b>Employee saved !</b>
             </#if>
-            <#if response.httpStatus.value() != 200>
-                <b>Employee not saved status: ${response.httpStatus.value()}</b>
+            <#if response.status != "OPERATIONSUCCESS">
+                <b>Employee not saved status: ${response.status}</b>
             </#if>
             <ul>
                 <#list response.messages as error>

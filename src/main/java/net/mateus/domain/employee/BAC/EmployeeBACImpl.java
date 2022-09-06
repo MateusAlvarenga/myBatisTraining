@@ -1,12 +1,10 @@
 package net.mateus.domain.employee.BAC;
 
-import java.util.Collections;
-import java.util.Objects;
 import net.mateus.domain.Response;
+import net.mateus.domain.STATUS;
 import net.mateus.domain.Validator;
 import net.mateus.domain.employee.BAR.EmployeeBAR;
 import net.mateus.domain.employee.model.Employee;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,15 +18,12 @@ public class EmployeeBACImpl implements EmployeeBAC {
 
   @Override
   public Response<Employee> fetchAllEmployees() {
-    return Response.of(bar.fetchAllEmployees(), HttpStatus.OK);
+    return bar.fetchAllEmployees();
   }
 
   @Override
   public Response<Employee> fetchEmployeeById(Integer id) {
-    Employee employee = bar.fetchEmployeeById(id);
-    return Response.of(Objects.nonNull(employee) ?
-        Collections.singletonList(employee) :  Collections.emptyList(),
-        Objects.nonNull(employee) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    return bar.fetchEmployeeById(id);
   }
 
   @Override
@@ -36,16 +31,10 @@ public class EmployeeBACImpl implements EmployeeBAC {
     Validator validator = new EmployeeValidator(employee);
 
     if(!validator.validate()){
-      return Response.of(HttpStatus.BAD_REQUEST, validator.getErrors());
+      return Response.of(STATUS.VALIDATIONERROR, validator.getErrors());
     }
 
-    Integer transactionStatus = bar.insertEmployee(employee);
-
-    if(transactionStatus == 1){
-      return Response.of(employee, HttpStatus.OK);
-    }else {
-      return Response.of(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return  bar.insertEmployee(employee);
   }
 
   @Override
@@ -53,20 +42,13 @@ public class EmployeeBACImpl implements EmployeeBAC {
     Validator validator = new EmployeeValidator(employee);
 
     if(!validator.validate()){
-      return Response.of(HttpStatus.BAD_REQUEST, validator.getErrors());
+      return Response.of(STATUS.VALIDATIONERROR, validator.getErrors());
     }
-
-    Integer transactionStatus = bar.updateEmployee(employee);
-
-    if(transactionStatus == 1){
-      return Response.of(employee, HttpStatus.OK);
-    }else {
-      return Response.of(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return bar.updateEmployee(employee);
   }
 
   @Override
-  public Integer deleteEmployee(Integer id) {
+  public Response<Employee> deleteEmployee(Integer id) {
     return bar.deleteEmployee(id);
   }
 }

@@ -2,11 +2,13 @@ package net.mateus.springbootmybatiscrud.domain.employee.BAC;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
 import net.mateus.domain.Response;
+import net.mateus.domain.STATUS;
 import net.mateus.domain.employee.BAC.EmployeeBACImpl;
 import net.mateus.domain.employee.BAR.EmployeeBAR;
 import net.mateus.domain.employee.BAR.EmployeeBuilder;
@@ -39,8 +41,8 @@ public class EmployeeBACTest {
             .name("joe").email("example@gmail.com").branch("abc").phone("3456891")
             .build()
     );
-    final Response<Employee> responseExpected = Response.of(employeesExpected, HttpStatus.OK);
-    when(bar.fetchAllEmployees()).thenReturn(employeesExpected);
+    final Response<Employee> responseExpected = Response.of(employeesExpected, STATUS.OPERATIONSUCCESS);
+    when(bar.fetchAllEmployees()).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.fetchAllEmployees();
     assertEquals(responseExpected, employeesResponse);
@@ -49,8 +51,8 @@ public class EmployeeBACTest {
   @Test
   public void testFetchEmployeeById() {
     final Employee employeeExpected = EmployeeBuilder.builder().id(1).name("Mateus").build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
-    when(bar.fetchEmployeeById(anyInt())).thenReturn(employeeExpected);
+    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
+    when(bar.fetchEmployeeById(anyInt())).thenReturn(responseExpected);
 
     Response<Employee> employeeResponse = bac.fetchEmployeeById(1);
    assertEquals(responseExpected, employeeResponse);
@@ -62,8 +64,8 @@ public class EmployeeBACTest {
         .builder()
         .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
-    when(bar.insertEmployee(employeeExpected)).thenReturn(1);
+    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
+    when(bar.insertEmployee(any())).thenReturn(responseExpected);
 
     final Response<Employee> response = bac.insertEmployee(employeeExpected);
     assertEquals(responseExpected.getData(), response.getData());
@@ -76,8 +78,8 @@ public class EmployeeBACTest {
         .builder()
         .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, HttpStatus.OK);
-    when(bar.updateEmployee(employeeExpected)).thenReturn(1);
+    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
+    when(bar.updateEmployee(employeeExpected)).thenReturn(responseExpected);
 
     final Response<Employee> response = bac.updateEmployee(employeeExpected);
     assertEquals(responseExpected.getData(), response.getData());
@@ -90,10 +92,10 @@ public class EmployeeBACTest {
         .builder()
         .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
-    when(bar.deleteEmployee(anyInt())).thenReturn(1);
-
-    Integer idResponse = bac.deleteEmployee(1);
-    assertEquals(idResponse, 1);
+    final Response<Employee> responseExpected = Response.of(STATUS.OPERATIONSUCCESS);
+    when(bar.deleteEmployee(anyInt())).thenReturn(responseExpected);
+    final Response<Employee> response = bac.deleteEmployee(1);
+    assertEquals(responseExpected, response);
   }
 
   @Test
@@ -114,6 +116,7 @@ public class EmployeeBACTest {
         .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
     final Integer expectedValidationErrorsSize = 0;
+    when(bar.insertEmployee(any())).thenReturn(Response.of(employeeInput, STATUS.OPERATIONSUCCESS));
 
     final Response<Employee> response = bac.insertEmployee(employeeInput);
     assertEquals(expectedValidationErrorsSize,response.getMessages().size());

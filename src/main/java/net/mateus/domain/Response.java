@@ -5,45 +5,49 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import net.mateus.domain.employee.model.Employee;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class Response <R>{
 
   private List<R> data;
-  private HttpStatus httpStatus;
+  private STATUS status;
   private final List<ValidationError> messages;
 
   private static final List EMPTY_LIST = Collections.emptyList();
 
-  private Response(List<R> data, HttpStatus aStatus, List<ValidationError> errors) {
+  private Response(List<R> data, STATUS aStatus, List<ValidationError> errors) {
     this.data = data;
-    this.httpStatus = aStatus;
+    this.status = aStatus;
     this.messages = errors;
   }
 
-  public static <R> Response<R> of(List<R> data, HttpStatus aStatus) {
+  public static <R> Response<R> of(List<R> data, STATUS aStatus) {
     return new Response<>(data, aStatus, EMPTY_LIST);
   }
 
-  public static <R> Response<R> of(R data, HttpStatus aStatus) {
+  public static <R> Response<R> of(R data, STATUS aStatus) {
     return new Response<>(Collections.singletonList(data), aStatus, EMPTY_LIST);
   }
 
-  public static <R> Response<R> of(HttpStatus aStatus , List<ValidationError> errors) {
+  public static <R> Response<R> of(STATUS aStatus , List<ValidationError> errors) {
     return new Response<>( EMPTY_LIST, aStatus, errors);
   }
 
-  public static Response<Employee> of(HttpStatus aStatus) {
+  public static Response<Employee> of(STATUS aStatus) {
     return new Response<>( EMPTY_LIST, aStatus, EMPTY_LIST);
   }
+
+  public static Response<Employee> of(Exception exception) {
+    return  new Response<>(EMPTY_LIST, STATUS.EXCEPTIONERROR, Collections.singletonList( ValidationError.of("",exception.getMessage())));
+  }
+
 
   public List<R> getData() {
     return data;
   }
 
-  public HttpStatus getHttpStatus() {
-    return httpStatus;
+  public STATUS getStatus() {
+    return status;
   }
 
   public List<ValidationError> getMessages() {
@@ -51,7 +55,7 @@ public class Response <R>{
   }
 
   public ResponseEntity<?> toResponseEntity() {
-    return new ResponseEntity<>(this, httpStatus);
+    return new ResponseResponseEntityAdapter(this);
   }
 
   @Override
@@ -63,12 +67,12 @@ public class Response <R>{
       return false;
     }
     Response<?> response = (Response<?>) o;
-    return Objects.equals(data, response.data) && httpStatus == response.httpStatus
+    return Objects.equals(data, response.data) && status == response.status
         && Objects.equals(messages, response.messages);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, httpStatus, messages);
+    return Objects.hash(data, status, messages);
   }
 }
