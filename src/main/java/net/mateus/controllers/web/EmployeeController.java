@@ -1,4 +1,4 @@
-package net.mateus.ports.controllers.web;
+package net.mateus.controllers.web;
 
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;

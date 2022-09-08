@@ -8,7 +8,7 @@ public class ResponseResponseEntityAdapter extends ResponseEntity {
   private final Response response;
 
   public ResponseResponseEntityAdapter(Response response) {
-    super(response, parseStatustoHttpStatus(response.getStatus()));
+    super(response, parseStatusToHttpStatus(response.getStatus()));
     this.response = response;
   }
 
@@ -16,7 +16,7 @@ public class ResponseResponseEntityAdapter extends ResponseEntity {
     return response;
   }
 
-  private static HttpStatus parseStatustoHttpStatus(STATUS status) {
+  private static HttpStatus parseStatusToHttpStatus(STATUS status) {
     switch (status) {
       case OPERATIONSUCCESS:
         return HttpStatus.OK;
@@ -27,44 +27,11 @@ public class ResponseResponseEntityAdapter extends ResponseEntity {
       case VALIDATIONERROR:
         return HttpStatus.BAD_REQUEST;
       case NOROWSFOUNDERROR:
-        return HttpStatus.NOT_FOUND;
       case NOROWSREMOVEDERROR:
-        return HttpStatus.NOT_FOUND;
       case NOROWSUPDATEDERROR:
         return HttpStatus.NOT_FOUND;
       default:
         return HttpStatus.INTERNAL_SERVER_ERROR;
     }
   }
-
-  /*
-  *
-  * EXCEPTIONERROR,
-
-  SYSTEMERROR,
-
-  PERSISTENCEERROR,
-
-  VALIDATIONERROR,
-
-  OPTIMISTICLOCKINGERROR,
-
-  VERSIONNOTFOUNDERROR,
-
-  NOROWSFOUNDERROR,
-
-  NOROWSUPDATEDERROR,
-
-  NOROWSREMOVEDERROR,
-
-  NOROWSINSERTEDERROR,
-
-  SINGLETONSELECTERROR,
-
-  QUERYBUILDERERROR,
-
-  UNSPECIFIEDERROR,
-
-  EXTERNALERROR
-  * */
 }
