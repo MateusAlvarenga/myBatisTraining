@@ -7,19 +7,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import net.mateus.controllers.rest.EmployeeRest;
 import net.mateus.domain.Response;
 import net.mateus.domain.STATUS;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.BAR.EmployeeBuilder;
 import net.mateus.domain.employee.model.Employee;
-import net.mateus.ports.controllers.rest.EmployeeRest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -43,7 +42,6 @@ public class EmployeeRestTest {
 
 
   @Test
-
   public void fetchList() throws Exception {
 
     final List<Employee> employeesExpected = List.of(

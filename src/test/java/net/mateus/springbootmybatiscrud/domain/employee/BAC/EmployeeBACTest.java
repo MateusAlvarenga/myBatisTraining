@@ -18,7 +18,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -85,6 +84,19 @@ public class EmployeeBACTest {
     assertEquals(responseExpected.getData(), response.getData());
     assertEquals(response.getMessages().size(),0);
   }
+  
+  @Test
+  public void testUpdateEmployeeWithInvalidData() {
+    final Employee employeeInput =  EmployeeBuilder
+        .builder()
+        .name("Mateus").email("examplegmail.com").branch("abc").phone("123456")
+        .build();
+    
+
+    final Response<Employee> response = bac.updateEmployee(employeeInput);
+    assertEquals(1,response.getMessages().size());
+    assertEquals(0,response.getData().size());
+  }
 
   @Test
   public void testDeleteEmployeeById() {
@@ -128,6 +140,17 @@ public class EmployeeBACTest {
         .name("Mateus").email("example").branch("abc").phone("123456")
         .build();
     final Integer expectedValidationErrorsSize = 1;
+
+    final Response<Employee> response = bac.insertEmployee(employeeInput);
+    assertEquals(expectedValidationErrorsSize,response.getMessages().size());
+  }
+  @Test
+  public void testValidations4(){
+    final Employee employeeInput =  EmployeeBuilder
+        .builder()
+        .name("abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc").email("abcabcabcabcabcabcabcabcabcab@cabcabcabcabcabcabcab.com").branch("abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc").phone("012345678901234567890123456789012345678901234567890123456789")
+        .build();
+    final Integer expectedValidationErrorsSize = 4;
 
     final Response<Employee> response = bac.insertEmployee(employeeInput);
     assertEquals(expectedValidationErrorsSize,response.getMessages().size());
