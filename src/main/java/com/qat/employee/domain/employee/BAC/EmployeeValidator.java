@@ -7,7 +7,6 @@ public class EmployeeValidator extends Validator {
   private final Employee employee;
 
   public EmployeeValidator(Employee aEmployee) {
-    super();
     employee = aEmployee;
   }
 
