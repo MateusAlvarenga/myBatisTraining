@@ -30,19 +30,19 @@ public abstract class Validator{
     errors.add(ValidationError.of(field, message));
   }
 
-  public void required(String field, String value) {
+  public void checkRequired(String field, String value) {
     if (value == null || value.isEmpty()) {
       addError(field, field + " is required");
     }
   }
 
-  public void maxLength(String field, String value, int maxLength) {
+  public void checkMaxLength(String field, String value, int maxLength) {
     if(value != null && value.length() > maxLength) {
       addError(field, field + " must be less than " + maxLength + " characters");
     }
   }
 
-  public void email(String field, String value) {
+  public void checkEmail(String field, String value) {
     if(value != null && !VALID_EMAIL_ADDRESS_REGEX.matcher(value).find()) {
       addError(field, field + " is not valid");
     }

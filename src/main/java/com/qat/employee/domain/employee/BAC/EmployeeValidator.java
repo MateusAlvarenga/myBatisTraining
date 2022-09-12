@@ -13,22 +13,22 @@ public class EmployeeValidator extends Validator {
   @Override
   public void checkValidState() {
 
-    required("name", employee.getName());
+    checkRequired("name", employee.getName());
 
-    maxLength("name", employee.getName(), 50);
+    checkRequired("phone", employee.getPhone());
 
-    required("phone", employee.getPhone());
+    checkRequired("email", employee.getEmail());
 
-    maxLength("phone", employee.getPhone(), 20);
+    checkRequired("branch", employee.getBranch());
 
-    required("email", employee.getEmail());
+    checkMaxLength("name", employee.getName(), 50);
 
-    maxLength("email", employee.getEmail(), 50);
+    checkMaxLength("phone", employee.getPhone(), 20);
 
-    email("email", employee.getEmail());
+    checkMaxLength("email", employee.getEmail(), 50);
 
-    required("branch", employee.getBranch());
+    checkMaxLength("branch", employee.getBranch(), 30);
 
-    maxLength("branch", employee.getBranch(), 30);
+    checkEmail("email", employee.getEmail());
   }
 }
