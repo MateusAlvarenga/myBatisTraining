@@ -1,5 +1,6 @@
 package net.mateus.controllers.rest;
 
+import net.mateus.advice.TrackExecutionTime;
 import net.mateus.domain.Response;
 import net.mateus.domain.employee.BAC.EmployeeBAC;
 import net.mateus.domain.employee.model.Employee;
@@ -24,6 +25,7 @@ public class EmployeeRest {
   }
 
   @GetMapping("/fetch-all")
+  @TrackExecutionTime
   public ResponseEntity<?> list(){
     try{
       Response<Employee> response = bac.fetchAllEmployees();
