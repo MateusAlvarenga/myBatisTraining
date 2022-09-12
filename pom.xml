@@ -8,7 +8,7 @@
         <version>2.2.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>net.mateus</groupId>
+    <groupId>com.qat</groupId>
     <artifactId>myBatisTraining</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>myBatisTraining</name>

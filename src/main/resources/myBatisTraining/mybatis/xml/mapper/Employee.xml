@@ -3,8 +3,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.mateus.domain.employee.BAR.EmployeeMapper">
-  <insert id="createNewEmployee" parameterType="net.mateus.domain.employee.model.Employee" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+<mapper namespace="com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper">
+  <insert id="createNewEmployee" parameterType="com.qat.employee.domain.employee.model.Employee" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     INSERT INTO EMPLOYEE
       (NAME, PHONE, EMAIL, BRANCH)
     VALUES
