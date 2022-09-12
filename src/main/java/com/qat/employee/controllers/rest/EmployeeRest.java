@@ -1,6 +1,6 @@
 package com.qat.employee.controllers.rest;
 
-import com.qat.employee.advice.TrackExecutionTime;
+import com.qat.employee.aspect.TrackExecutionTime;
 import com.qat.employee.domain.Response;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
 import com.qat.employee.domain.employee.model.Employee;

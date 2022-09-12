@@ -1,4 +1,4 @@
-package com.qat.employee.advice;
+package com.qat.employee.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,7 +14,7 @@ import org.aspectj.lang.annotation.Aspect;
 public class ExecutionTimeAdvice {
 
   // Anotation to track execution time of a method
-  @Around("@annotation(com.qat.employee.advice.TrackExecutionTime)")
+  @Around("@annotation(com.qat.employee.aspect.TrackExecutionTime)")
   public Object executionTime(ProceedingJoinPoint point) throws Throwable {
     return logExecutionTime(point);
   }
