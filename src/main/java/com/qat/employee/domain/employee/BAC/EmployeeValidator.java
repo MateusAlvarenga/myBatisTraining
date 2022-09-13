@@ -4,6 +4,7 @@ import com.qat.employee.domain.Validator;
 import com.qat.employee.domain.employee.model.Employee;
 
 public class EmployeeValidator extends Validator {
+
   private final Employee employee;
 
   public EmployeeValidator(Employee aEmployee) {

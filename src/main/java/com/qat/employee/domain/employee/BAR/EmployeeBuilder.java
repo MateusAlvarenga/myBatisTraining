@@ -4,6 +4,7 @@ import com.qat.employee.domain.employee.model.Employee;
 
 
 public class EmployeeBuilder {
+
   private Integer id;
   private String name;
   private String phone;
@@ -39,7 +40,7 @@ public class EmployeeBuilder {
     return new EmployeeBuilder();
   }
 
-  public Employee build(){
+  public Employee build() {
     return new Employee(id, name, phone, email, branch);
   }
 

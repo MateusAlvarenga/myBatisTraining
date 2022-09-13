@@ -1,10 +1,12 @@
 package com.qat.employee.domain.employee.BAC;
 
 import com.qat.employee.domain.Response;
+import com.qat.employee.domain.STATUS;
 import com.qat.employee.domain.Validator;
 import com.qat.employee.domain.employee.BAR.EmployeeBAR;
 import com.qat.employee.domain.employee.model.Employee;
-import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.employee.model.EmployeeRequest;
+import com.qat.employee.domain.employee.model.EmployeeResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,38 +19,40 @@ public class EmployeeBACImpl implements EmployeeBAC {
   private final EmployeeBAR bar;
 
   @Override
-  public Response<Employee> fetchAllEmployees() {
-    return bar.fetchAllEmployees();
+  public EmployeeResponse fetchAllEmployees(EmployeeRequest request) {
+    return bar.fetchAllEmployees(request);
   }
 
   @Override
-  public Response<Employee> fetchEmployeeById(Integer id) {
-    return bar.fetchEmployeeById(id);
+  public EmployeeResponse fetchEmployeeById(EmployeeRequest request) {
+    return bar.fetchEmployeeById(request);
   }
 
   @Override
-  public Response<Employee> insertEmployee(Employee employee) {
-    Validator validator = new EmployeeValidator(employee);
+  public EmployeeResponse insertEmployee(EmployeeRequest request) {
+    Validator validator = new EmployeeValidator(request.getData());
 
-    if(!validator.validate()){
-      return Response.of(STATUS.VALIDATIONERROR, validator.getErrors());
+    if (!validator.validate()) {
+      return new EmployeeResponse(STATUS.VALIDATIONERROR, validator.getErrors());
     }
 
-    return  bar.insertEmployee(employee);
+    return bar.insertEmployee(request);
   }
 
   @Override
-  public Response<Employee> updateEmployee(Employee employee) {
+  public EmployeeResponse updateEmployee(EmployeeRequest request) {
+
+    Employee employee = request.getData();
     Validator validator = new EmployeeValidator(employee);
 
-    if(!validator.validate()){
-      return Response.of(STATUS.VALIDATIONERROR, validator.getErrors());
+    if (!validator.validate()) {
+      return  new EmployeeResponse(STATUS.VALIDATIONERROR, validator.getErrors());
     }
-    return bar.updateEmployee(employee);
+    return bar.updateEmployee(request);
   }
 
   @Override
-  public Response<Employee> deleteEmployee(Integer id) {
-    return bar.deleteEmployee(id);
+  public EmployeeResponse deleteEmployee(EmployeeRequest request) {
+    return bar.deleteEmployee(request);
   }
 }

@@ -1,19 +1,21 @@
 package com.qat.employee.domain.employee.BAR;
 
-import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.Response;
+import com.qat.employee.domain.employee.model.Employee;
+import com.qat.employee.domain.employee.model.EmployeeRequest;
+import com.qat.employee.domain.employee.model.EmployeeResponse;
 
 public interface EmployeeBAR {
 
-  public Response<Employee> fetchAllEmployees();
+  public EmployeeResponse fetchAllEmployees(EmployeeRequest request);
 
-  public Response<Employee> fetchEmployeeById(Integer id);
+  public EmployeeResponse fetchEmployeeById(EmployeeRequest request);
 
-  public Response<Employee> insertEmployee(Employee employee);
+  public EmployeeResponse insertEmployee(EmployeeRequest request);
 
-  public Response<Employee> updateEmployee(Employee employee);
+  public EmployeeResponse updateEmployee(EmployeeRequest request);
 
-  public Response<Employee> deleteEmployee(Integer id);
+  public EmployeeResponse deleteEmployee(EmployeeRequest request);
 
 //  public Integer createNewEmployee(Employee employee);
 }

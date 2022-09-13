@@ -1,17 +1,19 @@
 package com.qat.employee.aspect;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
-import org.aspectj.lang.annotation.Aspect;
 
 @Aspect
 @Component
 @ConditionalOnExpression("${aspect.enabled:true}")
-@Slf4j
 public class ExecutionTimeAdvice {
+
+  Logger log = LoggerFactory.getLogger(ExecutionTimeAdvice.class);
 
   // Anotation to track execution time of a method
   @Around("@annotation(com.qat.employee.aspect.TrackExecutionTime)")
@@ -44,7 +46,8 @@ public class ExecutionTimeAdvice {
     final String className = classNameWithPackage.substring(classNameWithPackage
         .lastIndexOf('.') + 1);
 
-    final String msg = className + " " + methodName + " " + "execution time: " + executionTime + "ms";
+    final String msg =
+        className + " " + methodName + " " + "execution time: " + executionTime + "ms";
 
     log.info(msg);
     return object;

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public abstract class Validator{
+public abstract class Validator {
 
   public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
       Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
   public abstract void checkValidState();
 
-  public Boolean validate(){
+  public Boolean validate() {
     checkValidState();
     return getErrors().isEmpty();
   }
@@ -19,7 +19,7 @@ public abstract class Validator{
   private List<ValidationError> errors;
 
   public Validator() {
-     this.errors = new ArrayList<>();
+    this.errors = new ArrayList<>();
   }
 
   public List<ValidationError> getErrors() {
@@ -37,13 +37,13 @@ public abstract class Validator{
   }
 
   public void checkMaxLength(String field, String value, int maxLength) {
-    if(value != null && value.length() > maxLength) {
+    if (value != null && value.length() > maxLength) {
       addError(field, field + " must be less than " + maxLength + " characters");
     }
   }
 
   public void checkEmail(String field, String value) {
-    if(value != null && !VALID_EMAIL_ADDRESS_REGEX.matcher(value).find()) {
+    if (value != null && !VALID_EMAIL_ADDRESS_REGEX.matcher(value).find()) {
       addError(field, field + " is not valid");
     }
   }

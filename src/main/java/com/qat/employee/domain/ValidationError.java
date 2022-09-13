@@ -2,7 +2,7 @@ package com.qat.employee.domain;
 
 import java.io.Serializable;
 
-public class ValidationError  implements Serializable {
+public class ValidationError implements Serializable {
 
   private final String field;
   private final String message;

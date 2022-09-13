@@ -1,84 +1,76 @@
 package com.qat.employee.controllers.rest;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.List;
-import com.qat.employee.controllers.rest.EmployeeRest;
-import com.qat.employee.domain.Response;
 import com.qat.employee.domain.STATUS;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
 import com.qat.employee.domain.employee.BAR.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.Employee;
+import com.qat.employee.domain.employee.model.EmployeeRequest;
+import com.qat.employee.domain.employee.model.EmployeeResponse;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(EmployeeRest.class)
-public class EmployeeRestTest {
-
-  @Autowired
-  private MockMvc mockMvc;
+public class EmployeeRestTest  extends BaseWebTest {
 
   @MockBean
   private EmployeeBAC BAC;
 
-  @Autowired
-  ObjectMapper mapper;
+  private final String FETCHALL = "/api/employee/fetch-all";
+  private final String FETCHBYID = "/api/employee/fetch-by-id";
+  private final String INSERT = "/api/employee/insert";
+  private final String UPDATE = "/api/employee/update";
+  private final String DELETE = "/api/employee/delete";
 
 
+  private Employee givenEmployee() {
+    return givenEmployee(1);
+  }
+  private Employee givenEmployee(Integer id) {
+    return EmployeeBuilder
+        .builder()
+        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
+        .build();
+  }
 
   @Test
   public void fetchList() throws Exception {
 
-    final List<Employee> employeesExpected = List.of(
-        EmployeeBuilder.builder().id(1).name("Mateus").build(),
-        EmployeeBuilder.builder().id(2).name("James").build()
+    final List<Employee> givenEmployees = List.of(
+       givenEmployee(1), givenEmployee(2)
     );
-    final String urlTemplate = "/api/employee/fetch-all";
-    final Response<Employee> responseExpected = Response.of(employeesExpected, STATUS.OPERATIONSUCCESS);
-    when(BAC.fetchAllEmployees()).thenReturn(responseExpected);
+    EmployeeRequest givenRequest = new EmployeeRequest();
+    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployees,STATUS.OPERATIONSUCCESS);
 
-    RequestBuilder request = MockMvcRequestBuilders
-        .get(urlTemplate)
-        .accept(MediaType.APPLICATION_JSON);
-    MvcResult Response = mockMvc.perform(request)
-        .andExpect(status().isOk())
-        .andReturn();
+    when(BAC.fetchAllEmployees(givenRequest)).thenReturn(responseExpected);
+
+    final RequestBuilder request =  createRequest(FETCHALL, givenRequest);
+    final MvcResult Response = performRequest(request);
 
     JSONAssert.assertEquals(
         Response.getResponse().getContentAsString(),
         mapper.writeValueAsString(responseExpected), true);
   }
   @Test
-
   public void fetchById() throws Exception {
 
-    final Employee employeeExpected =  EmployeeBuilder.builder().id(1).name("Mateus").build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
-    final Integer givenId = 1;
-    final String urlTemplate = "/api/employee/fetch-by-id/" + givenId;
-    when(BAC.fetchEmployeeById(anyInt())).thenReturn(responseExpected);
+    final Employee givenEmployee = givenEmployee();
+    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,STATUS.OPERATIONSUCCESS);
 
-    RequestBuilder request = MockMvcRequestBuilders
-        .get(urlTemplate)
-        .accept(MediaType.APPLICATION_JSON);
-    MvcResult Response = mockMvc.perform(request)
-        .andExpect(status().isOk())
-        .andReturn();
+    when(BAC.fetchEmployeeById(any())).thenReturn(responseExpected);
+
+    final RequestBuilder request = createRequest(FETCHBYID, givenEmployee);
+    final MvcResult Response = performRequest(request);
 
     JSONAssert.assertEquals(
         Response.getResponse().getContentAsString(),
@@ -88,56 +80,37 @@ public class EmployeeRestTest {
   @Test
   public void insert() throws Exception {
 
-    final Employee employeeExpected =  EmployeeBuilder
-        .builder()
-        .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
-        .build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
-    final String urlTemplate = "/api/employee";
+    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeResponse responseExpected =  new EmployeeResponse(givenEmployee(),STATUS.OPERATIONSUCCESS);
+
     when(BAC.insertEmployee(any())).thenReturn(responseExpected);
 
-    RequestBuilder request = MockMvcRequestBuilders
-        .post(urlTemplate)
-        .accept(MediaType.APPLICATION_JSON)
-        .content(mapper.writeValueAsString(employeeExpected))
-        .contentType(MediaType.APPLICATION_JSON);
-    mockMvc.perform(request)
-        .andExpect(status().isOk());
+    RequestBuilder request = createRequest(INSERT, givenRequest);
+    performRequest(request);
   }
 
   @Test
   public void update() throws Exception {
 
-    final Employee employeeExpected =  EmployeeBuilder
-        .builder()
-        .name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
-        .build();
-    final Response<Employee> responseExpected = Response.of(employeeExpected, STATUS.OPERATIONSUCCESS);
-    final String urlTemplate = "/api/employee";
+    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeResponse responseExpected =  new EmployeeResponse(givenEmployee(),STATUS.OPERATIONSUCCESS);
+
     when(BAC.updateEmployee(any())).thenReturn(responseExpected);
 
-    RequestBuilder request = MockMvcRequestBuilders
-        .put(urlTemplate)
-        .accept(MediaType.APPLICATION_JSON)
-        .content(mapper.writeValueAsString(employeeExpected))
-        .contentType(MediaType.APPLICATION_JSON);
-    mockMvc.perform(request)
-        .andExpect(status().isOk());
+    RequestBuilder request = createRequest(UPDATE, givenRequest);
+    performRequest(request);
   }
 
   @Test
   public void delete() throws Exception {
 
-    final Integer givenId = 1;
-    final String urlTemplate = "/api/employee/" + givenId;
-    final Response<Employee> responseExpected = Response.of(STATUS.OPERATIONSUCCESS);
-    when(BAC.deleteEmployee(anyInt())).thenReturn(responseExpected);
-    RequestBuilder request = MockMvcRequestBuilders
-        .delete(urlTemplate)
-        .accept(MediaType.APPLICATION_JSON);
-    mockMvc.perform(request)
-        .andExpect(status().isOk());
-  }
+    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeResponse responseExpected =  new EmployeeResponse(givenEmployee(),STATUS.OPERATIONSUCCESS);
 
+    when(BAC.deleteEmployee(any())).thenReturn(responseExpected);
+
+    RequestBuilder request = createRequest(DELETE, givenRequest);
+    performRequest(request);
+  }
 
 }
