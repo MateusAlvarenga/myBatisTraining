@@ -62,7 +62,9 @@ public class EmployeeBARTest {
     final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest(1);
-    when(employeeMapper.findById(anyInt())).thenReturn(employeeExpected);
+    //when(employeeMapper.findById(anyInt())).thenReturn(employeeExpected);
+    when(employeeMapper.findById(1)).thenReturn(employeeExpected);
+
 
     Response<Employee> employeesResponse = employeeBAR.fetchEmployeeById(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
@@ -98,10 +100,11 @@ public class EmployeeBARTest {
     final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest(1);
-    when(employeeMapper.deleteById(anyInt())).thenReturn(1);
+    //when(employeeMapper.deleteById(anyInt())).thenReturn(1);
+    when(employeeMapper.deleteById(1)).thenReturn(1);
 
     Response<Employee> employeesResponse = employeeBAR.deleteEmployee(givenRequest);
-    Assertions.assertEquals(responseExpected, employeesResponse);
+    Assertions.assertEquals(responseExpected.getStatus(), employeesResponse.getStatus());
   }
 
 }
