@@ -12,7 +12,6 @@ import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -55,11 +54,9 @@ public class EmployeeRestTest  extends BaseWebTest {
     when(BAC.fetchAllEmployees(givenRequest)).thenReturn(responseExpected);
 
     final RequestBuilder request =  createRequest(FETCHALL, givenRequest);
-    final MvcResult Response = performRequest(request);
+    final MvcResult response = performRequest(request);
 
-    JSONAssert.assertEquals(
-        Response.getResponse().getContentAsString(),
-        mapper.writeValueAsString(responseExpected), true);
+    assertJsonEquals(response, responseExpected);
   }
   @Test
   public void fetchById() throws Exception {
@@ -70,11 +67,9 @@ public class EmployeeRestTest  extends BaseWebTest {
     when(BAC.fetchEmployeeById(any())).thenReturn(responseExpected);
 
     final RequestBuilder request = createRequest(FETCHBYID, givenEmployee);
-    final MvcResult Response = performRequest(request);
+    final MvcResult response = performRequest(request);
 
-    JSONAssert.assertEquals(
-        Response.getResponse().getContentAsString(),
-        mapper.writeValueAsString(responseExpected), true);
+    assertJsonEquals(response, responseExpected);
   }
 
   @Test

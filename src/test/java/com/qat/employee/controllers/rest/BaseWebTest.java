@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -11,7 +12,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-public class BaseWebTest {
+public abstract class BaseWebTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -31,6 +32,12 @@ public class BaseWebTest {
     return mockMvc.perform(requestBuilder)
         .andExpect(status().isOk())
         .andReturn();
+  }
+
+  protected void assertJsonEquals(MvcResult expected, Object actual) throws Exception {
+    JSONAssert.assertEquals(
+        expected.getResponse().getContentAsString(),
+        mapper.writeValueAsString(actual), true);
   }
 
 }

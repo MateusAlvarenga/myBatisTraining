@@ -11,6 +11,8 @@ public class EmployeeResponse extends Response<Employee> {
     super(data, aStatus, errors);
   }
 
+
+
   public EmployeeResponse(Exception exception) {
     super(EMPTY_LIST,STATUS.EXCEPTIONERROR,List.of(
         ValidationError.of("", exception.getMessage())));
@@ -31,4 +33,7 @@ public class EmployeeResponse extends Response<Employee> {
   public EmployeeResponse(List<Employee> employees, STATUS status) {
     super(employees,status,EMPTY_LIST);
   }
+
+
+
 }

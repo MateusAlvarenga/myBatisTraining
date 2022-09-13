@@ -32,7 +32,7 @@ public class EmployeeController {
   private String insert(@ModelAttribute("employee") Employee employee, Model model) {
     final EmployeeRequest givenRequest = new EmployeeRequest(null, employee);
     Response response = bac.insertEmployee(givenRequest);
-    EmployeeRequest request = new EmployeeRequest(null, null);
+    EmployeeRequest request = new EmployeeRequest();
 
     model.addAttribute("employees", bac.fetchAllEmployees(request).getData());
     model.addAttribute("response", response);
@@ -41,21 +41,21 @@ public class EmployeeController {
 
   @GetMapping("/emp-list")
   private String employees(Model model) {
-    EmployeeRequest request = new EmployeeRequest(null, null);
+    EmployeeRequest request = new EmployeeRequest();
     model.addAttribute("employees", bac.fetchAllEmployees(request).getData());
     return "employee";
   }
 
   @GetMapping("/delete")
   private String delete(@RequestParam("id") int id) {
-    EmployeeRequest request = new EmployeeRequest(id, null);
+    EmployeeRequest request = new EmployeeRequest(id);
     bac.deleteEmployee(request);
     return "redirect:/emp-list";
   }
 
   @GetMapping("/form")
   private String updateForm(@RequestParam("id") int id, Model model) {
-    EmployeeRequest request = new EmployeeRequest(null, null);
+    EmployeeRequest request = new EmployeeRequest();
     Employee emp = bac.fetchEmployeeById(request).getData().get(0);
     if (emp != null) {
       model.addAttribute("emp", emp);
@@ -65,9 +65,8 @@ public class EmployeeController {
 
   @PostMapping("/update")
   private String update(@ModelAttribute("employee") Employee employee, Model model) {
-    final EmployeeRequest givenRequest = new EmployeeRequest(null, employee);
-    Response response = bac.updateEmployee(givenRequest);
-    EmployeeRequest request = new EmployeeRequest(null, null);
+    final EmployeeRequest request = new EmployeeRequest(employee);
+    Response response = bac.updateEmployee(request);
     model.addAttribute("employees", bac.fetchAllEmployees(request).getData());
     model.addAttribute("response", response);
     return "employee";
