@@ -2,7 +2,7 @@ package com.qat.employee.domain;
 
 import java.util.Objects;
 
-public class Request<T, ID> {
+public abstract class Request<T, ID> {
 
   private final ID id;
   private final T data;
@@ -18,18 +18,6 @@ public class Request<T, ID> {
 
   public T getData() {
     return data;
-  }
-
-  public static <T,ID> Request<T,ID> of(ID id, T data) {
-    return new Request<>(id, data);
-  }
-
-  public static <T,ID> Request<T,ID> of(T data) {
-    return new Request<>(null, data);
-  }
-
-  public static <T,ID> Request<T,ID> of() {
-    return new Request<>(null, null);
   }
 
   @Override
@@ -52,7 +40,6 @@ public class Request<T, ID> {
     Request<?, ?> request = (Request<?, ?>) o;
     return Objects.equals(id, request.id) && Objects.equals(data, request.data);
   }
-
 
   @Override
   public int hashCode() {

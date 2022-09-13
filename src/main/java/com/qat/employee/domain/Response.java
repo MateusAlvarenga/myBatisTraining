@@ -1,16 +1,14 @@
 package com.qat.employee.domain;
 
-
-import com.qat.employee.domain.employee.model.Employee;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.http.ResponseEntity;
 
-public class Response<R> {
+public abstract class Response<R> {
 
-  private List<R> data;
-  private STATUS status;
+  private final List<R> data;
+  private final STATUS status;
   private final List<ValidationError> messages;
 
   protected static final List EMPTY_LIST = Collections.emptyList();

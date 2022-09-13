@@ -21,7 +21,6 @@ public class Employee {
   public Employee() {
   }
 
-
   public Integer getId() {
     return id;
   }
