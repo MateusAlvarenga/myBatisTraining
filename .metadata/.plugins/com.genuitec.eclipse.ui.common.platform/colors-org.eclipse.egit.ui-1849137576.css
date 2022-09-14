@@ -22,8 +22,8 @@
 * Override this with a more specific selector.
 */
 .MPart Composite > StyledText.org-eclipse-egit-ui-CommitAndDiffComponent {
-background-color: inherit;
-color: inherit;
+  background-color: inherit;
+  color: inherit;
 }
 
 /*
@@ -32,12 +32,12 @@ color: inherit;
 * other views (#272c30; decimal 39,44,48).
 */
 Table.org-eclipse-egit-ui-GitHistoryPage {
-background-color: inherit;
+  background-color: inherit;
 }
 
 /*
 * Same for the staged/unstaged tree viewers in the staging view.
 */
 .MPart Section Tree.org-eclipse-egit-ui-StagingView {
-background-color: inherit;
+  background-color: inherit;
 }

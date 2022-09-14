@@ -31,12 +31,12 @@
 
   <appender name="MavenConsoleLog" class="org.eclipse.m2e.logback.appender.MavenConsoleAppender">
   </appender>
-        
+
   <root level="INFO">
-    <appender-ref ref="FILE" />
-    <appender-ref ref="STDOUT" />
-    <appender-ref ref="EclipseLog" />
-    <appender-ref ref="MavenConsoleLog" />
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="EclipseLog"/>
+    <appender-ref ref="MavenConsoleLog"/>
   </root>
-<logger name="net.schmizz" level="OFF" />
+  <logger name="net.schmizz" level="OFF"/>
 </configuration>

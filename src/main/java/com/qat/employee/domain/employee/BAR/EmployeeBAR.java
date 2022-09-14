@@ -1,7 +1,5 @@
 package com.qat.employee.domain.employee.BAR;
 
-import com.qat.employee.domain.Response;
-import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 

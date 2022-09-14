@@ -31,6 +31,7 @@ public class EmployeeBARTest {
   private Employee givenEmployee() {
     return givenEmployee(1);
   }
+
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
@@ -40,14 +41,15 @@ public class EmployeeBARTest {
 
   private List givenEmployees() {
     return List.of(
-      givenEmployee(1),givenEmployee(2)
+        givenEmployee(1), givenEmployee(2)
     );
   }
 
   @Test
   public void testFetchEmployees() {
-    final List<Employee> employeesExpected =  givenEmployees();
-    final EmployeeResponse responseExpected = new EmployeeResponse(employeesExpected,STATUS.OPERATIONSUCCESS);
+    final List<Employee> employeesExpected = givenEmployees();
+    final EmployeeResponse responseExpected = new EmployeeResponse(employeesExpected,
+        STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest();
     when(employeeMapper.fetchAll()).thenReturn(employeesExpected);
@@ -59,12 +61,12 @@ public class EmployeeBARTest {
   @Test
   public void testFetchEmployeeById() {
     final Employee employeeExpected = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,
+        STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest(1);
     //when(employeeMapper.findById(anyInt())).thenReturn(employeeExpected);
     when(employeeMapper.findById(1)).thenReturn(employeeExpected);
-
 
     Response<Employee> employeesResponse = employeeBAR.fetchEmployeeById(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
@@ -73,7 +75,8 @@ public class EmployeeBARTest {
   @Test
   public void testInsertEmployee() {
     final Employee employeeExpected = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,
+        STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest(employeeExpected);
     when(employeeMapper.insert(any(Employee.class))).thenReturn(1);
@@ -85,7 +88,8 @@ public class EmployeeBARTest {
   @Test
   public void testUpdateEmployee() {
     final Employee employeeExpected = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,
+        STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest(employeeExpected);
     when(employeeMapper.update(any(Employee.class))).thenReturn(1);
@@ -97,7 +101,8 @@ public class EmployeeBARTest {
   @Test
   public void testDeleteEmployee() {
     final Employee employeeExpected = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(employeeExpected,
+        STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest(1);
     //when(employeeMapper.deleteById(anyInt())).thenReturn(1);

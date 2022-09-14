@@ -1,6 +1,5 @@
 package com.qat.employee.domain.employee.BAC;
 
-import com.qat.employee.domain.Response;
 import com.qat.employee.domain.STATUS;
 import com.qat.employee.domain.Validator;
 import com.qat.employee.domain.employee.BAR.EmployeeBAR;
@@ -46,7 +45,7 @@ public class EmployeeBACImpl implements EmployeeBAC {
     Validator validator = new EmployeeValidator(employee);
 
     if (!validator.validate()) {
-      return  new EmployeeResponse(STATUS.VALIDATIONERROR, validator.getErrors());
+      return new EmployeeResponse(STATUS.VALIDATIONERROR, validator.getErrors());
     }
     return bar.updateEmployee(request);
   }

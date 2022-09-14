@@ -27,9 +27,11 @@ public class EmployeeBACTest {
   EmployeeBAR bar;
   @InjectMocks
   EmployeeBACImpl bac;
+
   private Employee givenEmployee() {
     return givenEmployee(1);
   }
+
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
@@ -40,9 +42,10 @@ public class EmployeeBACTest {
   @Test
   public void testFetchEmployees() {
     final List<Employee> givenEmployee = List.of(
-      givenEmployee(1),givenEmployee(2)
+        givenEmployee(1), givenEmployee(2)
     );
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,
+        STATUS.OPERATIONSUCCESS);
     EmployeeRequest givenRequest = new EmployeeRequest();
     when(bar.fetchAllEmployees(givenRequest)).thenReturn(responseExpected);
 
@@ -53,7 +56,8 @@ public class EmployeeBACTest {
   @Test
   public void testFetchEmployeeById() {
     final Employee givenEmployee = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,
+        STATUS.OPERATIONSUCCESS);
     EmployeeRequest givenRequest = new EmployeeRequest(1);
     when(bar.fetchEmployeeById(givenRequest)).thenReturn(responseExpected);
 
@@ -64,7 +68,8 @@ public class EmployeeBACTest {
   @Test
   public void testInsertEmployee() {
     final Employee givenEmployee = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,
+        STATUS.OPERATIONSUCCESS);
     EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
     when(bar.insertEmployee(givenRequest)).thenReturn(responseExpected);
 
@@ -75,7 +80,8 @@ public class EmployeeBACTest {
   @Test
   public void testUpdateEmployee() {
     final Employee givenEmployee = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,
+        STATUS.OPERATIONSUCCESS);
     EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
     when(bar.updateEmployee(givenRequest)).thenReturn(responseExpected);
 
@@ -86,7 +92,8 @@ public class EmployeeBACTest {
   @Test
   public void testDeleteEmployee() {
     final Employee givenEmployee = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,
+        STATUS.OPERATIONSUCCESS);
     EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
     when(bar.deleteEmployee(givenRequest)).thenReturn(responseExpected);
 
@@ -97,7 +104,8 @@ public class EmployeeBACTest {
   @Test
   public void testUpdateEmployeeWithInvalidData() {
     final Employee givenEmployee = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.VALIDATIONERROR, List.of());
+    final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.VALIDATIONERROR,
+        List.of());
     EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
     when(bar.updateEmployee(givenRequest)).thenReturn(responseExpected);
 
@@ -106,7 +114,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void  testInsertEmployeeWithInvalidData() {
+  public void testInsertEmployeeWithInvalidData() {
     final Employee givenEmployee = givenEmployee();
     givenEmployee.setName(null);
     final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.VALIDATIONERROR, List.of(
@@ -120,7 +128,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void  testValidations() {
+  public void testValidations() {
     final Employee givenEmployee = new Employee();
     givenEmployee.setName(null);
     final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.VALIDATIONERROR, List.of(

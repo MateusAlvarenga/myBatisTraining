@@ -2,7 +2,6 @@ package com.qat.employee.controllers.web;
 
 import com.qat.employee.domain.Response;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
-import com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper;
 import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import org.springframework.stereotype.Controller;
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class EmployeeController {
 
-  private final EmployeeMapper mapper;
   private final EmployeeBAC bac;
 
-  public EmployeeController(EmployeeMapper mapper, EmployeeBAC bac) {
-    this.mapper = mapper;
+  public EmployeeController(EmployeeBAC bac) {
     this.bac = bac;
   }
 

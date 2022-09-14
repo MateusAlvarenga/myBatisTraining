@@ -1,176 +1,176 @@
 {
-	"info": {
-		"_postman_id": "10248c6a-bbb3-45ac-b09c-d10852711ccf",
-		"name": "employee",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21920487"
-	},
-	"item": [
-		{
-			"name": "insertEmployee",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
-							"    console.log(response.json());\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"data\": {\r\n    \"name\":  \"{{$randomFullName}}\",\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"branch\": \"{{$randomJobTitle}}\"\r\n  }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/api/employee/insert",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"employee",
-						"insert"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updateEmployee",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
-							"    console.log(response.json());\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"data\":{\r\n        \"id\":  2,\r\n    \"name\":  \"{{$randomFullName}}\",\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"branch\": \"{{$randomJobTitle}}\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/api/employee/update",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"employee",
-						"update"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "fetchEmployeeById",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 88\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}api/employee/fetch-by-id/",
-					"host": [
-						"{{host}}api"
-					],
-					"path": [
-						"employee",
-						"fetch-by-id",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "fetchAllEmployees",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/api/employee/fetch-all",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"employee",
-						"fetch-all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteEmployee",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/api/employee/delete",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"employee",
-						"delete"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "10248c6a-bbb3-45ac-b09c-d10852711ccf",
+    "name": "employee",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "21920487"
+  },
+  "item": [
+    {
+      "name": "insertEmployee",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+              "    console.log(response.json());\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"data\": {\r\n    \"name\":  \"{{$randomFullName}}\",\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"branch\": \"{{$randomJobTitle}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/employee/insert",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "employee",
+            "insert"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "updateEmployee",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+              "    console.log(response.json());\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"data\":{\r\n        \"id\":  2,\r\n    \"name\":  \"{{$randomFullName}}\",\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"branch\": \"{{$randomJobTitle}}\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/employee/update",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "employee",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "fetchEmployeeById",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 88\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}api/employee/fetch-by-id/",
+          "host": [
+            "{{host}}api"
+          ],
+          "path": [
+            "employee",
+            "fetch-by-id",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "fetchAllEmployees",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/employee/fetch-all",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "employee",
+            "fetch-all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteEmployee",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/api/employee/delete",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "api",
+            "employee",
+            "delete"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }

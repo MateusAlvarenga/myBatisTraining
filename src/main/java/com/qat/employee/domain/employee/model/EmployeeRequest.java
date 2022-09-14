@@ -13,7 +13,7 @@ public class EmployeeRequest extends Request<Employee, Integer> {
   }
 
   public EmployeeRequest(Employee employee) {
-    super(null,employee);
+    super(null, employee);
   }
 
   public EmployeeRequest(int id) {

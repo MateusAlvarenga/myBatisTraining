@@ -12,28 +12,26 @@ public class EmployeeResponse extends Response<Employee> {
   }
 
 
-
   public EmployeeResponse(Exception exception) {
-    super(EMPTY_LIST,STATUS.EXCEPTIONERROR,List.of(
+    super(EMPTY_LIST, STATUS.EXCEPTIONERROR, List.of(
         ValidationError.of("", exception.getMessage())));
   }
 
   public EmployeeResponse(STATUS validationerror, List<ValidationError> errors) {
-    super(EMPTY_LIST,validationerror,errors);
+    super(EMPTY_LIST, validationerror, errors);
   }
 
   public EmployeeResponse(Employee employee, STATUS status) {
-    super(List.of(employee),status,EMPTY_LIST);
+    super(List.of(employee), status, EMPTY_LIST);
   }
 
   public EmployeeResponse(STATUS status) {
-    super(EMPTY_LIST,status,EMPTY_LIST);
+    super(EMPTY_LIST, status, EMPTY_LIST);
   }
 
   public EmployeeResponse(List<Employee> employees, STATUS status) {
-    super(employees,status,EMPTY_LIST);
+    super(employees, status, EMPTY_LIST);
   }
-
 
 
 }

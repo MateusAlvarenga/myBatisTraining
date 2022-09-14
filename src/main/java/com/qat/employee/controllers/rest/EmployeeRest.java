@@ -34,7 +34,7 @@ public class EmployeeRest {
       return response.toResponseEntity();
 
     } catch (Exception exception) {
-      return  new EmployeeResponse(exception).toResponseEntity();
+      return new EmployeeResponse(exception).toResponseEntity();
     }
   }
 

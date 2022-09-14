@@ -1,6 +1,5 @@
 package com.qat.employee.domain.employee.BAR;
 
-import com.qat.employee.domain.Response;
 import com.qat.employee.domain.STATUS;
 import com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper;
 import com.qat.employee.domain.employee.model.Employee;
@@ -23,14 +22,14 @@ public class EmployeeBARImpl implements EmployeeBAR {
 
   @Override
   public EmployeeResponse fetchAllEmployees(EmployeeRequest request) {
-    return new EmployeeResponse(mapper.fetchAll(), STATUS.OPERATIONSUCCESS) ;
+    return new EmployeeResponse(mapper.fetchAll(), STATUS.OPERATIONSUCCESS);
   }
 
   @Override
   public EmployeeResponse fetchEmployeeById(EmployeeRequest request) {
     final Employee employee = mapper.findById(request.getId());
     if (Objects.nonNull(employee)) {
-      return new EmployeeResponse(employee,STATUS.OPERATIONSUCCESS);
+      return new EmployeeResponse(employee, STATUS.OPERATIONSUCCESS);
     } else {
       return new EmployeeResponse(STATUS.NOROWSFOUNDERROR);
     }
@@ -41,7 +40,7 @@ public class EmployeeBARImpl implements EmployeeBAR {
     Employee employee = request.getData();
 
     if (mapper.insert(employee) > 0) {
-      return new EmployeeResponse(employee,STATUS.OPERATIONSUCCESS);
+      return new EmployeeResponse(employee, STATUS.OPERATIONSUCCESS);
     } else {
       return new EmployeeResponse(STATUS.PERSISTENCEERROR);
     }

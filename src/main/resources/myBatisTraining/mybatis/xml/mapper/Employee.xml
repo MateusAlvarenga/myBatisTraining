@@ -4,10 +4,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper">
-  <insert id="createNewEmployee" parameterType="com.qat.employee.domain.employee.model.Employee" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+  <insert id="createNewEmployee" parameterType="com.qat.employee.domain.employee.model.Employee"
+    useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     INSERT INTO EMPLOYEE
       (NAME, PHONE, EMAIL, BRANCH)
-    VALUES
-      (#{name}, #{phone}, #{email}, #{branch})
+    VALUES (#{name}, #{phone}, #{email}, #{branch})
   </insert>
 </mapper>
