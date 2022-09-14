@@ -60,9 +60,7 @@ public class EmployeeRestTest extends BaseWebTest {
 
     final RequestBuilder request = createRequest(FETCHALL, givenRequest);
     final MvcResult response = performRequestAndReturn(request);
-    final String content = response.getResponse().getContentAsString();
-    final int status = response.getResponse().getStatus();
-    assert status == 417;
+
     assertJsonEquals(response, responseExpected);
   }
 
