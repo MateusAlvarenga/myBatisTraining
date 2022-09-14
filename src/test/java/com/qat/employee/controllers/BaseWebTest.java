@@ -47,6 +47,10 @@ public abstract class BaseWebTest {
         .andExpect(status().isOk())
         .andReturn();
   }
+  protected MvcResult performRequestAndReturn(RequestBuilder requestBuilder) throws Exception {
+    return mockMvc.perform(requestBuilder)
+        .andReturn();
+  }
 
   protected void assertJsonEquals(MvcResult expected, Object actual) throws Exception {
     JSONAssert.assertEquals(

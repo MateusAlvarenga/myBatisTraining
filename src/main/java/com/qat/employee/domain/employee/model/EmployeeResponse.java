@@ -13,8 +13,7 @@ public class EmployeeResponse extends Response<Employee> {
 
 
   public EmployeeResponse(Exception exception) {
-    super(EMPTY_LIST, STATUS.EXCEPTIONERROR, List.of(
-        ValidationError.of("", exception.getMessage())));
+    super(EMPTY_LIST, STATUS.EXCEPTIONERROR, EMPTY_LIST);
   }
 
   public EmployeeResponse(STATUS validationerror, List<ValidationError> errors) {
