@@ -33,23 +33,27 @@ public class ExecutionTimeAdvice {
     return logExecutionTime(point);
   }
 
-  private Object logExecutionTime(ProceedingJoinPoint point) throws Throwable {
+  public Object logExecutionTime(ProceedingJoinPoint point) throws Throwable {
 
-    final long startTime = System.currentTimeMillis();
+    final long startTime = getCurrentTime();
     final Object object = point.proceed();
-    final long endtime = System.currentTimeMillis();
+    final long endtime = getCurrentTime();
     final long executionTime = endtime - startTime;
 
-    //final String className = point.getTarget().getClass().getSimpleName();
+    final String className = point.getTarget().getClass().getSimpleName();
     final String methodName = point.getSignature().getName();
     final String classNameWithPackage = point.getSignature().getDeclaringTypeName();
-    final String className = classNameWithPackage.substring(classNameWithPackage
-        .lastIndexOf('.') + 1);
+//    final String className = classNameWithPackage.substring(classNameWithPackage
+//        .lastIndexOf('.') + 1);
 
     final String msg =
         className + " " + methodName + " " + "execution time: " + executionTime + "ms";
 
     log.info(msg);
     return object;
+  }
+
+  protected long getCurrentTime() {
+    return System.currentTimeMillis();
   }
 }
