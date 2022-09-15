@@ -22,11 +22,13 @@
           <#if response.status != "OPERATIONSUCCESS">
             <b>Employee not saved status: ${response.status}</b>
           </#if>
-        <ul>
-            <#list response.messages as error>
-              <li> ${error.message}</li>
-            </#list>
-        </ul>
+          <#if response.messages??>
+            <ul>
+                <#list response.messages as error>
+                  <li> ${error.message}</li>
+                </#list>
+            </ul>
+          </#if>
       </div>
     </#if>
 

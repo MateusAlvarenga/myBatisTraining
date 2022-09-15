@@ -32,7 +32,9 @@ public class EmployeeBACImpl implements EmployeeBAC {
     Validator validator = new EmployeeValidator(request.getData());
 
     if (!validator.validate()) {
-      return new EmployeeResponse(STATUS.VALIDATIONERROR, validator.getErrors());
+      return new EmployeeResponse()
+          .withStatus(STATUS.VALIDATIONERROR)
+          .withMessages(validator.getErrors());
     }
 
     return bar.insertEmployee(request);
@@ -45,7 +47,9 @@ public class EmployeeBACImpl implements EmployeeBAC {
     Validator validator = new EmployeeValidator(employee);
 
     if (!validator.validate()) {
-      return new EmployeeResponse(STATUS.VALIDATIONERROR, validator.getErrors());
+      return new EmployeeResponse()
+          .withStatus(STATUS.VALIDATIONERROR)
+          .withMessages(validator.getErrors());
     }
     return bar.updateEmployee(request);
   }

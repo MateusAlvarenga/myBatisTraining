@@ -7,30 +7,32 @@ import java.util.List;
 
 public class EmployeeResponse extends Response<Employee> {
 
-  public EmployeeResponse(List<Employee> data, STATUS aStatus, List<ValidationError> errors) {
-    super(data, aStatus, errors);
+  @Override
+  public EmployeeResponse withData(List<Employee> data) {
+    setData(data);
+    return this;
   }
 
-
-  public EmployeeResponse(Exception exception) {
-    super(EMPTY_LIST, STATUS.EXCEPTIONERROR, EMPTY_LIST);
+  @Override
+  public EmployeeResponse withData(Employee data) {
+    setData(List.of(data));
+    return this;
   }
 
-  public EmployeeResponse(STATUS validationerror, List<ValidationError> errors) {
-    super(EMPTY_LIST, validationerror, errors);
+  @Override
+  public EmployeeResponse withStatus(STATUS status) {
+    setStatus(status);
+    return this;
   }
 
-  public EmployeeResponse(Employee employee, STATUS status) {
-    super(List.of(employee), status, EMPTY_LIST);
+  @Override
+  public EmployeeResponse withMessages(List<ValidationError> messages) {
+    setMessages(messages);
+    return this;
   }
 
-  public EmployeeResponse(STATUS status) {
-    super(EMPTY_LIST, status, EMPTY_LIST);
+  public static EmployeeResponse create() {
+    return new EmployeeResponse();
   }
-
-  public EmployeeResponse(List<Employee> employees, STATUS status) {
-    super(employees, status, EMPTY_LIST);
-  }
-
 
 }

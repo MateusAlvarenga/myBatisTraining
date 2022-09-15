@@ -34,7 +34,7 @@ public class EmployeeRest {
       return response.toResponseEntity();
 
     } catch (Exception exception) {
-      return new EmployeeResponse(exception).toResponseEntity();
+      return new EmployeeResponse().withException(exception).toResponseEntity();
     }
   }
 
@@ -44,7 +44,7 @@ public class EmployeeRest {
       Response<Employee> response = bac.fetchEmployeeById(request);
       return response.toResponseEntity();
     } catch (Exception exception) {
-      return new EmployeeResponse(exception).toResponseEntity();
+      return new EmployeeResponse().withException(exception).toResponseEntity();
     }
   }
 
@@ -54,7 +54,7 @@ public class EmployeeRest {
       Response<Employee> response = bac.insertEmployee(request);
       return response.toResponseEntity();
     } catch (Exception exception) {
-      return new EmployeeResponse(exception).toResponseEntity();
+      return new EmployeeResponse().withException(exception).toResponseEntity();
     }
   }
 
@@ -64,7 +64,7 @@ public class EmployeeRest {
       Response<Employee> response = bac.updateEmployee(request);
       return response.toResponseEntity();
     } catch (Exception exception) {
-      return new EmployeeResponse(exception).toResponseEntity();
+      return new EmployeeResponse().withException(exception).toResponseEntity();
     }
   }
 
@@ -73,7 +73,7 @@ public class EmployeeRest {
     try {
       return bac.deleteEmployee(request).toResponseEntity();
     } catch (Exception exception) {
-      return new EmployeeResponse(exception).toResponseEntity();
+      return new EmployeeResponse().withException(exception).toResponseEntity();
     }
   }
 }

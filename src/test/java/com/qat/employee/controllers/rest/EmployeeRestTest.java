@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -37,10 +36,10 @@ public class EmployeeRestTest extends BaseWebTest {
   @Test
   public void fetchList() throws Exception {
 
-    final List<Employee> givenEmployees = givenEmployees();
     EmployeeRequest givenRequest = new EmployeeRequest();
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployees,
-        STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withData(givenEmployees())
+        .withStatus(STATUS.OPERATIONSUCCESS);
 
     when(BAC.fetchAllEmployees(givenRequest)).thenReturn(responseExpected);
 
@@ -54,7 +53,8 @@ public class EmployeeRestTest extends BaseWebTest {
   public void fetchListError() throws Exception {
 
     EmployeeRequest givenRequest = new EmployeeRequest();
-    final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.EXCEPTIONERROR);
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.fetchAllEmployees(givenRequest)).thenThrow(new RuntimeException());
 
@@ -68,8 +68,9 @@ public class EmployeeRestTest extends BaseWebTest {
   public void fetchById() throws Exception {
 
     final Employee givenEmployee = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee,
-        STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected =  new EmployeeResponse()
+        .withData(givenEmployee())
+        .withStatus(STATUS.OPERATIONSUCCESS);
 
     when(BAC.fetchEmployeeById(any())).thenReturn(responseExpected);
 
@@ -83,7 +84,8 @@ public class EmployeeRestTest extends BaseWebTest {
   public void fetchByIdError() throws Exception {
 
     final Employee givenEmployee = givenEmployee();
-    final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.EXCEPTIONERROR);
+    final EmployeeResponse responseExpected =  new EmployeeResponse()
+        .withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.fetchEmployeeById(any())).thenThrow(new RuntimeException());
 
@@ -97,8 +99,9 @@ public class EmployeeRestTest extends BaseWebTest {
   public void insert() throws Exception {
 
     final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee(),
-        STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withData(givenEmployee())
+        .withStatus(STATUS.OPERATIONSUCCESS);
 
     when(BAC.insertEmployee(any())).thenReturn(responseExpected);
 
@@ -110,7 +113,7 @@ public class EmployeeRestTest extends BaseWebTest {
   public void insertError() throws Exception {
 
     final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
-    final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.EXCEPTIONERROR);
+    final EmployeeResponse responseExpected = new EmployeeResponse().withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.insertEmployee(any())).thenThrow(new RuntimeException());
 
@@ -124,8 +127,9 @@ public class EmployeeRestTest extends BaseWebTest {
   public void update() throws Exception {
 
     final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee(),
-        STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected =  new EmployeeResponse()
+        .withData(givenEmployee())
+        .withStatus(STATUS.OPERATIONSUCCESS);
 
     when(BAC.updateEmployee(any())).thenReturn(responseExpected);
 
@@ -137,7 +141,7 @@ public class EmployeeRestTest extends BaseWebTest {
   public void updateError() throws Exception {
 
     final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
-    final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.EXCEPTIONERROR);
+    final EmployeeResponse responseExpected = new EmployeeResponse().withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.updateEmployee(any())).thenThrow(new RuntimeException());
 
@@ -151,8 +155,9 @@ public class EmployeeRestTest extends BaseWebTest {
   public void delete() throws Exception {
 
     final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
-    final EmployeeResponse responseExpected = new EmployeeResponse(givenEmployee(),
-        STATUS.OPERATIONSUCCESS);
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withData(givenEmployee())
+        .withStatus(STATUS.OPERATIONSUCCESS);
 
     when(BAC.deleteEmployee(any())).thenReturn(responseExpected);
 
@@ -164,7 +169,7 @@ public class EmployeeRestTest extends BaseWebTest {
   public void deleteError() throws Exception {
 
     final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
-    final EmployeeResponse responseExpected = new EmployeeResponse(STATUS.EXCEPTIONERROR);
+    final EmployeeResponse responseExpected = new EmployeeResponse().withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.deleteEmployee(any())).thenThrow(new RuntimeException());
 
@@ -186,7 +191,9 @@ public class EmployeeRestTest extends BaseWebTest {
   }
 
   private List<Employee> givenEmployees() {
-    return List.of(givenEmployee(1), givenEmployee(2));
+    return List.of(
+        givenEmployee(1), givenEmployee(2)
+    );
   }
 
 }

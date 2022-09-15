@@ -38,7 +38,10 @@ public class EmployeeControllerTest extends BaseWebTest {
   @Test
   public void fetchList() throws Exception {
 
-    final EmployeeResponse responseExpected = givenResponse();
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withData(givenEmployees())
+        .withStatus(STATUS.OPERATIONSUCCESS);
+
     when(BAC.fetchAllEmployees(any())).thenReturn(responseExpected);
 
     final RequestBuilder request = createRequest(HttpMethod.GET, EMPTY_LIST);
@@ -50,7 +53,10 @@ public class EmployeeControllerTest extends BaseWebTest {
 
   @Test
   public void insertTest() throws Exception {
-    final EmployeeResponse responseExpected = givenResponse();
+    final EmployeeResponse responseExpected =  new EmployeeResponse()
+        .withData(givenEmployee())
+        .withStatus(STATUS.OPERATIONSUCCESS);
+
     when(BAC.insertEmployee(any())).thenReturn(responseExpected);
     when(BAC.fetchAllEmployees(any())).thenReturn(responseExpected);
 
@@ -64,7 +70,10 @@ public class EmployeeControllerTest extends BaseWebTest {
 
   @Test
   public void updateTest() throws Exception {
-    final EmployeeResponse responseExpected = givenResponse();
+    final EmployeeResponse responseExpected =  new EmployeeResponse()
+        .withData(givenEmployee())
+        .withStatus(STATUS.OPERATIONSUCCESS);
+
     when(BAC.updateEmployee(any())).thenReturn(responseExpected);
     when(BAC.fetchAllEmployees(any())).thenReturn(responseExpected);
 
@@ -93,10 +102,6 @@ public class EmployeeControllerTest extends BaseWebTest {
       assertThat(content).contains(e.getName()).contains(e.getId().toString())
           .contains(e.getEmail()).contains(e.getBranch()).contains(e.getPhone());
     });
-  }
-
-  private EmployeeResponse givenResponse() {
-    return new EmployeeResponse(givenEmployees(), STATUS.OPERATIONSUCCESS);
   }
 
   private Employee givenEmployee() {

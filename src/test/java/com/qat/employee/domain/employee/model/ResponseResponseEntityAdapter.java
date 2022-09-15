@@ -17,12 +17,15 @@ public class ResponseResponseEntityAdapter {
   public void testOK() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse(employeExpected,
-        STATUS.OPERATIONSUCCESS);
+    final Response<Employee> responseExpected = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.OPERATIONSUCCESS);
     final ResponseEntity responseEntityExpected = ResponseEntity.ok(responseExpected);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse(employeExpected,
-        STATUS.OPERATIONSUCCESS).toResponseEntity();
+    final ResponseEntity responseEntityActual = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.OPERATIONSUCCESS)
+        .toResponseEntity();
 
     assertEquals(responseEntityExpected.getBody(), responseEntityActual.getBody());
     assertEquals(responseEntityExpected.getStatusCode(), responseEntityActual.getStatusCode());
@@ -32,13 +35,15 @@ public class ResponseResponseEntityAdapter {
   public void testEXPECTATION_FAILED() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse(employeExpected,
-        STATUS.EXCEPTIONERROR);
+    final Response<Employee> responseExpected = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.EXCEPTIONERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
         HttpStatus.EXPECTATION_FAILED);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse(employeExpected,
-        STATUS.EXCEPTIONERROR).toResponseEntity();
+    final ResponseEntity responseEntityActual = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.EXCEPTIONERROR).toResponseEntity();
 
     assertEquals(responseEntityExpected.getBody(), responseEntityActual.getBody());
     assertEquals(responseEntityExpected.getStatusCode(), responseEntityActual.getStatusCode());
@@ -48,13 +53,15 @@ public class ResponseResponseEntityAdapter {
   public void testPERSISTENCEERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse(employeExpected,
-        STATUS.PERSISTENCEERROR);
+    final Response<Employee> responseExpected = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.PERSISTENCEERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
         HttpStatus.CONFLICT);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse(employeExpected,
-        STATUS.PERSISTENCEERROR).toResponseEntity();
+    final ResponseEntity responseEntityActual = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.PERSISTENCEERROR).toResponseEntity();
 
     assertEquals(responseEntityExpected.getBody(), responseEntityActual.getBody());
     assertEquals(responseEntityExpected.getStatusCode(), responseEntityActual.getStatusCode());
@@ -64,13 +71,15 @@ public class ResponseResponseEntityAdapter {
   public void testVALIDATIONERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse(employeExpected,
-        STATUS.VALIDATIONERROR);
+    final Response<Employee> responseExpected = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.VALIDATIONERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
         HttpStatus.BAD_REQUEST);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse(employeExpected,
-        STATUS.VALIDATIONERROR).toResponseEntity();
+    final ResponseEntity responseEntityActual = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.VALIDATIONERROR).toResponseEntity();
 
     assertEquals(responseEntityExpected.getBody(), responseEntityActual.getBody());
     assertEquals(responseEntityExpected.getStatusCode(), responseEntityActual.getStatusCode());
@@ -80,13 +89,15 @@ public class ResponseResponseEntityAdapter {
   public void testNOROWSFOUNDERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse(employeExpected,
-        STATUS.NOROWSFOUNDERROR);
+    final Response<Employee> responseExpected = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.NOROWSFOUNDERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
         HttpStatus.NOT_FOUND);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse(employeExpected,
-        STATUS.NOROWSFOUNDERROR).toResponseEntity();
+    final ResponseEntity responseEntityActual = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.NOROWSFOUNDERROR).toResponseEntity();
 
     assertEquals(responseEntityExpected.getBody(), responseEntityActual.getBody());
     assertEquals(responseEntityExpected.getStatusCode(), responseEntityActual.getStatusCode());
@@ -96,13 +107,15 @@ public class ResponseResponseEntityAdapter {
   public void testUNSPECIFIEDERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse(employeExpected,
-        STATUS.UNSPECIFIEDERROR);
+    final Response<Employee> responseExpected = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.UNSPECIFIEDERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
         HttpStatus.INTERNAL_SERVER_ERROR);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse(employeExpected,
-        STATUS.UNSPECIFIEDERROR).toResponseEntity();
+    final ResponseEntity responseEntityActual = new EmployeeResponse()
+        .withData(employeExpected)
+        .withStatus(STATUS.UNSPECIFIEDERROR).toResponseEntity();
 
     assertEquals(responseEntityExpected.getBody(), responseEntityActual.getBody());
     assertEquals(responseEntityExpected.getStatusCode(), responseEntityActual.getStatusCode());

@@ -7,16 +7,22 @@ import org.springframework.http.ResponseEntity;
 
 public abstract class Response<R> {
 
-  private final List<R> data;
-  private final STATUS status;
-  private final List<ValidationError> messages;
+  private List<R> data;
+  private STATUS status;
+  private List<ValidationError> messages;
 
   protected static final List EMPTY_LIST = Collections.emptyList();
 
-  public Response(List<R> data, STATUS aStatus, List<ValidationError> errors) {
-    this.data = data;
-    this.status = aStatus;
-    this.messages = errors;
+  public abstract Response withData(List<R> data);
+
+  public abstract Response withData(R data);
+
+  public abstract Response withStatus(STATUS status);
+
+  public abstract Response withMessages(List<ValidationError> messages);
+
+  public Response withException(Exception e) {
+    return withStatus(STATUS.EXCEPTIONERROR);
   }
 
   public List<R> getData() {
@@ -29,6 +35,18 @@ public abstract class Response<R> {
 
   public List<ValidationError> getMessages() {
     return messages;
+  }
+
+  public void setData(List<R> data) {
+    this.data = data;
+  }
+
+  public void setStatus(STATUS status) {
+    this.status = status;
+  }
+
+  public void setMessages(List<ValidationError> messages) {
+    this.messages = messages;
   }
 
   public ResponseEntity<?> toResponseEntity() {

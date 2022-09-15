@@ -22,16 +22,16 @@ public class EmployeeBARImpl implements EmployeeBAR {
 
   @Override
   public EmployeeResponse fetchAllEmployees(EmployeeRequest request) {
-    return new EmployeeResponse(mapper.fetchAll(), STATUS.OPERATIONSUCCESS);
+    return new EmployeeResponse().withData(mapper.fetchAll()).withStatus(STATUS.OPERATIONSUCCESS);
   }
 
   @Override
   public EmployeeResponse fetchEmployeeById(EmployeeRequest request) {
     final Employee employee = mapper.findById(request.getId());
     if (Objects.nonNull(employee)) {
-      return new EmployeeResponse(employee, STATUS.OPERATIONSUCCESS);
+      return new EmployeeResponse().withData(employee).withStatus(STATUS.OPERATIONSUCCESS);
     } else {
-      return new EmployeeResponse(STATUS.NOROWSFOUNDERROR);
+      return new EmployeeResponse().withStatus(STATUS.NOROWSFOUNDERROR);
     }
   }
 
@@ -40,9 +40,9 @@ public class EmployeeBARImpl implements EmployeeBAR {
     Employee employee = request.getData();
 
     if (mapper.insert(employee) > 0) {
-      return new EmployeeResponse(employee, STATUS.OPERATIONSUCCESS);
+      return  new EmployeeResponse().withData(employee).withStatus(STATUS.OPERATIONSUCCESS);
     } else {
-      return new EmployeeResponse(STATUS.PERSISTENCEERROR);
+      return new EmployeeResponse().withStatus(STATUS.SYSTEMERROR);
     }
   }
 
@@ -52,9 +52,9 @@ public class EmployeeBARImpl implements EmployeeBAR {
     final Integer id = request.getId();
 
     if (mapper.update(employee) == 1) {
-      return new EmployeeResponse(employee, STATUS.OPERATIONSUCCESS);
+      return new EmployeeResponse().withData(employee).withStatus(STATUS.OPERATIONSUCCESS);
     } else {
-      return new EmployeeResponse(STATUS.NOROWSUPDATEDERROR);
+      return new EmployeeResponse().withStatus(STATUS.NOROWSUPDATEDERROR);
     }
   }
 
@@ -63,9 +63,9 @@ public class EmployeeBARImpl implements EmployeeBAR {
     final Integer id = request.getId();
 
     if (mapper.deleteById(id) == 1) {
-      return new EmployeeResponse(STATUS.OPERATIONSUCCESS);
+      return new EmployeeResponse().withStatus(STATUS.OPERATIONSUCCESS);
     } else {
-      return new EmployeeResponse(STATUS.NOROWSREMOVEDERROR);
+      return new EmployeeResponse().withStatus(STATUS.NOROWSREMOVEDERROR);
     }
   }
 }

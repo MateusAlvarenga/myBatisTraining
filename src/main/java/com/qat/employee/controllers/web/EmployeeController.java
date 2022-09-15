@@ -52,7 +52,7 @@ public class EmployeeController {
 
   @GetMapping("/form")
   private String updateForm(@RequestParam("id") int id, Model model) {
-    EmployeeRequest request = new EmployeeRequest();
+    EmployeeRequest request = new EmployeeRequest(id);
     Employee emp = bac.fetchEmployeeById(request).getData().get(0);
     if (emp != null) {
       model.addAttribute("emp", emp);
