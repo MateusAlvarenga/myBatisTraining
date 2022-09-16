@@ -60,7 +60,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
         .withStatus(STATUS.OPERATIONSUCCESS);
-    EmployeeRequest givenRequest = new EmployeeRequest(1);
+    EmployeeRequest givenRequest = new EmployeeRequest().withId(1);
     when(bar.fetchEmployeeById(givenRequest)).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.fetchEmployeeById(givenRequest);
@@ -73,7 +73,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
         .withStatus(STATUS.OPERATIONSUCCESS);
-    EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.insertEmployee(givenRequest)).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.insertEmployee(givenRequest);
@@ -86,7 +86,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
         .withStatus(STATUS.OPERATIONSUCCESS);
-    EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.updateEmployee(givenRequest)).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.updateEmployee(givenRequest);
@@ -99,7 +99,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
         .withStatus(STATUS.OPERATIONSUCCESS);
-    EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.deleteEmployee(givenRequest)).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.deleteEmployee(givenRequest);
@@ -112,7 +112,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withStatus(STATUS.VALIDATIONERROR)
         .withMessages(List.of());
-    EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.updateEmployee(givenRequest)).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.updateEmployee(givenRequest);
@@ -126,7 +126,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
           .withStatus(STATUS.VALIDATIONERROR)
           .withMessages(List.of(ValidationError.of("name", "name is required")));
-    EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     //when(bar.insertEmployee(givenRequest)).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.insertEmployee(givenRequest);
@@ -141,7 +141,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withStatus(STATUS.VALIDATIONERROR)
         .withMessages(List.of(ValidationError.of("name", "name is required")));
-    EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     //when(bar.insertEmployee(givenRequest)).thenReturn(responseExpected);
 
     Response<Employee> employeesResponse = bac.insertEmployee(givenRequest);

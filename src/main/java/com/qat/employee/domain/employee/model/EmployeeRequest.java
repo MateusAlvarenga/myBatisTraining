@@ -4,19 +4,15 @@ import com.qat.employee.domain.Request;
 
 public class EmployeeRequest extends Request<Employee, Integer> {
 
-  public EmployeeRequest(Integer integer, Employee data) {
-    super(integer, data);
+  @Override
+  public EmployeeRequest withId(Integer integer) {
+    setId(integer);
+    return this;
   }
 
-  public EmployeeRequest() {
-    super(null, null);
-  }
-
-  public EmployeeRequest(Employee employee) {
-    super(null, employee);
-  }
-
-  public EmployeeRequest(int id) {
-    super(id, null);
+  @Override
+  public EmployeeRequest withData(Employee data) {
+    setData(data);
+    return this;
   }
 }

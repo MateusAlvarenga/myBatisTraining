@@ -98,7 +98,7 @@ public class EmployeeRestTest extends BaseWebTest {
   @Test
   public void insert() throws Exception {
 
-    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee());
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee())
         .withStatus(STATUS.OPERATIONSUCCESS);
@@ -112,7 +112,7 @@ public class EmployeeRestTest extends BaseWebTest {
   @Test
   public void insertError() throws Exception {
 
-    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee());
     final EmployeeResponse responseExpected = new EmployeeResponse().withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.insertEmployee(any())).thenThrow(new RuntimeException());
@@ -126,7 +126,7 @@ public class EmployeeRestTest extends BaseWebTest {
   @Test
   public void update() throws Exception {
 
-    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee());
     final EmployeeResponse responseExpected =  new EmployeeResponse()
         .withData(givenEmployee())
         .withStatus(STATUS.OPERATIONSUCCESS);
@@ -140,7 +140,7 @@ public class EmployeeRestTest extends BaseWebTest {
   @Test
   public void updateError() throws Exception {
 
-    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee());
     final EmployeeResponse responseExpected = new EmployeeResponse().withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.updateEmployee(any())).thenThrow(new RuntimeException());
@@ -154,7 +154,7 @@ public class EmployeeRestTest extends BaseWebTest {
   @Test
   public void delete() throws Exception {
 
-    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee());
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee())
         .withStatus(STATUS.OPERATIONSUCCESS);
@@ -168,7 +168,7 @@ public class EmployeeRestTest extends BaseWebTest {
   @Test
   public void deleteError() throws Exception {
 
-    final EmployeeRequest givenRequest = new EmployeeRequest(givenEmployee());
+    final EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee());
     final EmployeeResponse responseExpected = new EmployeeResponse().withStatus(STATUS.EXCEPTIONERROR);
 
     when(BAC.deleteEmployee(any())).thenThrow(new RuntimeException());

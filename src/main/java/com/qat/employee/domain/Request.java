@@ -4,13 +4,8 @@ import java.util.Objects;
 
 public abstract class Request<T, ID> {
 
-  private final ID id;
-  private final T data;
-
-  public Request(ID id, T data) {
-    this.id = id;
-    this.data = data;
-  }
+  private ID id;
+  private T data;
 
   public ID getId() {
     return id;
@@ -18,6 +13,18 @@ public abstract class Request<T, ID> {
 
   public T getData() {
     return data;
+  }
+
+  public abstract Request withId(ID id);
+
+  public abstract Request withData(T data);
+
+  public void setId(ID id) {
+    this.id = id;
+  }
+
+  public void setData(T data) {
+    this.data = data;
   }
 
   @Override

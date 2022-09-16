@@ -47,7 +47,7 @@ public class EmployeeBARTest {
         .withData(employeeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
 
-    EmployeeRequest givenRequest = new EmployeeRequest(1);
+    EmployeeRequest givenRequest = new EmployeeRequest().withId(1);
     //when(employeeMapper.findById(anyInt())).thenReturn(employeeExpected);
     when(employeeMapper.findById(1)).thenReturn(employeeExpected);
 
@@ -62,7 +62,7 @@ public class EmployeeBARTest {
         .withData(employeeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
 
-    EmployeeRequest givenRequest = new EmployeeRequest(employeeExpected);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(employeeExpected);
     when(employeeMapper.insert(any(Employee.class))).thenReturn(1);
 
     Response<Employee> employeesResponse = employeeBAR.insertEmployee(givenRequest);
@@ -76,7 +76,7 @@ public class EmployeeBARTest {
         .withData(employeeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
 
-    EmployeeRequest givenRequest = new EmployeeRequest(employeeExpected);
+    EmployeeRequest givenRequest = new EmployeeRequest().withData(employeeExpected);
     when(employeeMapper.update(any(Employee.class))).thenReturn(1);
 
     Response<Employee> employeesResponse = employeeBAR.updateEmployee(givenRequest);
@@ -90,7 +90,7 @@ public class EmployeeBARTest {
         .withData(employeeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
 
-    EmployeeRequest givenRequest = new EmployeeRequest(1);
+    EmployeeRequest givenRequest = new EmployeeRequest().withId(1);
     //when(employeeMapper.deleteById(anyInt())).thenReturn(1);
     when(employeeMapper.deleteById(1)).thenReturn(1);
 
