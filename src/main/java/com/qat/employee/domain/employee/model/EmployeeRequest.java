@@ -2,17 +2,6 @@ package com.qat.employee.domain.employee.model;
 
 import com.qat.employee.domain.Request;
 
-public class EmployeeRequest extends Request<Employee, Integer> {
+public class EmployeeRequest extends Request<Employee, Integer, EmployeeRequest> {
 
-  @Override
-  public EmployeeRequest withId(Integer integer) {
-    setId(integer);
-    return this;
-  }
-
-  @Override
-  public EmployeeRequest withData(Employee data) {
-    setData(data);
-    return this;
-  }
 }

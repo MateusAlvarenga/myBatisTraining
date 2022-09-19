@@ -36,7 +36,7 @@ public class EmployeeBARTest {
     EmployeeRequest givenRequest = new EmployeeRequest();
     when(employeeMapper.fetchAll()).thenReturn(employeesExpected);
 
-    Response<Employee> employeesResponse = employeeBAR.fetchAllEmployees(givenRequest);
+    EmployeeResponse employeesResponse = employeeBAR.fetchAllEmployees(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
   }
 
@@ -51,7 +51,7 @@ public class EmployeeBARTest {
     //when(employeeMapper.findById(anyInt())).thenReturn(employeeExpected);
     when(employeeMapper.findById(1)).thenReturn(employeeExpected);
 
-    Response<Employee> employeesResponse = employeeBAR.fetchEmployeeById(givenRequest);
+    EmployeeResponse employeesResponse = employeeBAR.fetchEmployeeById(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
   }
 
@@ -65,7 +65,7 @@ public class EmployeeBARTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(employeeExpected);
     when(employeeMapper.insert(any(Employee.class))).thenReturn(1);
 
-    Response<Employee> employeesResponse = employeeBAR.insertEmployee(givenRequest);
+    EmployeeResponse employeesResponse = employeeBAR.insertEmployee(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
   }
 
@@ -79,7 +79,7 @@ public class EmployeeBARTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(employeeExpected);
     when(employeeMapper.update(any(Employee.class))).thenReturn(1);
 
-    Response<Employee> employeesResponse = employeeBAR.updateEmployee(givenRequest);
+    EmployeeResponse employeesResponse = employeeBAR.updateEmployee(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
   }
 
@@ -94,7 +94,7 @@ public class EmployeeBARTest {
     //when(employeeMapper.deleteById(anyInt())).thenReturn(1);
     when(employeeMapper.deleteById(1)).thenReturn(1);
 
-    Response<Employee> employeesResponse = employeeBAR.deleteEmployee(givenRequest);
+    EmployeeResponse employeesResponse = employeeBAR.deleteEmployee(givenRequest);
     Assertions.assertEquals(responseExpected.getStatus(), employeesResponse.getStatus());
   }
 

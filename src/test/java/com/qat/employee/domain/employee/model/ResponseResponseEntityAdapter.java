@@ -17,7 +17,7 @@ public class ResponseResponseEntityAdapter {
   public void testOK() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse()
+    final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
     final ResponseEntity responseEntityExpected = ResponseEntity.ok(responseExpected);
@@ -35,7 +35,7 @@ public class ResponseResponseEntityAdapter {
   public void testEXPECTATION_FAILED() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse()
+    final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.EXCEPTIONERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
@@ -53,7 +53,7 @@ public class ResponseResponseEntityAdapter {
   public void testPERSISTENCEERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse()
+    final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.PERSISTENCEERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
@@ -71,7 +71,7 @@ public class ResponseResponseEntityAdapter {
   public void testVALIDATIONERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse()
+    final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.VALIDATIONERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
@@ -89,7 +89,7 @@ public class ResponseResponseEntityAdapter {
   public void testNOROWSFOUNDERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse()
+    final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.NOROWSFOUNDERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
@@ -107,7 +107,7 @@ public class ResponseResponseEntityAdapter {
   public void testUNSPECIFIEDERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT");
-    final Response<Employee> responseExpected = new EmployeeResponse()
+    final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.UNSPECIFIEDERROR);
     final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,

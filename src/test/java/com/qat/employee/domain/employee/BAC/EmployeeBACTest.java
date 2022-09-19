@@ -50,7 +50,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest();
     when(bar.fetchAllEmployees(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.fetchAllEmployees(givenRequest);
+    EmployeeResponse employeesResponse = bac.fetchAllEmployees(givenRequest);
     assertEquals(responseExpected, employeesResponse);
   }
 
@@ -63,7 +63,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withId(1);
     when(bar.fetchEmployeeById(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.fetchEmployeeById(givenRequest);
+    EmployeeResponse employeesResponse = bac.fetchEmployeeById(givenRequest);
     assertEquals(responseExpected, employeesResponse);
   }
 
@@ -76,7 +76,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.insertEmployee(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.insertEmployee(givenRequest);
+    EmployeeResponse employeesResponse = bac.insertEmployee(givenRequest);
     assertEquals(responseExpected, employeesResponse);
   }
 
@@ -89,7 +89,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.updateEmployee(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.updateEmployee(givenRequest);
+    EmployeeResponse employeesResponse = bac.updateEmployee(givenRequest);
     assertEquals(responseExpected, employeesResponse);
   }
 
@@ -102,7 +102,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.deleteEmployee(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.deleteEmployee(givenRequest);
+    EmployeeResponse employeesResponse = bac.deleteEmployee(givenRequest);
     assertEquals(responseExpected, employeesResponse);
   }
 
@@ -115,7 +115,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     when(bar.updateEmployee(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.updateEmployee(givenRequest);
+    EmployeeResponse employeesResponse = bac.updateEmployee(givenRequest);
     assertEquals(responseExpected, employeesResponse);
   }
 
@@ -129,7 +129,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     //when(bar.insertEmployee(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.insertEmployee(givenRequest);
+    EmployeeResponse employeesResponse = bac.insertEmployee(givenRequest);
     assertEquals(responseExpected.getStatus(), employeesResponse.getStatus());
     assertEquals(responseExpected.getData(), employeesResponse.getData());
   }
@@ -144,7 +144,7 @@ public class EmployeeBACTest {
     EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
     //when(bar.insertEmployee(givenRequest)).thenReturn(responseExpected);
 
-    Response<Employee> employeesResponse = bac.insertEmployee(givenRequest);
+    EmployeeResponse employeesResponse = bac.insertEmployee(givenRequest);
     assertEquals(responseExpected.getStatus(), employeesResponse.getStatus());
     assertEquals(responseExpected.getData(), employeesResponse.getData());
   }

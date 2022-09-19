@@ -5,24 +5,39 @@ import java.util.List;
 import java.util.Objects;
 import org.springframework.http.ResponseEntity;
 
-public abstract class Response<R> {
+public abstract class Response<R, O> {
 
-  private List<R> data;
+  private List<R> data = EMPTY_LIST;
   private STATUS status;
-  private List<ValidationError> messages;
+  private List<ValidationError> messages = EMPTY_LIST;
 
   protected static final List EMPTY_LIST = Collections.emptyList();
 
-  public abstract Response withData(List<R> data);
+  public O withData(List<R> data) {
+    setData(data);
+    return (O) this;
+  }
 
-  public abstract Response withData(R data);
+  public O withData(R data) {
+    setData(List.of(data));
+    return (O) this;
+  }
 
-  public abstract Response withStatus(STATUS status);
 
-  public abstract Response withMessages(List<ValidationError> messages);
+  public O withMessages(List<ValidationError> messages) {
+    setMessages(messages);
+    return (O) this;
+  }
 
-  public Response withException(Exception e) {
-    return withStatus(STATUS.EXCEPTIONERROR);
+  public O withStatus(STATUS status) {
+    setStatus(status);
+    return (O) this;
+  }
+
+
+  public O withException(Exception e) {
+    setStatus(STATUS.EXCEPTIONERROR);
+    return (O) this;
   }
 
   public List<R> getData() {
@@ -61,7 +76,7 @@ public abstract class Response<R> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Response<?> response = (Response<?>) o;
+    Response<?, ?> response = (Response<?, ?>) o;
     return Objects.equals(data, response.data) && status == response.status
         && Objects.equals(messages, response.messages);
   }

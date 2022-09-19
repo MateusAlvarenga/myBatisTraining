@@ -2,7 +2,7 @@ package com.qat.employee.domain;
 
 import java.util.Objects;
 
-public abstract class Request<T, ID> {
+public abstract class Request<T, ID, O> {
 
   private ID id;
   private T data;
@@ -15,9 +15,15 @@ public abstract class Request<T, ID> {
     return data;
   }
 
-  public abstract Request withId(ID id);
+  public O withId(ID id) {
+    setId(id);
+    return (O) this;
+  }
 
-  public abstract Request withData(T data);
+  public  O withData(T data){
+    setData(data);
+    return (O) this;
+  }
 
   public void setId(ID id) {
     this.id = id;
@@ -44,7 +50,7 @@ public abstract class Request<T, ID> {
     if (!(o instanceof Request)) {
       return false;
     }
-    Request<?, ?> request = (Request<?, ?>) o;
+    Request<?, ?, ?> request = (Request<?, ?, ?>) o;
     return Objects.equals(id, request.id) && Objects.equals(data, request.data);
   }
 

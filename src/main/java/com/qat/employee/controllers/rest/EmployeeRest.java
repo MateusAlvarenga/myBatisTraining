@@ -30,7 +30,7 @@ public class EmployeeRest {
   @PostMapping(FETCHALL)
   public ResponseEntity<?> list(@RequestBody EmployeeRequest request) {
     try {
-      Response<Employee> response = bac.fetchAllEmployees(request);
+      EmployeeResponse response = bac.fetchAllEmployees(request);
       return response.toResponseEntity();
 
     } catch (Exception exception) {
@@ -41,7 +41,7 @@ public class EmployeeRest {
   @PostMapping(FETCHBYID)
   public ResponseEntity<?> fetchById(@RequestBody EmployeeRequest request) {
     try {
-      Response<Employee> response = bac.fetchEmployeeById(request);
+      EmployeeResponse response = bac.fetchEmployeeById(request);
       return response.toResponseEntity();
     } catch (Exception exception) {
       return new EmployeeResponse().withException(exception).toResponseEntity();
@@ -51,7 +51,7 @@ public class EmployeeRest {
   @PostMapping(INSERT)
   public ResponseEntity<?> insert(@RequestBody EmployeeRequest request) {
     try {
-      Response<Employee> response = bac.insertEmployee(request);
+      EmployeeResponse response = bac.insertEmployee(request);
       return response.toResponseEntity();
     } catch (Exception exception) {
       return new EmployeeResponse().withException(exception).toResponseEntity();
@@ -61,7 +61,7 @@ public class EmployeeRest {
   @PostMapping(UPDATE)
   public ResponseEntity update(@RequestBody EmployeeRequest request) {
     try {
-      Response<Employee> response = bac.updateEmployee(request);
+      EmployeeResponse response = bac.updateEmployee(request);
       return response.toResponseEntity();
     } catch (Exception exception) {
       return new EmployeeResponse().withException(exception).toResponseEntity();
