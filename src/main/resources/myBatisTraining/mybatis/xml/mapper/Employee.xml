@@ -4,10 +4,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper">
-  <insert id="createNewEmployee" parameterType="com.qat.employee.domain.employee.model.Employee"
+
+<!--  &lt;!&ndash;  INSERT&ndash;&gt;-->
+<!--  <insert id="insertEmployee" parameterType="com.qat.employee.domain.employee.model.Employee"-->
+<!--    useGeneratedKeys="true" keyColumn="id" keyProperty="id">-->
+<!--    INSERT INTO EMPLOYEE-->
+<!--      (NAME, PHONE, EMAIL, BRANCH, JOB_TITLE)-->
+<!--    VALUES (#{name}, #{phone}, #{email}, #{branch}, #{jobTitle})-->
+<!--  </insert>-->
+  <insert id="insertBookmarkEmployee" parameterType="java.util.List"
     useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     INSERT INTO EMPLOYEE
-      (NAME, PHONE, EMAIL, BRANCH)
-    VALUES (#{name}, #{phone}, #{email}, #{branch})
+    (NAME, PHONE, EMAIL, BRANCH, JOB_TITLE)
+    VALUES
+    <foreach collection="list" item="employee" index="index" open="(" separator="),("  close=")">
+      #{employee.name},
+      #{employee.phone},
+      #{employee.email},
+      #{employee.branch},
+      #{employee.jobTitle}
+    </foreach>
   </insert>
+
+<!--  &lt;!&ndash;  SELECT&ndash;&gt;-->
+<!--  <select id="fetchByIdEmployee" parameterType="int"  resultType="com.qat.employee.domain.employee.model.Employee">-->
+<!--    SELECT (NAME, PHONE, EMAIL, BRANCH, JOB_TITLE) FROM employee WHERE id = #{id}-->
+<!--  </select>-->
+<!--  <select id="fetchAllEmployee" resultType="com.qat.employee.domain.employee.model.Employee">-->
+<!--    SELECT (NAME, PHONE, EMAIL, BRANCH, JOB_TITLE) FROM employee-->
+<!--  </select>-->
+
+<!--  &lt;!&ndash;  UPDATE&ndash;&gt;-->
+<!--  <update id="updateEmployee" parameterType="com.qat.employee.domain.employee.model.Employee">-->
+<!--    UPDATE employee SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}, BRANCH = #{branch}, JOB_TITLE = #{jobTitle} WHERE id = #{id}-->
+<!--  </update>-->
+
+<!--  &lt;!&ndash;  DELETE&ndash;&gt;-->
+<!--  <delete id="deleteEmployee" parameterType="com.qat.employee.domain.employee.model.Employee">-->
+<!--    DELETE FROM employee WHERE id = #{id}-->
+<!--  </delete>-->
 </mapper>

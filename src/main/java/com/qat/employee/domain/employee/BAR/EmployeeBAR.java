@@ -15,5 +15,7 @@ public interface EmployeeBAR {
 
   public EmployeeResponse deleteEmployee(EmployeeRequest request);
 
+  public EmployeeResponse insertEmployeeBookmark(EmployeeRequest request);
+
 //  public Integer createNewEmployee(Employee employee);
 }

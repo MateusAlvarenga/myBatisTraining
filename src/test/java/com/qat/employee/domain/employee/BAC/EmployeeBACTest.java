@@ -99,7 +99,7 @@ public class EmployeeBACTest {
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
         .withStatus(STATUS.OPERATIONSUCCESS);
-    EmployeeRequest givenRequest = new EmployeeRequest().withData(givenEmployee);
+    EmployeeRequest givenRequest = new EmployeeRequest().withId(1);
     when(bar.deleteEmployee(givenRequest)).thenReturn(responseExpected);
 
     EmployeeResponse employeesResponse = bac.deleteEmployee(givenRequest);

@@ -46,7 +46,7 @@ public class EmployeeControllerTest extends BaseWebTest {
 
     final RequestBuilder request = createRequest(HttpMethod.GET, EMPTY_LIST);
     String result = performRequest(request).getResponse().getContentAsString();
-    System.out.println(result);
+
 
     assertEmployee(result, responseExpected);
   }
@@ -62,7 +62,7 @@ public class EmployeeControllerTest extends BaseWebTest {
 
     final RequestBuilder request = createRequest(HttpMethod.POST, INSERT, givenEmployee());
     String result = performRequest(request).getResponse().getContentAsString();
-    System.out.println(result);
+
 
     assertEmployee(result, responseExpected);
 
@@ -79,7 +79,7 @@ public class EmployeeControllerTest extends BaseWebTest {
 
     final RequestBuilder request = createRequest(HttpMethod.POST, UPDATE, givenEmployee());
     String result = performRequest(request).getResponse().getContentAsString();
-    System.out.println(result);
+
 
     assertEmployee(result, responseExpected);
 

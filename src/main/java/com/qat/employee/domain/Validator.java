@@ -9,10 +9,10 @@ public abstract class Validator {
   public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
       Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-  public abstract void checkValidState();
+  public abstract void checkValidState(ValidationContextIndicator validationContextIndicator);
 
-  public Boolean validate() {
-    checkValidState();
+  public Boolean validate(ValidationContextIndicator validationContextIndicator) {
+    checkValidState(validationContextIndicator);
     return getErrors().isEmpty();
   }
 
@@ -30,8 +30,8 @@ public abstract class Validator {
     errors.add(ValidationError.of(field, message));
   }
 
-  public void checkRequired(String field, String value) {
-    if (value == null || value.isEmpty()) {
+  public void checkRequired(String field, Object value) {
+    if (value == null) {
       addError(field, field + " is required");
     }
   }

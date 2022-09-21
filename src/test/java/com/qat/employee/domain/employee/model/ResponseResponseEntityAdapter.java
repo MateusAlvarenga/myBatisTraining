@@ -16,7 +16,7 @@ public class ResponseResponseEntityAdapter {
   @Test
   public void testOK() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT");
+        new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
@@ -34,7 +34,7 @@ public class ResponseResponseEntityAdapter {
   @Test
   public void testEXPECTATION_FAILED() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT");
+        new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.EXCEPTIONERROR);
@@ -52,7 +52,7 @@ public class ResponseResponseEntityAdapter {
   @Test
   public void testPERSISTENCEERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT");
+        new Employee(1, "Mateus", "222", "", "IT",1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.PERSISTENCEERROR);
@@ -70,7 +70,7 @@ public class ResponseResponseEntityAdapter {
   @Test
   public void testVALIDATIONERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT");
+        new Employee(1, "Mateus", "222", "", "IT",1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.VALIDATIONERROR);
@@ -88,7 +88,7 @@ public class ResponseResponseEntityAdapter {
   @Test
   public void testNOROWSFOUNDERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT");
+        new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.NOROWSFOUNDERROR);
@@ -106,7 +106,7 @@ public class ResponseResponseEntityAdapter {
   @Test
   public void testUNSPECIFIEDERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT");
+        new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.UNSPECIFIEDERROR);

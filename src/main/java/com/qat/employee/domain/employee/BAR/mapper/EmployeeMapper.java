@@ -13,8 +13,8 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface EmployeeMapper {
 
-  @Insert("INSERT INTO employee(name, phone, email, branch) " +
-      " VALUES (#{name}, #{phone}, #{email}, #{branch})")
+  @Insert("INSERT INTO employee(name, phone, email, branch, job_title) " +
+      " VALUES (#{name}, #{phone}, #{email}, #{branch}, #{jobTitle})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   int insert(Employee employee);
 

@@ -1,6 +1,7 @@
 package com.qat.employee.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -15,24 +16,7 @@ public class ExecutionTimeAdvice {
 
   Logger log = LoggerFactory.getLogger(ExecutionTimeAdvice.class);
 
-  // Anotation to track execution time of a method
-  @Around("@annotation(com.qat.employee.aspect.TrackExecutionTime)")
-  public Object executionTime(ProceedingJoinPoint point) throws Throwable {
-    return logExecutionTime(point);
-  }
-
-  // Log execution time of BAC methods
-  @Around("execution(*  com.qat.employee.domain.employee.BAC.*.*(..))")
-  public Object executionTimeBAC(ProceedingJoinPoint point) throws Throwable {
-    return logExecutionTime(point);
-  }
-
-  // Log execution time of BAR methods
-  @Around("execution(* com.qat.employee.domain.employee.BAR.*.*(..))")
-  public Object executionTimeBAR(ProceedingJoinPoint point) throws Throwable {
-    return logExecutionTime(point);
-  }
-
+  @Around("execution(public * com.qat..*BAC.*(..)) || execution(public * com.qat..*BAR.*(..))")
   public Object logExecutionTime(ProceedingJoinPoint point) throws Throwable {
 
     final long startTime = getCurrentTime();
@@ -52,6 +36,32 @@ public class ExecutionTimeAdvice {
     log.info(msg);
     return object;
   }
+
+
+  @AfterThrowing(pointcut =" execution(public * com.qat..*BAR.*(..))", throwing="ex")
+  public void logError(Exception ex) {
+    log.error("LOG ERROR:");
+    log.error(ex.getCause().getMessage());
+  }
+
+  @Around("execution(public * com.qat..*mapper.*(..))")
+  public Object asdas(ProceedingJoinPoint point) throws Throwable {
+    log.info("Around mapper");
+
+    Object returnedValue = null;
+    try{
+      System.out.println("Before advice");
+      returnedValue=point.proceed();
+      System.out.println("After returning advice");
+    }catch(Throwable ex){
+      System.out.println("After throwing advice");
+    }
+
+    log.info("Around mapper end");
+    log.info("Returned value"+ returnedValue);
+    return returnedValue;
+  }
+
 
   protected long getCurrentTime() {
     return System.currentTimeMillis();

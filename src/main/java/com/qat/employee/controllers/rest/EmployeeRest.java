@@ -20,6 +20,7 @@ public class EmployeeRest {
   private final String INSERT = "/insert";
   private final String UPDATE = "/update";
   private final String DELETE = "/delete";
+  private final String INSERT_BOOKMARK = "/insert-bookmark";
 
   private final EmployeeBAC bac;
 
@@ -76,4 +77,14 @@ public class EmployeeRest {
       return new EmployeeResponse().withException(exception).toResponseEntity();
     }
   }
+  
+  @PostMapping(INSERT_BOOKMARK)
+  public ResponseEntity<?> insertBookmark(@RequestBody EmployeeRequest request) {
+    try {
+      return bac.insertEmployeeBookmark(request).toResponseEntity();
+    } catch (Exception exception) {
+      return new EmployeeResponse().withException(exception).toResponseEntity();
+    }
+  }
+  
 }

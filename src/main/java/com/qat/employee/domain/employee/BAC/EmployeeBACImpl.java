@@ -1,9 +1,9 @@
 package com.qat.employee.domain.employee.BAC;
 
 import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.ValidationContextIndicator;
 import com.qat.employee.domain.Validator;
 import com.qat.employee.domain.employee.BAR.EmployeeBAR;
-import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import org.springframework.stereotype.Component;
@@ -24,14 +24,22 @@ public class EmployeeBACImpl implements EmployeeBAC {
 
   @Override
   public EmployeeResponse fetchEmployeeById(EmployeeRequest request) {
-    return bar.fetchEmployeeById(request);
+    EmployeeValidator validator = new EmployeeValidator(request);
+
+    if (validator.validate(ValidationContextIndicator.FETCHBYID)) {
+      return bar.fetchEmployeeById(request);
+    } else {
+      return new EmployeeResponse()
+          .withStatus(STATUS.VALIDATIONERROR)
+          .withMessages(validator.getErrors());
+    }
   }
 
   @Override
   public EmployeeResponse insertEmployee(EmployeeRequest request) {
-    Validator validator = new EmployeeValidator(request.getData());
+    Validator validator = new EmployeeValidator(request);
 
-    if (!validator.validate()) {
+    if (!validator.validate(ValidationContextIndicator.INSERT)) {
       return new EmployeeResponse()
           .withStatus(STATUS.VALIDATIONERROR)
           .withMessages(validator.getErrors());
@@ -43,10 +51,9 @@ public class EmployeeBACImpl implements EmployeeBAC {
   @Override
   public EmployeeResponse updateEmployee(EmployeeRequest request) {
 
-    Employee employee = request.getData();
-    Validator validator = new EmployeeValidator(employee);
+    Validator validator = new EmployeeValidator(request);
 
-    if (!validator.validate()) {
+    if (!validator.validate(ValidationContextIndicator.UPDATE)) {
       return new EmployeeResponse()
           .withStatus(STATUS.VALIDATIONERROR)
           .withMessages(validator.getErrors());
@@ -56,6 +63,20 @@ public class EmployeeBACImpl implements EmployeeBAC {
 
   @Override
   public EmployeeResponse deleteEmployee(EmployeeRequest request) {
-    return bar.deleteEmployee(request);
+    EmployeeValidator validator = new EmployeeValidator(request);
+
+    if (validator.validate(ValidationContextIndicator.DELETE)) {
+      return bar.deleteEmployee(request);
+    } else {
+      return new EmployeeResponse()
+          .withStatus(STATUS.VALIDATIONERROR)
+          .withMessages(validator.getErrors());
+    }
   }
+
+@Override
+public EmployeeResponse insertEmployeeBookmark(EmployeeRequest request) {
+	 
+	return  bar.insertEmployeeBookmark(request);
+}
 }

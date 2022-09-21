@@ -18,10 +18,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
+ 
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(EmployeeRest.class)
-public class EmployeeRestTest extends BaseWebTest {
+public class EmployeeControllerTest extends BaseWebTest {
 
   @MockBean
   private EmployeeBAC BAC;

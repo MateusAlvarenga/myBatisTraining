@@ -41,7 +41,7 @@ public class EmployeeBuilder {
   }
 
   public Employee build() {
-    return new Employee(id, name, phone, email, branch);
+    return new Employee(id, name, phone, email, branch, 1);
   }
 
 }

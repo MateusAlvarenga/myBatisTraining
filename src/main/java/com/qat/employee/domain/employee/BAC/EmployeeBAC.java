@@ -14,5 +14,7 @@ public interface EmployeeBAC {
   public EmployeeResponse updateEmployee(EmployeeRequest request);
 
   public EmployeeResponse deleteEmployee(EmployeeRequest request);
+  
+  public EmployeeResponse insertEmployeeBookmark(EmployeeRequest request);
 
 }

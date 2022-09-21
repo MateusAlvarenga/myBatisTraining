@@ -9,13 +9,15 @@ public class Employee {
   private String phone;
   private String email;
   private String branch;
+  private Integer jobTitle;
 
-  public Employee(Integer id, String name, String phone, String email, String branch) {
+  public Employee(Integer id, String name, String phone, String email, String branch, Integer jobTitle) {
     this.id = id;
     this.name = name;
     this.phone = phone;
     this.email = email;
     this.branch = branch;
+    this.jobTitle = jobTitle;
   }
 
   public Employee() {
@@ -61,6 +63,13 @@ public class Employee {
     this.branch = branch;
   }
 
+  public Integer getJobTitle() {
+    return jobTitle;
+  }
+
+  public void setJobTitle(Integer jobTitle) {
+    this.jobTitle = jobTitle;
+  }
   @Override
   public String toString() {
     final StringBuffer sb = new StringBuffer("Employee{");

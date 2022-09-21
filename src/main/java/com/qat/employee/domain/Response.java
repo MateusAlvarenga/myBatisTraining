@@ -23,7 +23,6 @@ public abstract class Response<R, O> {
     return (O) this;
   }
 
-
   public O withMessages(List<ValidationError> messages) {
     setMessages(messages);
     return (O) this;
@@ -33,7 +32,6 @@ public abstract class Response<R, O> {
     setStatus(status);
     return (O) this;
   }
-
 
   public O withException(Exception e) {
     setStatus(STATUS.EXCEPTIONERROR);
