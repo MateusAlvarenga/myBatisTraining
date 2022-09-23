@@ -2,7 +2,6 @@ package com.qat.employee.domain.employee.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.qat.employee.domain.Response;
 import com.qat.employee.domain.STATUS;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,18 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @ExtendWith(MockitoExtension.class)
-public class ResponseResponseEntityAdapter {
+class ResponseresponseentityadapterTest {
 
   @Test
-  public void testOK() {
+  void testOK() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
-    final ResponseEntity responseEntityExpected = ResponseEntity.ok(responseExpected);
+    final ResponseEntity<EmployeeResponse> responseEntityExpected = ResponseEntity.ok(responseExpected);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse()
+    final ResponseEntity<?> responseEntityActual = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS)
         .toResponseEntity();
@@ -32,16 +31,16 @@ public class ResponseResponseEntityAdapter {
   }
 
   @Test
-  public void testEXPECTATION_FAILED() {
+  void testEXPECTATION_FAILED() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.EXCEPTIONERROR);
-    final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
-        HttpStatus.EXPECTATION_FAILED);
+    final ResponseEntity<EmployeeResponse> responseEntityExpected = 
+            new ResponseEntity<EmployeeResponse>(responseExpected,HttpStatus.EXPECTATION_FAILED);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse()
+    final ResponseEntity<?> responseEntityActual = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.EXCEPTIONERROR).toResponseEntity();
 
@@ -50,16 +49,16 @@ public class ResponseResponseEntityAdapter {
   }
 
   @Test
-  public void testPERSISTENCEERROR() {
+  void testPERSISTENCEERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT",1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.PERSISTENCEERROR);
-    final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
+    final ResponseEntity<EmployeeResponse> responseEntityExpected = new ResponseEntity<EmployeeResponse>(responseExpected,
         HttpStatus.CONFLICT);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse()
+    final ResponseEntity<?> responseEntityActual = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.PERSISTENCEERROR).toResponseEntity();
 
@@ -68,16 +67,16 @@ public class ResponseResponseEntityAdapter {
   }
 
   @Test
-  public void testVALIDATIONERROR() {
+  void testVALIDATIONERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT",1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.VALIDATIONERROR);
-    final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
+    final ResponseEntity<EmployeeResponse> responseEntityExpected = new ResponseEntity<EmployeeResponse>(responseExpected,
         HttpStatus.BAD_REQUEST);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse()
+    final ResponseEntity<?> responseEntityActual = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.VALIDATIONERROR).toResponseEntity();
 
@@ -86,16 +85,16 @@ public class ResponseResponseEntityAdapter {
   }
 
   @Test
-  public void testNOROWSFOUNDERROR() {
+  void testNOROWSFOUNDERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.NOROWSFOUNDERROR);
-    final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
+    final ResponseEntity<EmployeeResponse> responseEntityExpected = new ResponseEntity<EmployeeResponse>(responseExpected,
         HttpStatus.NOT_FOUND);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse()
+    final ResponseEntity<?> responseEntityActual = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.NOROWSFOUNDERROR).toResponseEntity();
 
@@ -104,16 +103,16 @@ public class ResponseResponseEntityAdapter {
   }
 
   @Test
-  public void testUNSPECIFIEDERROR() {
+  void testUNSPECIFIEDERROR() {
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "", "IT", 1);
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.UNSPECIFIEDERROR);
-    final ResponseEntity responseEntityExpected = new ResponseEntity(responseExpected,
+    final ResponseEntity<EmployeeResponse> responseEntityExpected = new ResponseEntity<EmployeeResponse>(responseExpected,
         HttpStatus.INTERNAL_SERVER_ERROR);
 
-    final ResponseEntity responseEntityActual = new EmployeeResponse()
+    final ResponseEntity<?> responseEntityActual = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.UNSPECIFIEDERROR).toResponseEntity();
 

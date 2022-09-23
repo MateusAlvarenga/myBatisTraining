@@ -5,7 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.qat.employee.controllers.BaseWebTest;
+import com.qat.employee.controllers.BasewebTest;
 import com.qat.employee.domain.STATUS;
 import com.qat.employee.domain.employee.BAR.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.Employee;
@@ -23,20 +23,19 @@ import org.springframework.test.web.servlet.RequestBuilder;
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(EmployeeController.class)
-public class EmployeeControllerTest extends BaseWebTest {
+@WebMvcTest(EmployeeWebController.class)
+class EmployeeWebControllerTest extends BasewebTest {
 
   private final String EMPTY_LIST = "/emp-list";
   private final String INSERT = "/insert";
-
   private final String UPDATE = "/update";
-  private final String DELETE = "/delete";
+  //private final String DELETE = "/delete";
 
   @MockBean
   private EmployeeBAC BAC;
 
   @Test
-  public void fetchList() throws Exception {
+  void fetchList() throws Exception {
 
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployees())
@@ -52,7 +51,7 @@ public class EmployeeControllerTest extends BaseWebTest {
   }
 
   @Test
-  public void insertTest() throws Exception {
+  void insertTest() throws Exception {
     final EmployeeResponse responseExpected =  new EmployeeResponse()
         .withData(givenEmployee())
         .withStatus(STATUS.OPERATIONSUCCESS);
@@ -69,7 +68,7 @@ public class EmployeeControllerTest extends BaseWebTest {
   }
 
   @Test
-  public void updateTest() throws Exception {
+  void updateTest() throws Exception {
     final EmployeeResponse responseExpected =  new EmployeeResponse()
         .withData(givenEmployee())
         .withStatus(STATUS.OPERATIONSUCCESS);
@@ -113,7 +112,7 @@ public class EmployeeControllerTest extends BaseWebTest {
         .phone("123456").build();
   }
 
-  private List givenEmployees() {
+  private List<Employee> givenEmployees() {
     return List.of(givenEmployee(1), givenEmployee(2), givenEmployee(3), givenEmployee(4),
         givenEmployee(5));
   }

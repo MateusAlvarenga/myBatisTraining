@@ -3,6 +3,7 @@ package com.qat.employee.domain;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 public abstract class Request<T, ID, O> {
 
 	private ID id;
@@ -26,7 +27,7 @@ public abstract class Request<T, ID, O> {
 		return (O) this;
 	}
 
-	public O withData(T data) {
+    public O withData(T data) {
 		setData(data);
 		return (O) this;
 	}
@@ -61,7 +62,7 @@ public abstract class Request<T, ID, O> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Request other = (Request) obj;
+		Request<?, ?, ?> other = (Request<?, ?, ?>) obj;
 		return Objects.equals(data, other.data) && Objects.equals(dataList, other.dataList)
 				&& Objects.equals(id, other.id);
 	}

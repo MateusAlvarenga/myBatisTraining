@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class ValidationError implements Serializable {
 
-  private final String field;
+private static final long serialVersionUID = 1L;
+private final String field;
   private final String message;
 
   private ValidationError(String field, String message) {
@@ -26,7 +27,7 @@ public class ValidationError implements Serializable {
 
   @Override
   public String toString() {
-    final StringBuffer sb = new StringBuffer("ValidationError{");
+    final StringBuilder sb = new StringBuilder("ValidationError{");
     sb.append("field='").append(field).append('\'');
     sb.append(", message='").append(message).append('\'');
     sb.append('}');

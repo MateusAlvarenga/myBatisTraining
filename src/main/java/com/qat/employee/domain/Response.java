@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Objects;
 import org.springframework.http.ResponseEntity;
 
+@SuppressWarnings("unchecked")
 public abstract class Response<R, O> {
 
-  private List<R> data = EMPTY_LIST;
   private STATUS status;
-  private List<ValidationError> messages = EMPTY_LIST;
+  private List<R> data = Collections.emptyList();
+  private List<ValidationError> messages =  Collections.emptyList();
 
-  protected static final List EMPTY_LIST = Collections.emptyList();
+  protected static final List<?> EMPTY_LIST = Collections.emptyList();
 
   public O withData(List<R> data) {
     setData(data);

@@ -1,8 +1,6 @@
 package com.qat.employee.controllers.rest;
 
-import com.qat.employee.domain.Response;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
-import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import org.springframework.http.ResponseEntity;
@@ -13,18 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/employee")
-public class EmployeeRest {
-
-  private final String FETCHALL = "/fetch-all";
-  private final String FETCHBYID = "/fetch-by-id";
-  private final String INSERT = "/insert";
-  private final String UPDATE = "/update";
-  private final String DELETE = "/delete";
-  private final String INSERT_BOOKMARK = "/insert-bookmark";
+public class EmployeeController {
 
   private final EmployeeBAC bac;
+  private static final String FETCHALL = "/fetch-all";
+  private static final String FETCHBYID = "/fetch-by-id";
+  private static final String INSERT = "/insert";
+  private static final String UPDATE = "/update";
+  private static final String DELETE = "/delete";
+  private static final String INSERT_BOOKMARK = "/insert-bookmark";
 
-  public EmployeeRest(EmployeeBAC bac) {
+
+
+  public EmployeeController(EmployeeBAC bac) {
     this.bac = bac;
   }
 
@@ -60,7 +59,7 @@ public class EmployeeRest {
   }
 
   @PostMapping(UPDATE)
-  public ResponseEntity update(@RequestBody EmployeeRequest request) {
+  public ResponseEntity<?> update(@RequestBody EmployeeRequest request) {
     try {
       EmployeeResponse response = bac.updateEmployee(request);
       return response.toResponseEntity();
@@ -70,7 +69,7 @@ public class EmployeeRest {
   }
 
   @PostMapping(DELETE)
-  public ResponseEntity delete(@RequestBody EmployeeRequest request) {
+  public ResponseEntity<?> delete(@RequestBody EmployeeRequest request) {
     try {
       return bac.deleteEmployee(request).toResponseEntity();
     } catch (Exception exception) {

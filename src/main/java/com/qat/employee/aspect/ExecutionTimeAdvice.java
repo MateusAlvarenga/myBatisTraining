@@ -26,7 +26,7 @@ public class ExecutionTimeAdvice {
 
     final String className = point.getTarget().getClass().getSimpleName();
     final String methodName = point.getSignature().getName();
-    final String classNameWithPackage = point.getSignature().getDeclaringTypeName();
+//  final String classNameWithPackage = point.getSignature().getDeclaringTypeName();
 //    final String className = classNameWithPackage.substring(classNameWithPackage
 //        .lastIndexOf('.') + 1);
 
@@ -46,19 +46,15 @@ public class ExecutionTimeAdvice {
 
   @Around("execution(public * com.qat..*mapper.*(..))")
   public Object asdas(ProceedingJoinPoint point) throws Throwable {
-    log.info("Around mapper");
-
-    Object returnedValue = null;
-    try{
-      System.out.println("Before advice");
-      returnedValue=point.proceed();
-      System.out.println("After returning advice");
-    }catch(Throwable ex){
-      System.out.println("After throwing advice");
-    }
+    log.info("Around mapper");     
+ 
+    log.info("Before advice");
+    String returnedValue=point.proceed().toString();
+    log.info("After returning advice");    
 
     log.info("Around mapper end");
-    log.info("Returned value"+ returnedValue);
+    log.info("Returned value");
+    log.info(returnedValue);
     return returnedValue;
   }
 

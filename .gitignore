@@ -33,3 +33,4 @@ build/
 .metadata
 
 logging.log
+logging*gz
