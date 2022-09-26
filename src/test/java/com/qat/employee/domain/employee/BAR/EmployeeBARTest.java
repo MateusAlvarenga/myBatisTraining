@@ -4,10 +4,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
-import com.qat.employee.domain.Response;
 import com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper;
 import com.qat.employee.domain.employee.model.Employee;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeBARTest {
+class EmployeebarTest {
 
   @Mock
   EmployeeMapper employeeMapper;
@@ -27,7 +27,7 @@ public class EmployeeBARTest {
   EmployeeBARImpl employeeBAR;
 
   @Test
-  public void testFetchEmployees() {
+  void testFetchEmployees() {
     final List<Employee> employeesExpected = givenEmployees();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeesExpected)
@@ -41,7 +41,7 @@ public class EmployeeBARTest {
   }
 
   @Test
-  public void testFetchEmployeeById() {
+  void testFetchEmployeeById() {
     final Employee employeeExpected = givenEmployee();
     final EmployeeResponse responseExpected =  new EmployeeResponse()
         .withData(employeeExpected)
@@ -56,7 +56,7 @@ public class EmployeeBARTest {
   }
 
   @Test
-  public void testInsertEmployee() {
+  void testInsertEmployee() {
     final Employee employeeExpected = givenEmployee();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeeExpected)
@@ -70,7 +70,7 @@ public class EmployeeBARTest {
   }
 
   @Test
-  public void testUpdateEmployee() {
+  void testUpdateEmployee() {
     final Employee employeeExpected = givenEmployee();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeeExpected)
@@ -84,7 +84,7 @@ public class EmployeeBARTest {
   }
 
   @Test
-  public void testDeleteEmployee() {
+  void testDeleteEmployee() {
     final Employee employeeExpected = givenEmployee();
     final EmployeeResponse responseExpected =  new EmployeeResponse()
         .withData(employeeExpected)
@@ -105,7 +105,7 @@ public class EmployeeBARTest {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
+        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456").age(20)
         .build();
   }
 

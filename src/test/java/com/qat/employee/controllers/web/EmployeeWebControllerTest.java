@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 
 import com.qat.employee.controllers.BasewebTest;
 import com.qat.employee.domain.STATUS;
-import com.qat.employee.domain.employee.BAR.EmployeeBuilder;
+import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
@@ -99,7 +99,7 @@ class EmployeeWebControllerTest extends BasewebTest {
   private void assertEmployee(String content, EmployeeResponse employeeResponse) {
     employeeResponse.getData().forEach(e -> {
       assertThat(content).contains(e.getName()).contains(e.getId().toString())
-          .contains(e.getEmail()).contains(e.getBranch()).contains(e.getPhone());
+          .contains(e.getEmail()).contains(e.getBranch()).contains(e.getPhone()).contains(e.getBranch());
     });
   }
 
@@ -109,7 +109,7 @@ class EmployeeWebControllerTest extends BasewebTest {
 
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder.builder().id(id).name("Mateus").email("example@gmail.com").branch("abc")
-        .phone("123456").build();
+        .phone("123456").age(19).build();
   }
 
   private List<Employee> givenEmployees() {

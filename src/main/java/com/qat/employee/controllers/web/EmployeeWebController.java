@@ -30,7 +30,7 @@ public class EmployeeWebController {
   private static final String TEMPLATE_EMPLOYEE = EMPLOYEE;
   private static final String TMPLATE_EMP_LIST = "emp_list";
   private static final String TEMPLATE_FORM = "form";
-  private static final String REDIRECT = "redirect:/";   
+  private static final String REDIRECT = "redirect:";
 
   public EmployeeWebController(EmployeeBAC bac) {
     this.bac = bac;
@@ -38,7 +38,7 @@ public class EmployeeWebController {
 
   @GetMapping(SLASH)
   String emp() {
-    return REDIRECT + TMPLATE_EMP_LIST;
+    return REDIRECT + EMP_LIST;
   }
 
   @PostMapping(INSERT)

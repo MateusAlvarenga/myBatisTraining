@@ -76,7 +76,16 @@ public class EmployeeBACImpl implements EmployeeBAC {
 
 @Override
 public EmployeeResponse insertEmployeeBookmark(EmployeeRequest request) {
-	 
-	return  bar.insertEmployeeBookmark(request);
+
+  Validator validator = new EmployeeValidator(request);
+
+  if (!validator.validate(ValidationContextIndicator.INSERTBOOKMARK)) {
+    return new EmployeeResponse()
+        .withStatus(STATUS.VALIDATIONERROR)
+        .withMessages(validator.getErrors());
+  }
+
+  return bar.insertEmployeeBookmark(request);
+
 }
 }

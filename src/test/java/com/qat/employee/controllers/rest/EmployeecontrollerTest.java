@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 import com.qat.employee.controllers.BasewebTest;
 import com.qat.employee.domain.STATUS;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
-import com.qat.employee.domain.employee.BAR.EmployeeBuilder;
+import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;

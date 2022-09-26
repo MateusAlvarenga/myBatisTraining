@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import com.qat.employee.domain.ValidationError;
-import com.qat.employee.domain.employee.BAR.EmployeeBuilder;
+import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
@@ -34,7 +34,7 @@ class EmployeebacTest {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
+        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456").age(20)
         .build();
   }
 

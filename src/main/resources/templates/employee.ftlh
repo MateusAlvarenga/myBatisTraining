@@ -42,6 +42,7 @@
       <th>Phone</th>
       <th>Email</th>
       <th>Branch</th>
+      <th>Age</th>
       <th>Action</th>
     </tr>
     </thead>
@@ -53,6 +54,7 @@
         <td>${emp.phone}</td>
         <td>${emp.email}</td>
         <td>${emp.branch}</td>
+        <td>${emp.age}</td>
         <td>
           <a href="/form?id=${emp.id}" class="btn btn-info btn-sm" role="button">Update</a>
           <a href="/delete?id=${emp.id}" class="btn btn-danger btn-sm" role="button">Delete</a>
@@ -73,8 +75,11 @@
     Email:<br/>
     <input type="text" class="form-control" name="email" required/>
     <br/>
-    Department:<br/>
+    Branch:<br/>
     <input type="text" class="form-control" name="branch" required/>
+    <br/>
+    Age:<br/>
+    <input type="number" class="form-control" name="age" required/>
     <br/>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

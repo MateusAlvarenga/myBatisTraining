@@ -7,5 +7,5 @@ public enum ValidationContextIndicator {
   UPDATE,
   DELETE,
   VOID,
-  PROCESS
+  INSERTBOOKMARK, PROCESS
 }

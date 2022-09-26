@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.qat.employee.domain.STATUS;
 import com.qat.employee.domain.employee.model.Employee;
+import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
@@ -109,7 +110,7 @@ class Employeebar2Test {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("TestName").email("teste@gmail.com").branch("teste").phone("123456")
+        .id(id).name("TestName").email("teste@gmail.com").branch("teste").phone("123456").age(19)
         .build();
   }
 
