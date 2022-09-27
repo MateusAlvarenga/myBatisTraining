@@ -3,15 +3,16 @@ package com.qat.employee.domain.employee.BAR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.qat.employee.domain.employee.model.Employee;
+import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeTest {
+class EmployeeTest {
 
   @Test
-  public void TestBuilderInstantiation() {
+  void TestBuilderInstantiation() {
 
     final Employee employeExpected =
         new Employee(1, "Mateus", "222", "joe@gmail.com", "IT",1);

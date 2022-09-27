@@ -1,6 +1,6 @@
 package com.qat.employee.domain.employee.BAR;
 
-import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.common.STATUS;
 import com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper;
 import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
@@ -9,8 +9,8 @@ import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -18,18 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeBARImpl implements EmployeeBAR {
 
   private final EmployeeMapper mapper;
-  private final SqlSession sqlSession;
+  //private final SqlSession sqlSession;
 
-  private final String FETCH_ALL = "fetchAll";
-  private final String FETCH_BY_ID = "fetchById";
-  private final String INSERT = "insert";
-  private final String UPDATE = "update";
-  private final String DELETE = "deleteById";
-  private final String INSERT_BOOKMARK = "insertBookmark";
+//  private final static String FETCH_ALL = "fetchAll";
+//  private final static String FETCH_BY_ID = "fetchById";
+//  private final static String INSERT = "insert";
+//  private final static String UPDATE = "update";
+//  private final static String DELETE = "deleteById";
+//  private final static String INSERT_BOOKMARK = "insertBookmark";
 
-  public EmployeeBARImpl(EmployeeMapper mapper, SqlSession sqlSession) {
+  public EmployeeBARImpl(EmployeeMapper mapper/*, SqlSession sqlSession*/) {
     this.mapper = mapper;
-    this.sqlSession = sqlSession;
+   // this.sqlSession = sqlSession;
   }
 
   @Override
@@ -51,7 +51,7 @@ public class EmployeeBARImpl implements EmployeeBAR {
   }
 
   @Override
-  @Transactional
+  @Transactional(isolation = Isolation.READ_COMMITTED)
   public EmployeeResponse insertEmployee(EmployeeRequest request) {
     Employee employee = request.getData();
 
@@ -63,10 +63,9 @@ public class EmployeeBARImpl implements EmployeeBAR {
   }
 
   @Override
-  @Transactional
+  @Transactional(isolation = Isolation.READ_COMMITTED)
   public EmployeeResponse updateEmployee(EmployeeRequest request) {
-    final Employee employee = request.getData();
-    final Integer id = request.getId();
+    final Employee employee = request.getData();   
 
     if (mapper.update(employee) == 1) {
       return new EmployeeResponse().withData(employee).withStatus(STATUS.OPERATIONSUCCESS);
@@ -76,7 +75,7 @@ public class EmployeeBARImpl implements EmployeeBAR {
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public EmployeeResponse deleteEmployee(EmployeeRequest request) {
     final Integer id = request.getId();
 
@@ -88,8 +87,8 @@ public class EmployeeBARImpl implements EmployeeBAR {
   }
 
   @Override
-  @Transactional
-  public EmployeeResponse insertEmployeeBookmark(EmployeeRequest request) {
+  @Transactional(transactionManager = "transactionManager",isolation = Isolation.READ_COMMITTED)
+  public EmployeeResponse insertEmployeeList(EmployeeRequest request) {
 
     List<Employee> employeeList = request.getDataList();
 

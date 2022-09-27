@@ -1,4 +1,4 @@
-package com.qat.employee.domain;
+package com.qat.employee.domain.common;
 
 import java.util.ArrayList;
 import java.util.List;

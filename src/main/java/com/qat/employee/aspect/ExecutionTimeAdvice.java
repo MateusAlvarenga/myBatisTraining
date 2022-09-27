@@ -44,21 +44,6 @@ public class ExecutionTimeAdvice {
     log.error(ex.getCause().getMessage());
   }
 
-  @Around("execution(public * com.qat..*mapper.*(..))")
-  public Object asdas(ProceedingJoinPoint point) throws Throwable {
-    log.info("Around mapper");     
- 
-    log.info("Before advice");
-    String returnedValue=point.proceed().toString();
-    log.info("After returning advice");    
-
-    log.info("Around mapper end");
-    log.info("Returned value");
-    log.info(returnedValue);
-    return returnedValue;
-  }
-
-
   protected long getCurrentTime() {
     return System.currentTimeMillis();
   }

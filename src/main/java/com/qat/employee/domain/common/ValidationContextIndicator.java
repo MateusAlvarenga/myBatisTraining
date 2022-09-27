@@ -1,4 +1,4 @@
-package com.qat.employee.domain;
+package com.qat.employee.domain.common;
 
 public enum ValidationContextIndicator {
   FETCH,
@@ -7,5 +7,5 @@ public enum ValidationContextIndicator {
   UPDATE,
   DELETE,
   VOID,
-  INSERTBOOKMARK, PROCESS
+  INSERTLIST, PROCESS
 }

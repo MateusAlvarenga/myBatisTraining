@@ -4,7 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.qat.employee.controllers.BasewebTest;
-import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.common.STATUS;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
 import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.Employee;
@@ -32,6 +32,8 @@ public class EmployeecontrollerTest extends BasewebTest {
   private final String INSERT = "/api/employee/insert";
   private final String UPDATE = "/api/employee/update";
   private final String DELETE = "/api/employee/delete";
+
+  private final String INSERT_LIST = "/api/employee/insert-list";
 
 
   @Test
@@ -180,6 +182,20 @@ public class EmployeecontrollerTest extends BasewebTest {
     assertJsonEquals(response, responseExpected);
   }
 
+  @Test
+  public void insertList() throws Exception {
+
+    final EmployeeRequest givenRequest = new EmployeeRequest().withDataList(givenEmployees());
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withData(givenEmployees())
+        .withStatus(STATUS.OPERATIONSUCCESS);
+
+    when(BAC.insertEmployeeList(any())).thenReturn(responseExpected);
+
+    RequestBuilder request = createRequest(INSERT_LIST, givenRequest);
+    performRequest(request);
+  }
+
   private Employee givenEmployee() {
     return givenEmployee(1);
   }
@@ -187,7 +203,7 @@ public class EmployeecontrollerTest extends BasewebTest {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
+        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456").age(20)
         .build();
   }
 

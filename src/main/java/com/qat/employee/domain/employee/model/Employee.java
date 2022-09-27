@@ -2,6 +2,7 @@ package com.qat.employee.domain.employee.model;
 
 import java.util.Objects;
 
+
 public class Employee {
 
   private Integer id;

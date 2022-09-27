@@ -4,13 +4,12 @@ package com.qat.employee.domain.employee.BAC;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import com.qat.employee.domain.ValidationError;
-import com.qat.employee.domain.employee.BAR.EmployeeBuilder;
+import com.qat.employee.domain.common.ValidationError;
+import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
-import com.qat.employee.domain.Response;
-import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.common.STATUS;
 import com.qat.employee.domain.employee.BAR.EmployeeBAR;
 import com.qat.employee.domain.employee.model.Employee;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeBACTest {
+class EmployeebacTest {
 
   @Mock
   EmployeeBAR bar;
@@ -35,12 +34,12 @@ public class EmployeeBACTest {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
+        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456").age(20)
         .build();
   }
 
   @Test
-  public void testFetchEmployees() {
+  void testFetchEmployees() {
     final List<Employee> givenEmployee = List.of(
         givenEmployee(1), givenEmployee(2)
     );
@@ -55,7 +54,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void testFetchEmployeeById() {
+  void testFetchEmployeeById() {
     final Employee givenEmployee = givenEmployee();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
@@ -68,7 +67,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void testInsertEmployee() {
+  void testInsertEmployee() {
     final Employee givenEmployee = givenEmployee();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
@@ -81,7 +80,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void testUpdateEmployee() {
+  void testUpdateEmployee() {
     final Employee givenEmployee = givenEmployee();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
@@ -94,7 +93,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void testDeleteEmployee() {
+  void testDeleteEmployee() {
     final Employee givenEmployee = givenEmployee();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(givenEmployee)
@@ -107,7 +106,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void testUpdateEmployeeWithInvalidData() {
+  void testUpdateEmployeeWithInvalidData() {
     final Employee givenEmployee = givenEmployee();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withStatus(STATUS.VALIDATIONERROR)
@@ -120,7 +119,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void testInsertEmployeeWithInvalidData() {
+  void testInsertEmployeeWithInvalidData() {
     final Employee givenEmployee = givenEmployee();
     givenEmployee.setName(null);
     final EmployeeResponse responseExpected = new EmployeeResponse()
@@ -135,7 +134,7 @@ public class EmployeeBACTest {
   }
 
   @Test
-  public void testValidations() {
+  void testValidations() {
     final Employee givenEmployee = new Employee();
     givenEmployee.setName(null);
     final EmployeeResponse responseExpected = new EmployeeResponse()
@@ -147,5 +146,18 @@ public class EmployeeBACTest {
     EmployeeResponse employeesResponse = bac.insertEmployee(givenRequest);
     assertEquals(responseExpected.getStatus(), employeesResponse.getStatus());
     assertEquals(responseExpected.getData(), employeesResponse.getData());
+  }
+
+  @Test
+  void testInsertEmployeeList() {
+    final List<Employee> givenEmployees = List.of(givenEmployee(), givenEmployee(), givenEmployee());
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withData(givenEmployees)
+        .withStatus(STATUS.OPERATIONSUCCESS);
+    EmployeeRequest givenRequest = new EmployeeRequest().withDataList(givenEmployees);
+    when(bar.insertEmployeeList(givenRequest)).thenReturn(responseExpected);
+
+    EmployeeResponse employeesResponse = bac.insertEmployeeList(givenRequest);
+    assertEquals(responseExpected, employeesResponse);
   }
 }

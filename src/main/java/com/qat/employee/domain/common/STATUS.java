@@ -1,4 +1,4 @@
-package com.qat.employee.domain;
+package com.qat.employee.domain.common;
 
 public enum STATUS {
 

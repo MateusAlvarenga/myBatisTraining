@@ -1,9 +1,8 @@
-package com.qat.employee.domain.employee.BAC;
+package com.qat.employee.domain.employee.model;
 
-import com.qat.employee.domain.ValidationContextIndicator;
-import com.qat.employee.domain.Validator;
-import com.qat.employee.domain.employee.model.Employee;
-import com.qat.employee.domain.employee.model.EmployeeRequest;
+import com.qat.employee.domain.common.ValidationContextIndicator;
+import com.qat.employee.domain.common.Validator;
+import java.util.List;
 
 public class EmployeeValidator extends Validator {
 
@@ -19,11 +18,14 @@ public class EmployeeValidator extends Validator {
     switch (validationContextIndicator) {
       case INSERT:
       case UPDATE:
-        validateEmployee();
+        validateEmployee(request.getData());
+        break;
+      case INSERTLIST:
+       // validateEmployeeList(request.getDataList());
         break;
       case DELETE:
       case FETCHBYID:
-        checkValidateId();
+        checkValidateId(request.getId());
       case FETCH:
         break;
       default:
@@ -33,9 +35,17 @@ public class EmployeeValidator extends Validator {
 
   }
 
-  private void validateEmployee() {
+  private void validateEmployeeList(List< Employee > employees) {
+    if (employees== null || employees.isEmpty()) {
+      addError("Employee List","Employee list is null or empty");
+      return;
+    }
+    for (Employee employee : employees) {
+      validateEmployee(employee);
+    }
+  }
 
-    Employee employee = request.getData();
+  private void validateEmployee(Employee employee) {
 
     if(employee == null) {
       addError("Employee","Employee is required");
@@ -61,11 +71,13 @@ public class EmployeeValidator extends Validator {
     checkMaxLength("branch", employee.getBranch(), 30);
 
     checkEmail("email", employee.getEmail());
+
+    checkRequired("age", employee.getAge());
+
+    checkMinValue("age", employee.getAge(), 18);
   }
 
-  private void checkValidateId() {
-
-    Integer id = request.getId();
+  private void checkValidateId(Integer id) {
 
     checkRequired("id", id);
   }

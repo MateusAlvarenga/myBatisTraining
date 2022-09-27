@@ -2,7 +2,7 @@ package com.qat.employee.domain.employee.BAR;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.common.STATUS;
 import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
@@ -101,6 +101,25 @@ class Employeebar2Test {
     assertEquals(responseExpected, responseActual);
   }
 
+  @Test
+  @Order(6)
+  void testInsertEmployeesBookmark() {
+
+    final List<Employee> employees = List.of(givenEmployee(6), givenEmployee(7), givenEmployee(8),
+        givenEmployee(9));
+
+    final EmployeeResponse responseExpected = new EmployeeResponse()
+        .withData(employees)
+        .withStatus(STATUS.OPERATIONSUCCESS);
+
+    final EmployeeRequest requestToInsert = new EmployeeRequest().withDataList(employees);
+
+    final EmployeeResponse responseActual = employeeBAR.insertEmployeeList(requestToInsert);
+
+    assertEquals(responseExpected, responseActual);
+
+  }
+
 
 
   private Employee givenEmployee() {
@@ -113,5 +132,6 @@ class Employeebar2Test {
         .id(id).name("TestName").email("teste@gmail.com").branch("teste").phone("123456").age(19)
         .build();
   }
+
 
 }

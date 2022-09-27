@@ -2,7 +2,7 @@ package com.qat.employee.domain.employee.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.qat.employee.domain.STATUS;
+import com.qat.employee.domain.common.STATUS;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

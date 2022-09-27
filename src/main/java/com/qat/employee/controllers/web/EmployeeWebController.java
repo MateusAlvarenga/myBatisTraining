@@ -1,6 +1,6 @@
 package com.qat.employee.controllers.web;
 
-import com.qat.employee.domain.Response;
+import com.qat.employee.domain.common.Response;
 import com.qat.employee.domain.employee.BAC.EmployeeBAC;
 import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;

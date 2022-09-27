@@ -1,4 +1,4 @@
-package com.qat.employee.domain;
+package com.qat.employee.domain.common;
 
 import java.util.List;
 import java.util.Objects;

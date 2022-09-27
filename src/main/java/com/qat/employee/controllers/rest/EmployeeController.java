@@ -19,7 +19,7 @@ public class EmployeeController {
   private static final String INSERT = "/insert";
   private static final String UPDATE = "/update";
   private static final String DELETE = "/delete";
-  private static final String INSERT_BOOKMARK = "/insert-bookmark";
+  private static final String INSERT_LIST = "/insert-list";
 
 
 
@@ -77,10 +77,10 @@ public class EmployeeController {
     }
   }
   
-  @PostMapping(INSERT_BOOKMARK)
+  @PostMapping(INSERT_LIST)
   public ResponseEntity<?> insertBookmark(@RequestBody EmployeeRequest request) {
     try {
-      return bac.insertEmployeeBookmark(request).toResponseEntity();
+      return bac.insertEmployeeList(request).toResponseEntity();
     } catch (Exception exception) {
       return new EmployeeResponse().withException(exception).toResponseEntity();
     }
