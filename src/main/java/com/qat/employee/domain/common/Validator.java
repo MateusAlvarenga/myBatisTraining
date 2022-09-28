@@ -43,13 +43,13 @@ public abstract class Validator {
   }
 
   public void checkMaxValue(String field, Integer value, int maxValue) {
-    if (value != null && value >= maxValue) {
+    if (value != null && value > maxValue) {
       addError(field, field + " must be less than " + maxValue);
     }
   }
 
   public void checkMinValue(String field, Integer value, int minValue) {
-    if (value != null && value <= minValue) {
+    if (value != null && value <  minValue) {
       addError(field, field + " must be greater than " + minValue);
     }
   }
