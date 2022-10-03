@@ -21,7 +21,7 @@ public class EmployeeValidator extends Validator {
         validateEmployee(request.getData());
         break;
       case INSERTLIST:
-        validateEmployeeList(request.getDataList());
+        //validateEmployeeList(request.getDataList());
         break;
       case DELETE:
       case FETCHBYID:

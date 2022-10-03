@@ -10,6 +10,7 @@ import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
 import com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper;
 import com.qat.employee.domain.employee.model.Employee;
+import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,9 +24,12 @@ class EmployeebarTest {
   @Mock
   EmployeeMapper employeeMapper;
 
+  @Mock
+  SqlSession sqlSession;
+
   @InjectMocks
   EmployeeBARImpl employeeBAR;
-
+ 
   @Test
   void testFetchEmployees() {
     final List<Employee> employeesExpected = givenEmployees();
@@ -63,7 +67,8 @@ class EmployeebarTest {
         .withStatus(STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest().withData(employeeExpected);
-    when(employeeMapper.insert(any(Employee.class))).thenReturn(1);
+    //when(employeeMapper.insert(any(Employee.class))).thenReturn(1);
+    when(sqlSession.insert(any(String.class), any(Employee.class))).thenReturn(1);
 
     EmployeeResponse employeesResponse = employeeBAR.insertEmployee(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
@@ -77,7 +82,8 @@ class EmployeebarTest {
         .withStatus(STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest().withData(employeeExpected);
-    when(employeeMapper.update(any(Employee.class))).thenReturn(1);
+    //when(employeeMapper.update(any(Employee.class))).thenReturn(1);
+    when(sqlSession.update(any(String.class), any(Employee.class))).thenReturn(1);
 
     EmployeeResponse employeesResponse = employeeBAR.updateEmployee(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
@@ -91,8 +97,8 @@ class EmployeebarTest {
         .withStatus(STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest().withId(1);
-    //when(employeeMapper.deleteById(anyInt())).thenReturn(1);
-    when(employeeMapper.deleteById(1)).thenReturn(1);
+    //when(employeeMapper.deleteById(1)).thenReturn(1);
+    when(sqlSession.delete(any(String.class), any(Integer.class))).thenReturn(1);
 
     EmployeeResponse employeesResponse = employeeBAR.deleteEmployee(givenRequest);
     Assertions.assertEquals(responseExpected.getStatus(), employeesResponse.getStatus());
