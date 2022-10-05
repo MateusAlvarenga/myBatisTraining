@@ -75,18 +75,4 @@ public class EmployeeBACImpl implements EmployeeBAC {
     }
   }
 
-@Override
-public EmployeeResponse insertEmployeeList(EmployeeRequest request) {
-
-  Validator validator = new EmployeeValidator(request);
-
-  if (!validator.validate(ValidationContextIndicator.INSERTLIST)) {
-    return new EmployeeResponse()
-        .withStatus(STATUS.VALIDATIONERROR)
-        .withMessages(validator.getErrors());
-  }
-
-  return bar.insertEmployeeList(request);
-
-}
 }

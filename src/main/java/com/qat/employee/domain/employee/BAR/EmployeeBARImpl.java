@@ -25,13 +25,13 @@ public class EmployeeBARImpl implements EmployeeBAR {
 
   @Override
   public EmployeeResponse fetchAllEmployees(EmployeeRequest request) {
-    List<Employee> employees = mapper.fetchAll();
+    List<Employee> employees = sqlSession.selectList("fetchAllEmployee");
     return new EmployeeResponse().withData(employees).withStatus(STATUS.OPERATIONSUCCESS);
   }
 
   @Override
   public EmployeeResponse fetchEmployeeById(EmployeeRequest request) {
-    final Employee employee = mapper.findById(request.getId());
+    final Employee employee = sqlSession.selectOne("fetchByIdEmployee", request.getId());
     if (Objects.nonNull(employee)) {
       return new EmployeeResponse().withData(employee).withStatus(STATUS.OPERATIONSUCCESS);
     } else {
@@ -70,18 +70,6 @@ public class EmployeeBARImpl implements EmployeeBAR {
     } else {
       return new EmployeeResponse().withStatus(STATUS.NOROWSREMOVEDERROR);
     }
-  }
-
-  @Override
-  public EmployeeResponse insertEmployeeList(EmployeeRequest request) {
-
-    List<Employee> employeeList = request.getDataList();
-
-    for (Employee employee : employeeList) {
-     sqlSession.insert("insertEmployee", employee);
-    }
-
-    return new EmployeeResponse().withData(employeeList).withStatus(STATUS.OPERATIONSUCCESS);
   }
 
   public SqlSession getSqlSession() {

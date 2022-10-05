@@ -111,7 +111,7 @@ class EmployeebarTest {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456").age(20)
+        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
   }
 

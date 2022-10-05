@@ -77,13 +77,4 @@ public class EmployeeController {
     }
   }
   
-  @PostMapping(INSERT_LIST)
-  public ResponseEntity<?> insertBookmark(@RequestBody EmployeeRequest request) {
-    try {
-      return bac.insertEmployeeList(request).toResponseEntity();
-    } catch (Exception exception) {
-      return new EmployeeResponse().withException(exception).toResponseEntity();
-    }
-  }
-  
 }

@@ -20,9 +20,6 @@ public class EmployeeValidator extends Validator {
       case UPDATE:
         validateEmployee(request.getData());
         break;
-      case INSERTLIST:
-        //validateEmployeeList(request.getDataList());
-        break;
       case DELETE:
       case FETCHBYID:
         checkValidateId(request.getId());
@@ -33,16 +30,6 @@ public class EmployeeValidator extends Validator {
     }
 
 
-  }
-
-  private void validateEmployeeList(List< Employee > employees) {
-    if (employees== null || employees.isEmpty()) {
-      addError("Employee List","Employee list is null or empty");
-      return;
-    }
-    for (Employee employee : employees) {
-      validateEmployee(employee);
-    }
   }
 
   private void validateEmployee(Employee employee) {
@@ -71,10 +58,6 @@ public class EmployeeValidator extends Validator {
     checkMaxLength("branch", employee.getBranch(), 30);
 
     checkEmail("email", employee.getEmail());
-
-    checkRequired("age", employee.getAge());
-
-    checkMinValue("age", employee.getAge(), 18);
   }
 
   private void checkValidateId(Integer id) {

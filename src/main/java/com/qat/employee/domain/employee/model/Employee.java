@@ -10,15 +10,14 @@ public class Employee {
   private String phone;
   private String email;
   private String branch;
-  private Integer age;
 
-  public Employee(Integer id, String name, String phone, String email, String branch, Integer age) {
+
+  public Employee(Integer id, String name, String phone, String email, String branch) {
     this.id = id;
     this.name = name;
     this.phone = phone;
     this.email = email;
     this.branch = branch;
-    this.age = age;
   }
 
   public Employee() {
@@ -64,13 +63,7 @@ public class Employee {
     this.branch = branch;
   }
 
-  public Integer getAge() {
-    return age;
-  }
 
-  public void setAge(Integer age) {
-    this.age = age;
-  }
   @Override
   public String toString() {
     final StringBuffer sb = new StringBuffer("Employee{");

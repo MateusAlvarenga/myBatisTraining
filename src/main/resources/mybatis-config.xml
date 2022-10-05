@@ -26,4 +26,6 @@
   <mappers>
     <mapper resource="myBatisTraining/mybatis/xml/mapper/Employee.xml"/>
   </mappers>
+
+
 </configuration>

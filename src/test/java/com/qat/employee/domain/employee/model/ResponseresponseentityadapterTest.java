@@ -15,7 +15,7 @@ class ResponseresponseentityadapterTest {
   @Test
   void testOK() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT", 1);
+        new Employee(1, "Mateus", "222", "", "IT");
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
@@ -33,7 +33,7 @@ class ResponseresponseentityadapterTest {
   @Test
   void testEXPECTATION_FAILED() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT", 1);
+        new Employee(1, "Mateus", "222", "", "IT");
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.EXCEPTIONERROR);
@@ -51,12 +51,12 @@ class ResponseresponseentityadapterTest {
   @Test
   void testPERSISTENCEERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT",1);
+        new Employee(1, "Mateus", "222", "", "IT");
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.PERSISTENCEERROR);
     final ResponseEntity<EmployeeResponse> responseEntityExpected = new ResponseEntity<EmployeeResponse>(responseExpected,
-        HttpStatus.CONFLICT);
+        HttpStatus.CONFLICT);   
 
     final ResponseEntity<?> responseEntityActual = new EmployeeResponse()
         .withData(employeExpected)
@@ -69,7 +69,7 @@ class ResponseresponseentityadapterTest {
   @Test
   void testVALIDATIONERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT",1);
+        new Employee(1, "Mateus", "222", "", "IT");
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.VALIDATIONERROR);
@@ -87,7 +87,7 @@ class ResponseresponseentityadapterTest {
   @Test
   void testNOROWSFOUNDERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT", 1);
+        new Employee(1, "Mateus", "222", "", "IT");
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.NOROWSFOUNDERROR);
@@ -105,7 +105,7 @@ class ResponseresponseentityadapterTest {
   @Test
   void testUNSPECIFIEDERROR() {
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "", "IT", 1);
+        new Employee(1, "Mateus", "222", "", "IT");
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeExpected)
         .withStatus(STATUS.UNSPECIFIEDERROR);

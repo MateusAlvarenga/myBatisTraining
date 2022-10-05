@@ -11,42 +11,40 @@
     <result property="name" column="name"/>
     <result property="phone" column="phone"/>
     <result property="email" column="email"/>
-    <result property="branch" column="branch"/>
-    <result property="age" column="age"/>
+  
   </resultMap>
 
   <!--  INSERT-->
   <insert id="insertEmployee" parameterType="com.qat.employee.domain.employee.model.Employee"
     useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     INSERT INTO EMPLOYEE
-      (NAME, PHONE, EMAIL, BRANCH,AGE)
-    VALUES (#{name}, #{phone}, #{email}, #{branch}, #{age})
+      (NAME, PHONE, EMAIL, BRANCH)
+    VALUES (#{name}, #{phone}, #{email}, #{branch})
   </insert>
-  <insert id="insertBookmarkEmployee" parameterType="java.util.List"
+  <insert id="insertEmployeeList" parameterType="java.util.List"
     useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     INSERT INTO EMPLOYEE
-    (NAME, PHONE, EMAIL, BRANCH, age)
+    (NAME, PHONE, EMAIL, BRANCH)
     VALUES
     <foreach collection="list" item="employee" index="index" open="(" separator="),("  close=")">
       #{employee.name},
       #{employee.phone},
       #{employee.email},
-      #{employee.branch},
-      #{employee.age}
+      #{employee.branch}
     </foreach>
   </insert>
 
   <!--  SELECT-->
-  <select id="fetchByIdEmployee" parameterType="int"  resultMap="employeeResultType">
-    SELECT (NAME, PHONE, EMAIL, BRANCH, age) FROM employee WHERE id = #{id}
+  <select id="fetchByIdEmployee" resultType="com.qat.employee.domain.employee.model.Employee">
+    SELECT (NAME, PHONE, EMAIL, BRANCH) FROM employee WHERE id = #{id}
   </select>
-  <select id="fetchAllEmployee" resultMap="employeeResultType">
-    SELECT (NAME, PHONE, EMAIL, BRANCH, age) FROM employee
+  <select id="fetchAllEmployee" resultType="com.qat.employee.domain.employee.model.Employee" resultSetType="FORWARD_ONLY">
+    SELECT (NAME, PHONE, EMAIL, BRANCH) FROM employee
   </select>
 
   <!--  UPDATE-->
   <update id="updateEmployee" parameterType="com.qat.employee.domain.employee.model.Employee">
-    UPDATE employee SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}, BRANCH = #{branch}, age = #{age} WHERE id = #{id}
+    UPDATE employee SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}, BRANCH = #{branch} WHERE id = #{id}
   </update>
 
   <!--  DELETE-->

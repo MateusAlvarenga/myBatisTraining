@@ -9,7 +9,6 @@ public class EmployeeBuilder {
   private String email;
   private String branch;
 
-  private Integer age;
 
   public EmployeeBuilder id(Integer id) {
     this.id = id;
@@ -36,17 +35,12 @@ public class EmployeeBuilder {
     return this;
   }
 
-  public EmployeeBuilder age(Integer age) {
-    this.age = age;
-    return this;
-  }
-
   public static EmployeeBuilder builder() {
     return new EmployeeBuilder();
   }
 
   public Employee build() {
-    return new Employee(id, name, phone, email, branch, age);
+    return new Employee(id, name, phone, email, branch);
   }
 
 }

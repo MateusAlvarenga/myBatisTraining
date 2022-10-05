@@ -101,25 +101,7 @@ class Employeebar2Test {
     assertEquals(responseExpected, responseActual);
   }
 
-  @Test
-  @Order(6)
-  void testInsertEmployeesBookmark() {
-
-    final List<Employee> employees = List.of(givenEmployee(6), givenEmployee(7), givenEmployee(8),
-        givenEmployee(9));
-
-    final EmployeeResponse responseExpected = new EmployeeResponse()
-        .withData(employees)
-        .withStatus(STATUS.OPERATIONSUCCESS);
-
-    final EmployeeRequest requestToInsert = new EmployeeRequest().withDataList(employees);
-
-    final EmployeeResponse responseActual = employeeBAR.insertEmployeeList(requestToInsert);
-
-    assertEquals(responseExpected, responseActual);
-
-  }
-
+ 
 
 
   private Employee givenEmployee() {
@@ -129,7 +111,7 @@ class Employeebar2Test {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("TestName").email("teste@gmail.com").branch("teste").phone("123456").age(19)
+        .id(id).name("TestName").email("teste@gmail.com").branch("teste").phone("123456")
         .build();
   }
 

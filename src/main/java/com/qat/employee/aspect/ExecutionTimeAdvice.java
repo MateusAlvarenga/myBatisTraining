@@ -19,7 +19,7 @@ public class ExecutionTimeAdvice {
 
   Logger log = LoggerFactory.getLogger(ExecutionTimeAdvice.class);
 
-  @Around("execution(public * com.qat..*BAC.*(..))")
+  @Around("execution(public * com.qat..*BAC.*(..)) || execution(public * com.qat..*BAR.*(..)) )")
   public Object logExecutionTime(ProceedingJoinPoint point) throws Throwable {
 
     final long startTime = getCurrentTime();
@@ -38,36 +38,9 @@ public class ExecutionTimeAdvice {
     return object;
   }
 
-  @Around("execution(public * com.qat..*BAR.*(..)) )")
-  public Object logExecutionTimeBAR(ProceedingJoinPoint point) throws Throwable {
-
-    final long startTime = getCurrentTime();
-    Object resultProcess = null;
-    Object targetObject  = point.getTarget();
-    Method m = targetObject.getClass().getMethod("getSqlSession");
-    SqlSession session = (SqlSession) m.invoke(targetObject);
-
-    try {
-      resultProcess = point.proceed();
-    }catch (RuntimeException e){
-      session.rollback();
-    }
-
-    final long endtime = getCurrentTime();
-    final long executionTime = endtime - startTime;
-
-    final String className = point.getTarget().getClass().getSimpleName();
-    final String methodName = point.getSignature().getName();
-    final String msg =
-        className + " " + methodName + " " + "execution time: " + executionTime + "ms";
-
-    log.info(msg);
-
-    return resultProcess;
-  }
-
   @AfterThrowing(pointcut =" execution(public * com.qat..*BAR.*(..))", throwing="ex")
   public void logError(Exception ex) {
+	System.out.print(false);
     log.error("LOG ERROR:");
     log.error(ex.getCause().getMessage());
     log.error(ex.getMessage());

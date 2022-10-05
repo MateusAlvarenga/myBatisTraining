@@ -34,7 +34,7 @@ class EmployeebacTest {
   private Employee givenEmployee(Integer id) {
     return EmployeeBuilder
         .builder()
-        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456").age(20)
+        .id(id).name("Mateus").email("example@gmail.com").branch("abc").phone("123456")
         .build();
   }
 
@@ -148,16 +148,4 @@ class EmployeebacTest {
     assertEquals(responseExpected.getData(), employeesResponse.getData());
   }
 
-  @Test
-  void testInsertEmployeeList() {
-    final List<Employee> givenEmployees = List.of(givenEmployee(), givenEmployee(), givenEmployee());
-    final EmployeeResponse responseExpected = new EmployeeResponse()
-        .withData(givenEmployees)
-        .withStatus(STATUS.OPERATIONSUCCESS);
-    EmployeeRequest givenRequest = new EmployeeRequest().withDataList(givenEmployees);
-    when(bar.insertEmployeeList(givenRequest)).thenReturn(responseExpected);
-
-    EmployeeResponse employeesResponse = bac.insertEmployeeList(givenRequest);
-    assertEquals(responseExpected, employeesResponse);
-  }
 }

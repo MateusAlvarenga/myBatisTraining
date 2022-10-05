@@ -15,7 +15,7 @@ class EmployeeTest {
   void TestBuilderInstantiation() {
 
     final Employee employeExpected =
-        new Employee(1, "Mateus", "222", "joe@gmail.com", "IT",1);
+        new Employee(1, "Mateus", "222", "joe@gmail.com", "IT");
 
     final Employee employeActual1 =
         EmployeeBuilder.builder()
