@@ -1,7 +1,6 @@
 package com.qat.employee.domain.employee.BAR;
 
 import com.qat.employee.domain.common.STATUS;
-import com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper;
 import com.qat.employee.domain.employee.model.Employee;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
@@ -15,11 +14,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class EmployeeBARImpl implements EmployeeBAR {
 
-  private final EmployeeMapper mapper;
   private final SqlSession sqlSession;
 
-  public EmployeeBARImpl(EmployeeMapper mapper, SqlSession sqlSession) {
-    this.mapper = mapper;
+  public EmployeeBARImpl(SqlSession sqlSession) {
+
     this.sqlSession = sqlSession;
   }
 

@@ -63,7 +63,7 @@ public class EmployeeWebController {
   String delete(@RequestParam(ID) int id) {
     EmployeeRequest request = new EmployeeRequest().withId(id);
     bac.deleteEmployee(request);
-    return REDIRECT + TMPLATE_EMP_LIST;
+    return REDIRECT + EMP_LIST;
   }
 
   @GetMapping(FORM)

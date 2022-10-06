@@ -8,7 +8,6 @@ import com.qat.employee.domain.employee.model.EmployeeBuilder;
 import com.qat.employee.domain.employee.model.EmployeeRequest;
 import com.qat.employee.domain.employee.model.EmployeeResponse;
 import java.util.List;
-import com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper;
 import com.qat.employee.domain.employee.model.Employee;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Assertions;
@@ -21,8 +20,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class EmployeebarTest {
 
-  @Mock
-  EmployeeMapper employeeMapper;
 
   @Mock
   SqlSession sqlSession;
@@ -32,13 +29,15 @@ class EmployeebarTest {
  
   @Test
   void testFetchEmployees() {
-    final List<Employee> employeesExpected = givenEmployees();
+    final List employeesExpected = givenEmployees();
     final EmployeeResponse responseExpected = new EmployeeResponse()
         .withData(employeesExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
 
     EmployeeRequest givenRequest = new EmployeeRequest();
-    when(employeeMapper.fetchAll()).thenReturn(employeesExpected);
+ 
+    when(sqlSession.selectList(any(String.class))).thenReturn(employeesExpected);
+    
 
     EmployeeResponse employeesResponse = employeeBAR.fetchAllEmployees(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);
@@ -51,9 +50,8 @@ class EmployeebarTest {
         .withData(employeeExpected)
         .withStatus(STATUS.OPERATIONSUCCESS);
 
-    EmployeeRequest givenRequest = new EmployeeRequest().withId(1);
-    //when(employeeMapper.findById(anyInt())).thenReturn(employeeExpected);
-    when(employeeMapper.findById(1)).thenReturn(employeeExpected);
+    EmployeeRequest givenRequest = new EmployeeRequest().withId(1); 
+    when(sqlSession.selectOne(any(String.class), any(java.lang.Integer.class))).thenReturn(employeeExpected);
 
     EmployeeResponse employeesResponse = employeeBAR.fetchEmployeeById(givenRequest);
     Assertions.assertEquals(responseExpected, employeesResponse);

@@ -43,9 +43,6 @@
     Branch:<br/>
     <input type="text" class="form-control" name="branch" value="${emp.branch}" required/>
     <br/>
-    Age:<br/>
-    <input type="number" class="form-control" name="age" value="${emp.age}" required/>
-    <br/>
     <input type="hidden" name="id" value="${emp.id}"/>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

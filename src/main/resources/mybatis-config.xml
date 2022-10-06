@@ -20,12 +20,13 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!--  <settings>-->
+<!--    <setting name="logImpl" value="LOG4J"/>-->
+<!--  </settings>-->
   <typeAliases>
-    <package name="sample.mybatis.xml.domain"/>
+    <typeAlias alias="Employee" type="com.qat.employee.domain.employee.model.Employee"/>
   </typeAliases>
   <mappers>
     <mapper resource="myBatisTraining/mybatis/xml/mapper/Employee.xml"/>
   </mappers>
-
-
 </configuration>

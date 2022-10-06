@@ -3,19 +3,19 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qat.employee.domain.employee.BAR.mapper.EmployeeMapper">
+<mapper namespace="EmployeeMapper">
 
   <!-- mapping between table columns and object fields -->
-  <resultMap id="employeeResultType" type="com.qat.employee.domain.employee.model.Employee">
-    <result property="id" column="id"/>
-    <result property="name" column="name"/>
-    <result property="phone" column="phone"/>
-    <result property="email" column="email"/>
-  
+  <resultMap id="employeeResultType" type="Employee">
+    <id property="id" column="id" jdbcType="INTEGER"/>
+    <result property="name" column="name" jdbcType="VARCHAR"/>
+    <result property="phone" column="phone" jdbcType="VARCHAR"/>
+    <result property="email" column="email" jdbcType="VARCHAR"/>
+    <result property="branch" column="branch" jdbcType="VARCHAR"/>
   </resultMap>
 
   <!--  INSERT-->
-  <insert id="insertEmployee" parameterType="com.qat.employee.domain.employee.model.Employee"
+  <insert id="insertEmployee" parameterType="Employee"
     useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     INSERT INTO EMPLOYEE
       (NAME, PHONE, EMAIL, BRANCH)
@@ -35,20 +35,20 @@
   </insert>
 
   <!--  SELECT-->
-  <select id="fetchByIdEmployee" resultType="com.qat.employee.domain.employee.model.Employee">
-    SELECT (NAME, PHONE, EMAIL, BRANCH) FROM employee WHERE id = #{id}
+  <select id="fetchByIdEmployee"  resultType="Employee">
+    SELECT ID, NAME, PHONE, EMAIL, BRANCH FROM employee WHERE id = #{id}
   </select>
-  <select id="fetchAllEmployee" resultType="com.qat.employee.domain.employee.model.Employee" resultSetType="FORWARD_ONLY">
-    SELECT (NAME, PHONE, EMAIL, BRANCH) FROM employee
+  <select id="fetchAllEmployee"  resultType="Employee" >
+    SELECT ID, NAME, PHONE, EMAIL, BRANCH FROM "EMPLOYEE"
   </select>
 
   <!--  UPDATE-->
-  <update id="updateEmployee" parameterType="com.qat.employee.domain.employee.model.Employee">
+  <update id="updateEmployee" parameterType="Employee">
     UPDATE employee SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}, BRANCH = #{branch} WHERE id = #{id}
   </update>
 
   <!--  DELETE-->
-  <delete id="deleteEmployee" parameterType="com.qat.employee.domain.employee.model.Employee">
+  <delete id="deleteEmployee" parameterType="Employee">
     DELETE FROM employee WHERE id = #{id}
   </delete>
 </mapper>
